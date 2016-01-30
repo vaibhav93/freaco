@@ -1,0 +1,31 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle">Manage Rewards</h1>
+<!-- 			<span>Delete, modify vendors</span> -->
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: TABLE WITH FILTERS -->
+<div ng-controller="rewardsCtrl" class="container-fluid container-fullw">
+	<div class="row">
+		<div class="col-md-6">
+			<table ng-table="tableParams" show-filter="true" class="table">
+				<tbody ng-repeat="offer in $data">
+					<tr ng-class-odd="'odd'" ng-class-even="'even'">
+						<td width="70%" data-title="'Offer name'" filter="{ 'uid': 'text'}">{{offer.name}}</td>
+						<td width="30%" data-title="'Points'" filter="{ 'businessName': 'text'}">{{offer.points}}</td>
+						
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+
+	</div>
+</div>
+<!-- end: TABLE WITH FILTERS -->

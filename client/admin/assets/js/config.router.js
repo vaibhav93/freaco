@@ -174,19 +174,19 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         ncyBreadcrumb: {
             label: 'Basic'
         }
-    }).state('app.table.vendor', {
-        url: '/vendor',
-        templateUrl: "assets/views/table_vendor.html",
-        title: 'Vendor Table',
+    }).state('app.table.rewards', {
+        url: '/rewards',
+        templateUrl: "assets/views/table_rewards.html",
+        title: 'Rewards Table',
         ncyBreadcrumb: {
-            label: 'Vendor'
+            label: 'Rewards'
         },
-        resolve: loadSequence('monospaced.elastic', 'ui.mask', 'ngTable', 'vendorTableCtrl'),
-        data:{
-            permissions:{
-                only:['admin']
-            }
-        }
+        resolve: loadSequence('monospaced.elastic', 'ui.mask', 'ngTable', 'rewardsCtrl')
+        // data:{
+        //     permissions:{
+        //         only:['admin']
+        //     }
+        // }
     }).state('app.table.booking', {
         url: '/bookings',
         templateUrl: "assets/views/table_booking.html",

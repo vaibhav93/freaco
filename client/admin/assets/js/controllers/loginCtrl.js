@@ -24,7 +24,13 @@ app.controller('LoginCtrl', ["Vendor","$scope","$state","$rootScope","$localStor
 			$localStorage.accessToken = res.id;
 			$rootScope.user = res.user; 
 			$localStorage.user = res.user;
-        	$state.go('app.dashboard');
+      Vendor.businesses({id:res.user.id},function(business){
+        $localStorage.business = business;
+        $state.go('app.dashboard');
+      },function(err){
+        console.log(err);
+      })
+        	
       }, function(res) {
         //console.log('invalid login');
       	toaster.pop($scope.toaster.type, $scope.toaster.title, $scope.toaster.text);

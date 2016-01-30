@@ -53,7 +53,7 @@ app.constant('JS_REQUIRES', {
         'chatCtrl': 'assets/js/controllers/chatCtrl.js',
         'loginCtrl': 'assets/js/controllers/loginCtrl.js',
         'cityCtrl': 'assets/js/controllers/cityCtrl.js',
-        'vendorCtrl': 'assets/js/controllers/vendorCtrl.js',
+        'rewardsCtrl': 'assets/js/controllers/rewardsCtrl.js',
         'vendorTableCtrl': 'assets/js/controllers/vendorTableCtrl.js',
         'gMapsCtrl' : 'assets/js/controllers/gMapsCtrl.js',
         'bookingTableCtrl': 'assets/js/controllers/bookingTableCtrl.js',
