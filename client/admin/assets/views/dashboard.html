@@ -1,0 +1,215 @@
+<!-- start: DASHBOARD TITLE -->
+<section id="page-title" class="padding-top-15 padding-bottom-15">
+	<div class="row">
+		<div class="col-sm-7">
+			<h1 class="mainTitle" translate="dashboard.WELCOME" translate-values="{ appName: app.name }">{{ mainTitle }}</h1>
+		</div>
+		<div class="col-sm-5">
+			<!-- start: MINI STATS WITH SPARKLINE -->
+			<!-- /// controller:  'SparklineCtrl' -  localtion: assets/js/controllers/dashboardCtrl.js /// -->
+			
+			<!-- end: MINI STATS WITH SPARKLINE -->
+		</div>
+	</div>
+</section>
+<!-- end: DASHBOARD TITLE -->
+<!-- start: FEATURED BOX LINKS -->
+<div ng-controller="dashboardCtrl">
+	<div class="container-fluid container-fullw bg-white">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="row" style="padding-right:15px">
+					<div class="panel panel-white">
+						<div class="panel-heading  panel-primary" style="background-color:#1b1e24">
+							<h5 class="panel-title"><span style="color:#ffffff;font-weight:400">Customers</span></h5>
+						</div>
+						<div class="panel-body">							
+							<div class="row">
+								<div class="col-md-12">
+									<form role="form" class="form-horizontal">
+										<div class="form-group">
+											<div class="col-sm-9">
+												<input type="text" ng-model="searchCustomer" placeholder="Search Customers" id="search" class="form-control">
+											</div>
+											<label class="control-label" for="search">
+												<i class="ti-search"></i>
+											</label>
+											<div class="padding-right-10 pull-right">
+												<a class="btn btn-wide btn-blue" href="#">
+													<i class="fa fa-filter"></i>
+													Apply filters
+												</a>
+											</div>
+										</div>
+									</form>
+
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div ng-include="'assets/views/sample_data.html'"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="row">
+					<div class="panel panel-white">
+						<div class="panel-heading  panel-primary" style="background-color:#1b1e24">
+							<div class="row">
+								<div class="col-md-6 text-center">
+									<h5 class="panel-title"><span style="color:#ffffff;font-weight:400">Visits</span></h5>
+								</div>
+								<div class="col-md-6 text-center">
+									<h5 class="panel-title"><span style="color:#ffffff;font-weight:400">Customers</span></h5>
+								</div>
+							</div>
+							
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="row">
+										<div class="col-md-12 text-center">
+											<span style="color:#e72900;font-size:50px;font-weight:300">10.2K</span>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12 text-center">
+											<span>Total visits</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="row">
+										<div class="col-md-12 text-center">
+											<span style="color:#60a919;font-size:50px;font-weight:300">6.4K</span>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12 text-center">
+											<span>Total customers</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="row">
+										<div class="col-md-12 text-center">
+											<span style="color:#33a9e0;font-size:50px;font-weight:300">274</span>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12 text-center">
+											<span>Visits this week</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="row">
+										<div class="col-md-12 text-center">
+											<span style="color:#f0cc62;font-size:50px;font-weight:300">185</span>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12 text-center">
+											<span>New customers this week</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="panel panel-white">
+						<div class="panel-heading  panel-primary" style="background-color:#1b1e24">
+							<h5 class="panel-title"><span style="color:#ffffff;font-weight:400">Validate Redemtion code</span></h5>
+						</div>
+						<div class="panel-body">
+							<form role="form" class="form-horizontal">
+								<div class="form-group">
+									<label class="col-sm-4 control-label" for="code">
+										Redemtion code
+									</label>
+									<div class="col-sm-8">
+										<input type="text" ng-model="redemptionCode" placeholder="Redemption code" id="code" class="form-control">
+									</div>
+								</div>
+								<div class="form-group margin-bottom-0">
+									<div class="col-sm-offset-4 col-sm-2">
+										<button ng-click="redemptionValidate()"class="btn btn-o btn-primary" type="button">
+											Validate
+										</button>
+									</div>
+									<div class="col-sm-3" style="min-height:30px;padding:0">
+										<span us-spinner="{radius:4, width:2, length: 5,color:'green'}" spinner-key="spinner-1"></span>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="panel-footer" ng-show="validationRes">
+							<div class="alert alert-success" ng-show="resStatus==true"><strong>Success !</strong></div>
+							<div class="alert alert-danger" ng-show="resStatus==false"><strong>Invalid Code !</strong></div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="panel panel-white">
+						<div class="panel-heading  panel-primary" style="background-color:#1b1e24">
+
+							<div class="row">
+								<h5 class="panel-title col-sm-9"><span style="color:#ffffff;font-weight:400">Manage Rewards program</span></h5>
+								<div class="col-sm-3">
+								<button type="button" class="btn btn-primary btn-sm pull-right">Edit</button>
+								</div>
+								
+							</div>
+							
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-12">
+									<table class="table table-striped table-hover" id="sample-table-2">
+										<thead>
+											<tr>
+												<th class="center">Points</th>
+												<th class="center">Rewards</th>
+												
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="center">30</td>
+												<td class="center">Free Coke</td>
+											</tr>
+											<tr>
+												<td class="center">50</td>
+												<td class="center">Free Ice-cream sundae</td>
+											</tr>
+											<tr>
+												<td class="center">70</td>
+												<td class="center">10% off on bill value</td>
+											</tr>
+											<tr>
+												<td class="center">100</td>
+												<td class="center">20% off on bill value</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: FEATURED BOX LINKS -->
+<!-- start: FIRST SECTION -->
+
+<!-- end: FOURTH SECTION -->

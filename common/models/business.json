@@ -1,0 +1,47 @@
+{
+  "name": "business",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "qr": {
+      "type": "string",
+      "required": true
+    },
+    "img": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "customers": {
+      "type": "hasMany",
+      "model": "customer",
+      "foreignKey": ""
+    },
+    "offers": {
+      "type": "hasMany",
+      "model": "offer",
+      "foreignKey": ""
+    },
+    "codes": {
+      "type": "hasMany",
+      "model": "codes",
+      "foreignKey": ""
+    },
+    "vendor": {
+      "type": "belongsTo",
+      "model": "vendor",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

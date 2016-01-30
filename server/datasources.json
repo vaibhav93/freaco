@@ -1,0 +1,16 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mongoDs": {
+    "host": "ds053794.mongolab.com",
+    "port": 53794,
+    "database": "nocards",
+    "username": "vaibhav",
+    "password": "12345",
+    "name": "mongoDs",
+    "connector": "mongodb",
+    "connectionTimeout": 1000000
+  }
+}

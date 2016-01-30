@@ -1,0 +1,81 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle">Manage Bookings</h1>
+<!-- 			<span>Delete, modify vendors</span> -->
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: TABLE WITH FILTERS -->
+<div ng-controller="bookingTableCtrl" class="container-fluid container-fullw">
+	<div class="row">
+		<div class="col-md-12">
+			<table ng-table="tableParams" show-filter="true" class="table">
+				<tbody ng-repeat="booking in $data">
+					<tr ng-class-odd="'odd'" ng-class-even="'even'">
+						<td width="10%" data-title="'Booking ID'" filter="{ 'uid': 'text'}">{{booking.uid}}</td>
+						<td width="30%" data-title="'Business name'" filter="{ 'businessName': 'text'}">{{booking.businessName}}</td>
+						<td width="10%" data-title="'Booking date'" sortable="'bookingdate'" filter="{'bookingdate': 'text'}">{{booking.bookingdate}}</td>
+						<td width="10%" data-title="'Event date'" sortable="'date'" filter="{'date': 'text'}">{{booking.date | date:'DD-MM-yyyy'}}</td>
+						<td width="20%" data-title="'Customer contact'" filter="{'contact': 'text'}">{{booking.contact}}</td>
+						<td width="10%" data-title="'Booking status'" filter="{'status': 'text'}">{{booking.status}}</td>
+						<td data-title="'View Complete'">
+							<div class="pull-left margin-right-10">
+								<button class="btn btn-primary btn-o btn-sm" id="editRowBtn{{booking.id}}" ng-click="openModal(booking.id)">view</button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+					<script type="text/ng-template" id="myModalBooking.html">
+					<div class="modal-header">
+					<h3 class="modal-title">Booking ID: {{booking.uid}}</h3>
+					</div>
+					<div class="modal-body">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="row padding-bottom-10">
+								Business : <strong>{{booking.businessName}}</strong>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="row">
+								Customer : <strong>{{booking.name}}</strong>
+								</div>
+								<div class="row padding-top-10">
+								Email : <strong>{{booking.email}}</strong>
+								</div>
+								<div class="row padding-top-10">
+								Amount Finalized : <strong>{{booking.amntFinalized}}</strong>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="row">
+								Contact : <strong>{{booking.contact}}</strong>
+								</div>
+								<div class="row  padding-top-10">
+								Address : <strong>{{booking.address}}</strong>
+								</div>
+								<div class="row  padding-top-10">
+								Amount Paid : <strong>{{booking.amntPaid}}</strong>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+					</div>
+					<div class="modal-footer">
+					<button class="btn btn-primary" ng-click="ok()">OK</button>
+					<button class="btn btn-primary btn-o" ng-click="cancel()">Cancel</button>
+					</div>
+				</script>
+	</div>
+</div>
+<!-- end: TABLE WITH FILTERS -->

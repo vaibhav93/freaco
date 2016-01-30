@@ -1,0 +1,268 @@
+
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle">Add/Edit Vendor</h1>
+			<!-- <span class="mainDescription">Use this page to start from scratch and put your custom content</span> -->
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: YOUR CONTENT HERE -->
+<div  ng-controller="vendorController" class="container-fluid container-fullw">
+	<div class="row">
+		<div class="col-md-11">
+			<form role="form" class="form-horizontal" name="newVendorForm">
+				<!-- select city -->
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="col-sm-4 control-label symbol required" for="businessCity">
+								Select City
+							</label>
+							<div class="col-sm-8">	
+								<div
+								id="businessCity"
+								isteven-multi-select
+								input-model="cities"
+								output-model="selectedCity"
+								button-label="icon name"
+								item-label="icon name maker"
+								tick-property="ticked"
+								orientation="vertical"
+								selection-mode="single"
+								on-item-click="cityClick(data)"
+								on-reset=""
+
+								>
+							</div>
+							<input type="text" ng-model="selectedCity" name="selectedCity" style="display:none" required />
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- name of vendor and business -->
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="col-sm-4 control-label symbol required" for="vendorName">
+							Name of owner
+						</label>
+						<div class="col-sm-8">
+							<input type="text" placeholder="Name" id="vendorName" class="form-control" ng-model="vendor.name" required >
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="col-sm-4 control-label symbol required" for="businessName">
+							Name of business
+						</label>
+						<div class="col-sm-8">
+							<input type="text" placeholder="Business Name" id="businessName" class="form-control" ng-model="business.name" required >
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="col-sm-4 control-label symbol required" for="businessAddress">
+							Business Address
+						</label>
+						<div class="col-sm-8">
+							<textarea form="newVendorForm" placeholder="Enter address" id="businessAddress" class="form-control" ng-model="business.address" required></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label class="col-sm-4 control-label symbol required" for="businessLat">
+								Lat:
+							</label>
+							<div class="col-sm-8">
+								<input type="text" placeholder="Latitude" id="businessLat" class="form-control" ng-model="business.lat" required>
+							</div>
+							<label class="col-sm-4 control-label symbol required" for="businessLon">
+								Lon:
+							</label>
+							<div class="col-sm-8">
+								<input type="text" placeholder="Longitude" id="businessLon" class="form-control" ng-model="business.lon" required>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-1 margin-top-20">
+						OR
+					</div>
+					<div class="col-md-3 margin-top-15">
+						<button type="button" class="btn btn-primary btn-o btn-sm" ng-click="showMap()">
+						<div ng-if="!enableMap">Choose on map</div>
+							<div ng-if="enableMap">Close map</div>
+						</button>
+					</div>
+				</div>
+			</div>
+			<!-- MAP -->
+			<div class="row" ng-if="enableMap">
+				<div class="col-md-10 margin-bottom-15 col-md-offset-1">
+					<div ng-include="'assets/views/gMaps.html'"></div>
+				</div>
+			</div>
+			<!-- business category -->
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="col-sm-4 control-label symbol required" for="vendorEmail">
+							Email
+						</label>
+						<div class="col-sm-8">
+							<input type="text" placeholder="Email address" id="vendorEmail" class="form-control" ng-model="vendor.email" required >
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="col-sm-4 control-label symbol required" for="businessContact">
+							Contact
+						</label>
+						<div class="col-sm-8">
+							<input type="text" placeholder="Phone number" id="businessContact" class="form-control" ng-model="business.contact" required>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="col-sm-4 control-label symbol " for="businessCategory">
+							Select business category
+						</label>
+						<div class="col-sm-8">	
+							<div
+							id="businessCategory"
+							isteven-multi-select
+							input-model="categories"
+							output-model="businessCat"
+							button-label="icon name"
+							item-label="icon name maker"
+							tick-property="ticked"
+							orientation="vertical"
+							selection-mode="single"
+							on-item-click="businessCategoryClick(data)"
+							on-reset="reset()"
+							>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- depended on business category -->
+		<div ng-show="showOptions" ng-include="'assets/views/businessCatOptions.html'"></div>
+		<div class="row border-top">
+			<div class="col-md-12 margin-top-10">
+				<h3 ng-show="businessCategory.type===1">
+					Add Sections
+				</h3>
+			</div>
+		</div>
+		<div class="row margin-top-10" ng-show="businessCategory.type===1">
+			<div class="container-fluid container-fullw padding-top-5 padding-bottom-5">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="col-sm-4 control-label symbol required" for="sectionMin">
+								Minimum capacity
+							</label>
+							<div class="col-sm-8">
+								<input type="text" placeholder="Min capacity" id="sectionMin" class="form-control" ng-model="section.min">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="col-sm-4 control-label symbol required" for="sectionMax">
+								Maximum capacity
+							</label>
+							<div class="col-sm-8">
+								<input type="text" placeholder="Max capacity" id="sectionMax" class="form-control" ng-model="section.max">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<label class="control-label symbol  pull-right" for="sectionCost">
+							Costs
+						</label>
+					</div>
+					<div class="col-md-10">
+						<div class="col-md-3">
+							<input type="text" placeholder="{{businessCategory.properties[0].values[0].name}}" id="sectionMax" class="form-control" ng-disabled="!businessCategory.properties[0].values[0].value" ng-model="section.costs[0]" >
+						</div>
+						<div class="col-md-3">
+							<input type="text" placeholder="{{businessCategory.properties[0].values[1].name}}" id="sectionMax" class="form-control" ng-disabled="!businessCategory.properties[0].values[1].value" ng-model="section.costs[1]" >
+						</div>
+						<div class="col-md-3">
+							<input type="text" placeholder="{{businessCategory.properties[0].values[2].name}}" id="sectionMax" class="form-control" ng-disabled="!businessCategory.properties[0].values[2].value" ng-model="section.costs[2]" >
+						</div>
+						<div class="col-md-3">
+							<input type="text" placeholder="{{businessCategory.properties[0].values[3].name}}" id="sectionMax" class="form-control" ng-disabled="!businessCategory.properties[0].values[3].value" ng-model="section.costs[3]" >
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 margin-top-10">
+						<button type="button" class="btn btn-wide btn-info btn-squared animate-show" ng-click="submitSection()" ng-disabled="section.min=='' || section.max==''">
+							<div ng-if="sections.length===0">Save Section</div>
+							<div ng-if="sections.length>0">Save another section</div>
+						</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 margin-top-10">
+						<alert ng-repeat="alert in sections" class="margin-right-10 col-md-5" type="success" close="removeSection($index,alert.id)">
+							Section {{$index +1}}
+							<div class="pull-right">
+								Min capacity : {{alert.min}}  Max capacity : {{alert.max}}
+							</div>
+						</alert>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 margin-top-10">
+				<button type ="file" class="btn btn-wide btn-info btn-squared" ngf-select="upload($files)" multiple
+				accept="image/*" ngf-max-height="1000" ngf-max-size="1MB" ng-disabled="!showOptions">
+				Select Images</button>
+				<div class="row margin-top-10 margin-left-10" ng-show="files">							
+
+					<img ng-repeat="file in files" ngf-src="file" style="width:15%;height:15%" class="img-thumbnail pull-left">
+				</div>
+				<progressbar ng-show="files" value="progress" type="info" class="margin-top-5 margin-bottom-5">
+					{{progress}}%
+				</progressbar>     
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 margin-top-10">
+				<button type="submit" class="btn btn-wide btn-info btn-squared animate-show pull-right" ng-click="addOrUpdate()" ng-disabled="!showOptions || newVendorForm.$invalid || !files">
+					Submit
+				</button>   
+			</div>
+		</div>
+	</div>
+
+
+	<!-- include template here  -->
+
+
+</form>
+</div>
+</div>
+<!-- <div ng-include="'assets/views/gMaps.html'"></div> -->
+</div>
+<!-- end: YOUR CONTENT HERE

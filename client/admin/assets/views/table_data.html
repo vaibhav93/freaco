@@ -1,0 +1,47 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle">Manage Users</h1>
+			<span>Manage, find, edit user database</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: TABLE WITH FILTERS -->
+<div class="container-fluid container-fullw">
+	<div class="row">
+		<div class="col-md-12">
+			<!-- /// controller:  'ngTableCtrl3' -  localtion: assets/js/controllers/ngTableCtrl.js /// -->
+			<div ng-controller="ngTableCtrl3">
+							<features></features>
+				<table ng-table="tableParams" show-filter="true" class="table">
+					<tbody ng-repeat="user in $data">
+						<tr ng-class-odd="'odd'" ng-class-even="'even'">
+							<td data-title="'Name'" filter="{ 'fname': 'text' }"> {{user.fname}} </td>
+							<td data-title="'Email'" filter="{ 'email': 'text'}">{{user.email}}</td>
+							<td data-title="'Contact'" filter="{ 'contact': 'text'}">{{user.contact}}</td>
+							<td data-title="'# Products owned'" sortable="'owned'">{{user.owned}}</td>
+							<td data-title="'Edit user'">
+							<div class="pull-left margin-right-10">
+										<input type=button class="btn btn-primary btn-o btn-sm" id="editRowBtn{{p.id}}" value="edit"
+										ng-click="setEditId(user.id)">
+									</div></td>
+							<td data-title="'View Details'">
+							<div class="pull-left margin-right-10">
+										<input type=button class="btn btn-primary btn-o btn-sm" id="editRowBtn{{p.id}}" value="Details"
+										ng-click="setEditId(p.id)">
+									</div></td>
+						</tr>
+						<tr ng-show="editId===user.id" class="animate-show">
+								<td colspan="7" ng-include src="'assets/views/editRow.html'"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: TABLE WITH FILTERS -->

@@ -1,0 +1,113 @@
+<!-- start: SEARCH FORM -->
+<div class="search-form">
+	<a class="s-open" href="#">
+		<i class="ti-search"></i>
+	</a>
+	<form class="navbar-form" role="search">
+		<a class="s-remove" href="#" ng-toggle-class="search-open" target=".navbar-form">
+			<i class="ti-close"></i>
+		</a>
+		<div class="form-group">
+			<input type="text" class="form-control" placeholder="{{ 'sidebar.search.PLACEHOLDER' | translate }}">
+			<button class="btn search-button" type="submit">
+				<i class="ti-search"></i>
+			</button>
+		</div>
+	</form>
+</div>
+<!-- end: SEARCH FORM -->
+<!-- start: MAIN NAVIGATION MENU -->
+<div class="navbar-title">
+	<span translate="sidebar.heading.NAVIGATION">Main Navigation</span>
+</div>
+<ul class="main-navigation-menu">
+	<li ui-sref-active="active">
+		<a ui-sref="app.dashboard">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-home"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title" translate="sidebar.nav.dashboard.MAIN"> Dashboard </span>
+				</div>
+			</div>
+		</a>
+	</li>
+	<!-- <li ui-sref-active="active">
+		<a ui-sref="app.form.city">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-world"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Manage Cities </span>
+				</div>
+			</div>
+		</a>
+	</li>
+	<li ui-sref-active="active">
+		<a ui-sref="app.form.vendor({vendorId:''})">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-shopping-cart"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Add Vendors </span>
+				</div>
+			</div>
+		</a>
+	</li>
+	<li ui-sref-active="active">
+		<a ui-sref="app.table.vendor">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-shopping-cart"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Manage Vendors </span>
+				</div>
+			</div>
+		</a>
+	</li>
+	<li ui-sref-active="active">
+		<a ui-sref="app.table.data">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-user"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Manage Users </span>
+				</div>
+			</div>
+		</a>
+	</li>
+	<li ui-sref-active="active">
+		<a ui-sref="app.table.booking">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-user"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Manage Bookings </span>
+				</div>
+			</div>
+		</a>
+	</li>
+	<li ui-sref-active="active">
+		<a ui-sref="app.form.playground">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-archive"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Playground </span>
+				</div>
+			</div>
+		</a>
+	</li>	 -->
+	
+</ul>
+<!-- end: MAIN NAVIGATION MENU -->
+<!-- start: CORE FEATURES -->
+
+<!-- end: CORE FEATURES -->

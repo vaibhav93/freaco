@@ -1,0 +1,57 @@
+{
+  /**
+   * This is a sample configuration file for PM2
+   */
+
+  /**
+   * Here we declare the apps that must be managed by PM2
+   * All options are listed here:
+   * https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#json-app-declaration
+   *
+   */
+  apps : [
+
+    // First application
+    {
+      name      : "propKaro",
+      script    : "server/server.js",
+      env: {
+        COMMON_VARIABLE: "true"
+      },
+      env_production : {
+        NODE_ENV: "production"
+      }
+    }
+  ],
+
+
+  /**
+   * PM2 help you to deploy apps over your servers
+   * For more help go to :
+   * https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#deployment-pm2--090
+   */
+  deploy : {
+    production : {
+      user : "ubuntu",
+      host :  [ {
+            host : "my_aws",
+            port: "22"
+          }],
+      ref  : "origin/master",
+      repo : "https://github.com/vaibhav93/propKaro.git",
+      path : "/home/ubuntu/propKaro",
+      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production"
+    },
+    dev : {
+      user : "node",
+      host : "45.55.41.225",
+      ref  : "origin/master",
+      repo : "git@github.com:repo.git",
+      path : "/var/www/development",
+      "post-deploy" : "pm2 startOrRestart ecosystem.json5 --env dev",
+      env  : {
+        NODE_ENV: "dev"
+      }
+    }
+  }
+}

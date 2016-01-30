@@ -1,0 +1,37 @@
+<table class="table no-bg table-bordered">
+	<tr>
+		<td>Order ID:</td>
+		<td>
+		<input class="form-control" type="text" name="fn" class="w100" ng-model="city.orderId" value="{{ciy.orderId}}}">
+		</td>
+		<td>City: </td>
+		<td>
+		<input class="form-control" type="text" name="dc" class="w180" ng-model="city.name" value="{{city.name}}">
+		</td>
+	</tr>
+	<tr>
+		<td>Image</td>
+		<td><img src="{{city.imgUrl}}" width="80px" height="80px"></td>
+		<td colspan="5">
+		<table>
+			<tr><button type ="file" class="btn btn-wide btn-info btn-squared" ngf-select="upload($file,0)" multiple
+					          accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+	       Upload new Image</button>
+	       </tr>
+	       <tr>
+	        <progressbar value="progress" type="info" class="margin-top-5">
+												{{progress}}%
+			</progressbar>
+	       </tr>
+	     </table>
+	    </td>
+	</tr>
+	<tr><td colspan="7">
+		<div class="pull-right">
+			<input type="button" class="btn btn-primary btn-sm margin-right-15" value="save" ng-click="updateCity(city)">
+			<input type="button" class="btn btn-primary btn-sm" value=" close" ng-click="setEditId(-1)">
+		</div></td>
+	</tr>
+	<tr ng-show="alertUpdate.val===1" class="animate-show"><td colspan="7"><alert type="{{alertUpdate.type}}">{{alertUpdate.msg}}</alert></td></tr>
+</table>
+<!--  class="editRowTd" -->

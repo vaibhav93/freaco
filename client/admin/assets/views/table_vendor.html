@@ -1,0 +1,94 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle">Manage Vendors</h1>
+			<span>Delete, modify vendors</span>
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+
+<!-- start: TABLE WITH FILTERS -->
+<div ng-controller="vendorTableController" class="container-fluid container-fullw">
+	<div class="row">
+		<div class="col-md-12">
+		<button class="btn btn-primary btn-o btn-sm" ng-click="exportCSV()">Download</button>
+			<table ng-table="tableParams" show-filter="true" class="table">
+				<tbody ng-repeat="vendor in $data">
+					<tr ng-class-odd="'odd'" ng-class-even="'even'">
+						<td width="10%" data-title="'UID'" filter="{ 'uid': 'text'}">{{vendor.uid}}</td>
+						<td width="30%" data-title="'Vendor Name'" filter="{ 'name': 'text'}">{{vendor.name}}</td>
+						<td width="20%" data-title="'Contact number'" filter="{ 'contact': 'text'}">{{vendor.contact}}</td>
+						<td width="10%" data-title="'Status'">
+						<div class="checkbox small" style="margin:0">
+								<switch ng-model="vendor.status" ng-change="statusChange(vendor.id,vendor.status)" class="green small"></switch>
+						</div>
+						</td>
+						<td data-title="'Edit vendor'">
+							<div class="pull-left margin-right-10">
+								<a ui-sref="app.form.vendor({vendorId:vendor.id})"><button class="btn btn-primary btn-o btn-sm" id="editRowBtn{{vendor.id}}">edit</button></a>
+							</div>
+							</td>
+						<td data-title="'View vendor'">
+							<div class="pull-left margin-right-10">
+								<button class="btn btn-primary btn-o btn-sm" id="editRowBtn{{vendor.id}}" ng-click="openModal(vendor.id)">view</button>
+							</div>
+							</td>
+							<td data-title="'Delete'">
+								<button
+								class="btn btn-primary btn-o btn-sm"
+								mwl-confirm
+								title="{{ title }}"
+								message="Do you wish to delete ?"
+								confirm-text="Confirm"
+								cancel-text="Cancel"
+								placement="bottom"
+								on-confirm="deleteVendor(vendor.id)"
+								on-cancel="cancelClicked = true"
+								confirm-button-type="danger"
+								cancel-button-type="success">
+								Delete
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+					<script type="text/ng-template" id="myModalContent.html">
+					<div class="modal-header">
+					<h3 class="modal-title">{{business.name}} (UID: {{business.uid}})</h3>
+					<h4 class="modal-title">{{business.businessCategory}}, {{business.city}}</h4>
+					</div>
+					<div class="modal-body">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="row">
+								Owner : <strong>{{business.vendorName}}</strong>
+								</div>
+								<div class="row padding-top-10">
+								Email : <strong>{{business.vendorEmail}}</strong>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="row">
+								Contact : <strong>{{business.contact}}</strong>
+								</div>
+								<div class="row  padding-top-10">
+								Address : <strong>{{business.address}}</strong>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+					<div class="modal-footer">
+					<button class="btn btn-primary" ng-click="ok()">OK</button>
+					<button class="btn btn-primary btn-o" ng-click="cancel()">Cancel</button>
+					</div>
+				</script>
+	</div>
+</div>
+<!-- end: TABLE WITH FILTERS -->

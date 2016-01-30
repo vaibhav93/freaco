@@ -1,0 +1,35 @@
+<table class="table no-bg table-bordered">
+	<tr>
+		<td>Name:</td>
+		<td>
+		<input class="form-control" type="text" name="fn" class="w100" ng-model="user.fname" value="{{user.fname}}">
+		</td>
+		<td>Contact: </td>
+		<td>
+		<input class="form-control" type="text" name="dc" class="w180" ng-model="user.contact" value="{{user.contact}}">
+		</td>
+		<td>State:</td>
+		<td>
+		  <ui-select ng-model="user.state"
+             theme="bootstrap"
+             ng-disabled="disabled"
+             reset-search-input="false"
+             style="width: 300px;">
+    		<ui-select-match placeholder="{{user.state}}">{{$select.selected.name}}</ui-select-match>
+    		<ui-select-choices repeat="address in addresses | filter: $select.search"
+             refresh="refreshAddresses($select.search)"
+             refresh-delay="0">
+      		<div ng-bind-html="address.name | highlight: $select.search"></div>
+    		</ui-select-choices>
+  		</ui-select>
+		</td>
+	</tr>
+	<tr><td colspan="7">
+		<div class="pull-right">
+			<input type="button" class="btn btn-primary btn-sm margin-right-15" value=" save " ng-click="updateUser(user)">
+			<input type="button" class="btn btn-primary btn-sm" value=" close" ng-click="setEditId(-1)">
+		</div></td>
+	</tr>
+	<tr ng-show="alert.val===1" class="animate-show"><td colspan="7"><alert type="{{alert.type}}">{{alert.msg}}</alert></td></tr>
+</table>
+<!--  class="editRowTd" -->

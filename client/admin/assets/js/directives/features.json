@@ -1,0 +1,22 @@
+{
+	features:[
+		{
+			name:"Parking Capacity",
+			type: "boolean"
+			values: ['Yes','No']
+		},
+		{
+			name:"AC",
+			value: "boolean"
+		},
+		{
+			name: "Power Backup",
+			value: "boolean"
+		},
+		{
+			name: "Weddings"
+			type: "multi",
+			values: ['type1','type2','type3']
+		}
+	]
+}

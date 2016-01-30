@@ -1,0 +1,63 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "db"
+  },
+  "AccessToken": {
+    "dataSource": "mongoDs",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "appuser": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "customer": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "business": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "activity": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "offer": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "codes": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "vendor": {
+    "dataSource": "mongoDs",
+    "public": true
+  }
+}
