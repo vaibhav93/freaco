@@ -13,7 +13,7 @@
 
     // First application
     {
-      name      : "propKaro",
+      name      : "freaco",
       script    : "server/server.js",
       env: {
         COMMON_VARIABLE: "true"
@@ -34,11 +34,11 @@
     production : {
       user : "ubuntu",
       host :  [ {
-            host : "my_aws",
+            host : "freaco_aws",
             port: "22"
           }],
       ref  : "origin/master",
-      repo : "https://github.com/vaibhav93/propKaro.git",
+      repo : "https://github.com/vaibhav93/freaco.git",
       path : "/home/ubuntu/propKaro",
       "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production"
     },
