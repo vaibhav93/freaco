@@ -26,11 +26,27 @@ module.exports = function(Appuser) {
             next();
         }
     })
-    Appuser.beforeRemote('prototype.updateAttributes',function(ctx,next){
-        console.log(ctx.args.data.gcm_id);
-        next();
-    })
-    Appuser.afterRemote('logout', function(ctx, result, next) {
+    Appuser.beforeRemote('prototype.updateAttributes',function(ctx,result,next){
+        if(ctx.args.data.gcm_id){
+            app.sns.createPlatformEndpoint({
+              PlatformApplicationArn: 'arn:aws:sns:us-west-2:048063244432:app/GCM/freaCo',
+              Token: ctx.args.data.gcm_id,
+              CustomUserData: ctx.req.params.id
+          }, function(err, data) {
+              if (err) {
+                console.log(err.stack);
+                next(err);
+            } else {
+                // console.log(data);
+                next();
+            }
+        })
+        }
+        else {
+            next();
+        }
+    });
+            Appuser.afterRemote('logout', function(ctx, result, next) {
         //console.log(ctx.reslt);
         if (ctx.result == null) {
             ctx.res.send({
@@ -51,12 +67,12 @@ module.exports = function(Appuser) {
 
     });
 
-    Appuser.processQR = function(body, req, res, cb) {
-        var accessTokenModel = app.models.AccessToken;
-        if (body.qr === undefined) {
-            var err = new Error();
-            err.message = "Invalid QR";
-            err.status = 501;
+            Appuser.processQR = function(body, req, res, cb) {
+                var accessTokenModel = app.models.AccessToken;
+                if (body.qr === undefined) {
+                    var err = new Error();
+                    err.message = "Invalid QR";
+                    err.status = 501;
             //console.log(error);
             res.statusCode = 200;
             res.send({
@@ -293,7 +309,7 @@ Appuser.findOne({ where:query }, function(err,user){
 Appuser.remoteMethod(
     'loginWithAccessTokenfb', 
     {
-     accepts: [{
+       accepts: [{
         arg: 'data',
         type: 'object',
         http: {
