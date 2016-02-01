@@ -26,6 +26,10 @@ module.exports = function(Appuser) {
             next();
         }
     })
+    Appuser.beforeRemote('prototype.updateAttributes',function(ctx,next){
+        console.log(ctx.args.data.gcm_id);
+        next();
+    })
     Appuser.afterRemote('logout', function(ctx, result, next) {
         //console.log(ctx.reslt);
         if (ctx.result == null) {

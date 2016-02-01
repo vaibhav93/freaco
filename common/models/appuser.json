@@ -51,6 +51,18 @@
       "principalId": "$unauthenticated",
       "permission": "ALLOW",
       "property": "loginWithAccessTokenfb"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
     }
   ],
   "methods": {}

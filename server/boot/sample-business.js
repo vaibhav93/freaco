@@ -5,10 +5,12 @@ module.exports = function(app) {
     var ds = app.dataSources.mongoDs;
     var sample_businesses = [{
         name: 'Ohri, Hyderabad',
-        qr: 'ohri_hyderabad'
+        qr: 'ohri_hyderabad',
+        img: 'http://app.freaco.com/admin/assets/images/ohri.jpg'
     }, {
         name: 'Taj, Chandigarh',
-        qr: 'taj_chandigarh'
+        qr: 'taj_chandigarh',
+        img: 'http://app.freaco.com/admin/assets/images/taj.jpg'
     }]
     ds.once('connected', function() {
         sample_businesses.forEach(function(business) {

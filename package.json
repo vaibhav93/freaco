@@ -6,6 +6,7 @@
     "pretest": "jshint ."
   },
   "dependencies": {
+    "aws-sdk": "^2.2.33",
     "bower": "^1.7.1",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
