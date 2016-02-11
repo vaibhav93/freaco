@@ -37,7 +37,8 @@ module.exports = function(Appuser) {
                 console.log(err.stack);
                 next(err);
             } else {
-                // console.log(data);
+                console.log(data);
+                ctx.args.data.EndpointArn = data.EndpointArn;
                 next();
             }
         })
