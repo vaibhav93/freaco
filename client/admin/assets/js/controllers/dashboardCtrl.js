@@ -59,7 +59,7 @@ app.controller('dashboardCtrl', ["$scope", "$localStorage", "Business", "Offer",
                 return false;
         }
         var calculateSince = function(lastVisit) {
-            var mins = Math.floor(moment.duration(moment() - lastVisit).asMinutes());
+            var mins = Math.round(moment.duration(moment() - lastVisit).asMinutes());
             if (mins <= 60) {
                 return mins + ' minutes ago';
             } else if (mins > 60 && mins <= 24 * 60) {

@@ -6,11 +6,13 @@ module.exports = function(app) {
     var sample_businesses = [{
         name: 'Ohri, Hyderabad',
         qr: 'ohri_hyderabad',
-        img: 'http://app.freaco.com/admin/assets/images/ohri.jpg'
+        img: 'http://app.freaco.com/admin/assets/images/ohri.jpg',
+        totalVisits: 0
     }, {
         name: 'Taj, Chandigarh',
         qr: 'taj_chandigarh',
-        img: 'http://app.freaco.com/admin/assets/images/taj.jpg'
+        img: 'http://app.freaco.com/admin/assets/images/taj.jpg',
+        totalVisits: 0
     }]
     ds.once('connected', function() {
         sample_businesses.forEach(function(business) {
@@ -18,7 +20,7 @@ module.exports = function(app) {
                 where: {
                     name: business.name
                 }
-            },business, function(err, createdBusiness, created) {
+            }, business, function(err, createdBusiness, created) {
                 if (err) {
                     console.log(err)
                 }
