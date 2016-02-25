@@ -59,5 +59,9 @@
   "vendor": {
     "dataSource": "mongoDs",
     "public": true
+  },
+  "visit": {
+    "dataSource": "mongoDs",
+    "public": true
   }
 }

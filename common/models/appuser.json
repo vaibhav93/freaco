@@ -44,7 +44,8 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "redeem"
-    },{
+    },
+    {
       "accessType": "EXECUTE",
       "principalType": "ROLE",
       "principalId": "$authenticated",

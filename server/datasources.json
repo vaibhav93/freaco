@@ -2,15 +2,15 @@
   "db": {
     "name": "db",
     "connector": "memory"
-    },
-    "mongoDs": {
-      "host": "127.0.0.1",
-      "port": 27017,
-      "database": "freaco",
-      "username": "",
-      "password": "",
-      "name": "mongoDs",
-      "connector": "mongodb",
-      "connectionTimeout": 1000000
-    }
+  },
+  "mongoDs": {
+    "host": "127.0.0.1",
+    "port": 27017,
+    "database": "freaco",
+    "username": "",
+    "password": "",
+    "name": "mongoDs",
+    "connector": "mongodb",
+    "connectionTimeout": 1000000
   }
+}

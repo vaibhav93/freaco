@@ -1,46 +1,48 @@
 {
-  "name": "customer",
-  "base": "PersistedModel",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {
-    "points": {
-      "type": "number",
-      "required": true
+    "name": "customer",
+    "base": "PersistedModel",
+    "idInjection": true,
+    "options": {
+        "validateUpsert": true
     },
-    "visits": {
-      "type": "number",
-      "required": true
-    }
-  },
-  "validations": [],
-  "relations": {
-    "appuser": {
-      "type": "belongsTo",
-      "model": "appuser",
-      "foreignKey": ""
+    "properties": {
+        "points": {
+            "type": "number",
+            "required": true
+        },
+        "visitCount": {
+            "type": "number",
+            "required": true
+        }
     },
-    "business": {
-      "type": "belongsTo",
-      "model": "business",
-      "foreignKey": ""
-    }
-  },
-  "acls": [
-    {
-      "accessType": "WRITE",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW"
+    "validations": [],
+    "relations": {
+        "appuser": {
+            "type": "belongsTo",
+            "model": "appuser",
+            "foreignKey": ""
+        },
+        "business": {
+            "type": "belongsTo",
+            "model": "business",
+            "foreignKey": ""
+        },
+        "visits": {
+            "type": "hasMany",
+            "model": "visit",
+            "foreignKey": ""
+        }
     },
-    {
-      "accessType": "READ",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW"
-    }
-  ],
-  "methods": {}
+    "acls": [{
+        "accessType": "WRITE",
+        "principalType": "ROLE",
+        "principalId": "$authenticated",
+        "permission": "ALLOW"
+    }, {
+        "accessType": "READ",
+        "principalType": "ROLE",
+        "principalId": "$authenticated",
+        "permission": "ALLOW"
+    }],
+    "methods": {}
 }

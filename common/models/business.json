@@ -14,6 +14,9 @@
       "type": "string",
       "required": true
     },
+    "totalVisits": {
+      "type": "number"
+    },
     "img": {
       "type": "string",
       "required": true
@@ -39,6 +42,11 @@
     "vendor": {
       "type": "belongsTo",
       "model": "vendor",
+      "foreignKey": ""
+    },
+    "visits": {
+      "type": "hasMany",
+      "model": "visit",
       "foreignKey": ""
     }
   },

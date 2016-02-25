@@ -73,7 +73,7 @@
 								<div class="col-md-6">
 									<div class="row">
 										<div class="col-md-12 text-center">
-											<span style="color:#e72900;font-size:50px;font-weight:300">10.2K</span>
+											<span style="color:#e72900;font-size:50px;font-weight:300">{{business.totalVisits}}</span>
 										</div>
 									</div>
 									<div class="row">
@@ -85,7 +85,7 @@
 								<div class="col-md-6">
 									<div class="row">
 										<div class="col-md-12 text-center">
-											<span style="color:#60a919;font-size:50px;font-weight:300">6.4K</span>
+											<span style="color:#60a919;font-size:50px;font-weight:300">{{customerCount.count}}</span>
 										</div>
 									</div>
 									<div class="row">
@@ -99,7 +99,7 @@
 								<div class="col-md-6">
 									<div class="row">
 										<div class="col-md-12 text-center">
-											<span style="color:#33a9e0;font-size:50px;font-weight:300">274</span>
+											<span style="color:#33a9e0;font-size:50px;font-weight:300">{{visitsLastWeek}}</span>
 										</div>
 									</div>
 									<div class="row">
@@ -111,7 +111,7 @@
 								<div class="col-md-6">
 									<div class="row">
 										<div class="col-md-12 text-center">
-											<span style="color:#f0cc62;font-size:50px;font-weight:300">185</span>
+											<span style="color:#f0cc62;font-size:50px;font-weight:300">{{newLastWeek}}</span>
 										</div>
 									</div>
 									<div class="row">
@@ -164,7 +164,7 @@
 							<div class="row">
 								<h5 class="panel-title col-sm-9"><span style="color:#ffffff;font-weight:400">Manage Rewards program</span></h5>
 								<div class="col-sm-3">
-								<button type="button" class="btn btn-primary btn-sm pull-right">Edit</button>
+								<a ui-sref="app.table.rewards" class="btn btn-primary btn-sm pull-right">Edit</a>
 								</div>
 								
 							</div>
@@ -182,22 +182,11 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td class="center">30</td>
-												<td class="center">Free Coke</td>
+											<tr ng-repeat="offer in offers">
+												<td class="center">{{offer.points}}</td>
+												<td class="center">{{offer.name}}</td>
 											</tr>
-											<tr>
-												<td class="center">50</td>
-												<td class="center">Free Ice-cream sundae</td>
-											</tr>
-											<tr>
-												<td class="center">70</td>
-												<td class="center">10% off on bill value</td>
-											</tr>
-											<tr>
-												<td class="center">100</td>
-												<td class="center">20% off on bill value</td>
-											</tr>
+											
 										</tbody>
 									</table>
 								</div>

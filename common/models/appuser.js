@@ -2,6 +2,7 @@ var app = require('../../server/server'),
     FB = require('fb'),
     shortid = require('shortid');
 var loopback = require('loopback');
+var moment = require('moment');
 var response = {};
 module.exports = function(Appuser) {
 
@@ -100,6 +101,10 @@ module.exports = function(Appuser) {
                                 error: err
                             });
                         } else {
+                            business.updateAttributes({
+                                totalVisits: business.totalVisits + 1
+                            });
+
                             var customerModel = app.models.Customer;
                             customerModel.findOrCreate({
                                 where: {
@@ -110,24 +115,46 @@ module.exports = function(Appuser) {
                                     }]
                                 }
                             }, {
-                                visits: 1,
+                                visitCount: 1,
                                 points: 10,
                                 appuserId: token.userId,
                                 businessId: business.id,
                                 businessName: business.name,
-                                businessImg: business.img
+                                businessImg: business.img,
+                                lastVisit: Date.now(),
+                                created: Date.now()
                             }, function(err, customer, created) {
                                 if (err) {
                                     cb(null, err)
                                 } else {
+                                    business.visits.create({
+                                        time: Date.now(),
+                                        customerId: customer.id
+                                    }, function(err, visit) {
+                                        console.log(visit);
+                                    });
                                     (created) ? console.log('Created customer') : console.log('Found customer');
                                     if (!created) {
-                                        customer.updateAttributes({
-                                            visits: customer.visits + 1,
-                                            points: customer.points + 10
-                                        }, function(err, updatedCustomer) {
-                                            cb(null, updatedCustomer)
-                                        })
+                                        var sinceLastVisit = moment.duration(moment() - customer.lastVisit).asHours();
+
+                                        if (sinceLastVisit < 12) {
+                                            customer.updateAttributes({
+                                                visitCount: customer.visitCount + 1,
+                                                points: customer.points + 10,
+                                                lastVisit: Date.now()
+                                            }, function(err, updatedCustomer) {
+                                                cb(null, updatedCustomer)
+                                            })
+                                        } else {
+                                            var err = new Error();
+                                            err.message = "12 hours not passed since last visit";
+                                            err.status = 502;
+                                            //console.log(error);
+                                            res.statusCode = 200;
+                                            res.send({
+                                                error: err
+                                            });
+                                        }
                                     } else {
                                         cb(null, customer);
                                     }
@@ -191,7 +218,8 @@ module.exports = function(Appuser) {
                     GCM: {
                         data: {
                             message: body.message,
-                            description: body.description
+                            description: body.description,
+                            type: 'REDEMPTION'
                         }
                     }
                 };
@@ -212,10 +240,34 @@ module.exports = function(Appuser) {
                             error: err
                         });
                     }
-
+                    //Offer redeemed notification sent successfully. Now reduce user points.
+                    var customerModel = app.models.Customer;
+                    customerModel.findOne({
+                        where: {
+                            and: [{
+                                appuserId: body.appUserId
+                            }, {
+                                businessId: body.businessId
+                            }]
+                        }
+                    }, function(customer) {
+                        var updatedPoints = customer.points - body.offer.points;
+                        customer.updateAttributes({
+                            points: updatedPoints
+                        }, function(err, updatedCustomer) {
+                            if (err) {
+                                err.status = 900; // cannot update customer points
+                                res.statusCode = 200;
+                                res.send({
+                                    error: err
+                                });
+                            }
+                            cb(null, 'success');
+                        })
+                    })
                     console.log('push sent');
                     console.log(data);
-                    cb(null,'success');
+
                 });
             }
         });

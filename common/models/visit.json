@@ -1,0 +1,29 @@
+{
+  "name": "visit",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "time": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "business": {
+      "type": "belongsTo",
+      "model": "business",
+      "foreignKey": ""
+    },
+    "customer": {
+      "type": "belongsTo",
+      "model": "customer",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
