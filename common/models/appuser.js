@@ -403,6 +403,7 @@ module.exports = function(Appuser) {
                 });
 
             } else {
+                console.log(res);
                 response.id = res.id;
                 response.email = res.email;
                 response.first_name = res.first_name + ' ' + res.last_name;
