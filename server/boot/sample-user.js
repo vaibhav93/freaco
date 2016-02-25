@@ -47,7 +47,7 @@ module.exports = function(app) {
                     console.log(err)
                 }
                 //console.log(createdBusiness);
-                (created) ? console.log('Created user', createdUser.name) : console.log('Found user', createdUser.name);
+                (created) ? console.log('Created user', createdUser.name) : console.log('Found user', createdUser.fname);
             })
         })
     })

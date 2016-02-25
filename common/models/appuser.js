@@ -32,8 +32,8 @@ module.exports = function(Appuser) {
         if (ctx.args.data.gcm_id) {
             app.sns.createPlatformEndpoint({
                 PlatformApplicationArn: 'arn:aws:sns:us-west-2:048063244432:app/GCM/freaCo',
-                Token: ctx.args.data.gcm_id,
-                CustomUserData: ctx.req.params.id
+                Token: ctx.args.data.gcm_id
+                //CustomUserData: ctx.req.params.id
             }, function(err, data) {
                 if (err) {
                     console.log(err.stack);
