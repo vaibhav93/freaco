@@ -8,23 +8,28 @@ module.exports = function(app) {
         name: 'vendor',
         email: 'vendor@abc.com',
         password: 'vendor'
+
     };
     var sample_users = [{
         fname: 'Vaibhav',
         email: 'vaibhav@gmail.com',
-        password: '12345'
+        password: '12345',
+        img: 'assets/images/media-user.png'
     }, {
         fname: 'Sahil',
         email: 'sahil@gmail.com',
-        password: '12345'
+        password: '12345',
+        img: 'assets/images/media-user.png'
     }, {
         fname: 'Neeraj',
         email: 'neeraj@gmail.com',
-        password: '12345'
+        password: '12345',
+        img: 'assets/images/media-user.png'
     }, {
         fname: 'Abhishek',
         email: 'abhishek@gmail.com',
-        password: '12345'
+        password: '12345',
+        img: 'assets/images/media-user.png'
     }]
     ds.once('connected', function() {
         vendorModel.findOrCreate({
