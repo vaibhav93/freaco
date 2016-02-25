@@ -407,6 +407,12 @@ module.exports = function(Appuser) {
                 response.id = res.id;
                 response.email = res.email;
                 response.first_name = res.first_name + ' ' + res.last_name;
+                response.img = res.picture.data.url;
+                response.gender = res.gender;
+                if (res.birthday)
+                    response.birthday = res.birthday;
+                else
+                    response.birthday = null;
                 console.log(response.id);
                 console.log(response.first_name);
                 console.log(response.email);
@@ -430,6 +436,9 @@ module.exports = function(Appuser) {
                             fname: response.first_name,
                             email: query.email,
                             username: response.id,
+                            img: response.img,
+                            birthday: response.birthday,
+                            gender: response.gender,
                             password: dummy_pass
                         }, function(err, user) {
                             if (err) {
