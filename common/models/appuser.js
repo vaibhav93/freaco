@@ -33,7 +33,7 @@ module.exports = function(Appuser) {
             app.sns.createPlatformEndpoint({
                 PlatformApplicationArn: 'arn:aws:sns:us-west-2:048063244432:app/GCM/freaCo',
                 Token: ctx.args.data.gcm_id
-                //CustomUserData: ctx.req.params.id
+                CustomUserData: ctx.req.params.id
             }, function(err, data) {
                 if (err) {
                     console.log(err.stack);
@@ -391,7 +391,7 @@ module.exports = function(Appuser) {
         FB.setAccessToken(body.accessToken);
 
         FB.api('/me', {
-            fields: ['id', 'first_name', 'last_name', 'email']
+            fields: ['id', 'first_name', 'last_name', 'email', 'gender', 'picture', 'birthday']
         }, function(res) {
             if (!res || res.error) {
                 var err = {};
