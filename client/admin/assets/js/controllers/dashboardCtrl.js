@@ -2,13 +2,14 @@
 /** 
  * controllers used for the dashboard
  */
-app.controller('dashboardCtrl', ["$scope", "$localStorage", "Business", "Offer", "Appuser", "$filter", "usSpinnerService", "$timeout", "moment", "Customer", "ngTableParams",
-    function($scope, $localStorage, Business, Offer, Appuser, $filter, usSpinnerService, $timeout, moment, Customer, ngTableParams) {
+app.controller('dashboardCtrl', ["$scope", "$localStorage", "Business", "Offer", "Vendor", "Appuser", "$filter", "usSpinnerService", "$timeout", "moment", "Customer", "ngTableParams",
+    function($scope, $localStorage, Business, Offer, Vendor, Appuser, $filter, usSpinnerService, $timeout, moment, Customer, ngTableParams) {
         $scope.showFilterAttributes = false;
         $scope.selectedFilter;
         $scope.redemptionCode;
         $scope.validationRes = false;
         $scope.resStatus = false
+        $scope.filteredList = [];
         $scope.parentScope = {};
         $scope.filter = {};
         $scope.newLastWeek = 0;
@@ -16,6 +17,18 @@ app.controller('dashboardCtrl', ["$scope", "$localStorage", "Business", "Offer",
         $scope.business = Business.findById({
             id: $localStorage.business.id
         });
+        $scope.pushOffer = function() {
+            console.log($scope.filteredList);
+            Vendor.pushOffer({
+                customerList: $scope.filteredList,
+                offer: {
+                    message: 'New push offer',
+                    description: 'Happy hours between 1pm to 4pm'
+                }
+            }, function(res) {
+                console.log(res);
+            })
+        }
         $scope.showFilter = function() {
             if ($scope.showFilterAttributes)
                 $scope.showFilterAttributes = false;
@@ -219,6 +232,7 @@ app.controller('dashboardCtrl', ["$scope", "$localStorage", "Business", "Offer",
                         });
 
                     });
+                    $scope.filteredList = customers;
                     applyData(customers);
                 });
                 var applyData = function(data) {

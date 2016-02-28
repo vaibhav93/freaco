@@ -1,31 +1,31 @@
 {
-    "name": "activity",
-    "base": "PersistedModel",
-    "idInjection": true,
-    "options": {
-        "validateUpsert": true
+  "name": "activity",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "type": {
+      "type": "string"
     },
-    "properties": {
-        "type": {
-            "type": "string"
-        },
-        "time": {
-            "type": "Date"
-        }
+    "time": {
+      "type": "Date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "business": {
+      "type": "belongsTo",
+      "model": "business",
+      "foreignKey": ""
     },
-    "validations": [],
-    "relations": {
-        "business": {
-            "type": "belongsTo",
-            "model": "business",
-            "foreignKey": ""
-        },
-        "customer": {
-            "type": "belongsTo",
-            "model": "customer",
-            "foreignKey": ""
-        }
-    },
-    "acls": [],
-    "methods": {}
+    "customer": {
+      "type": "belongsTo",
+      "model": "customer",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
 }

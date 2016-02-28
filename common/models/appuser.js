@@ -4,6 +4,7 @@ var app = require('../../server/server'),
 var loopback = require('loopback');
 var moment = require('moment');
 var response = {};
+
 module.exports = function(Appuser) {
     Appuser.afterRemoteError('**', function(ctx, next) {
         console.log(ctx.error);
@@ -226,6 +227,7 @@ module.exports = function(Appuser) {
         }
 
     );
+
     Appuser.notify = function(body, req, res, cb) {
         Appuser.findById(body.appUserId, function(err, appuser) {
             if (err || !appuser) {
