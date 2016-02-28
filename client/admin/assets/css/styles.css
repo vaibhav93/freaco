@@ -10051,7 +10051,7 @@ td.small-width {
 }
 
 .ng-table th {
-  text-align: left !important;
+  text-align: left;
 }
 
 .ng-table .plus, .ng-table .minus {

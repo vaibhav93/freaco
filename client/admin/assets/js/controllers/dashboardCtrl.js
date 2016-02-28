@@ -2,17 +2,37 @@
 /** 
  * controllers used for the dashboard
  */
-app.controller('dashboardCtrl', ["$scope", "$localStorage", "Business", "Offer", "Appuser", "usSpinnerService", "$timeout", "moment", "Customer",
-    function($scope, $localStorage, Business, Offer, Appuser, usSpinnerService, $timeout, moment, Customer) {
+app.controller('dashboardCtrl', ["$scope", "$localStorage", "Business", "Offer", "Appuser", "$filter", "usSpinnerService", "$timeout", "moment", "Customer", "ngTableParams",
+    function($scope, $localStorage, Business, Offer, Appuser, $filter, usSpinnerService, $timeout, moment, Customer, ngTableParams) {
         $scope.redemptionCode;
         $scope.validationRes = false;
         $scope.resStatus = false
         $scope.parentScope = {};
         $scope.newLastWeek = 0;
+        $scope.business = Business.findById({
+            id: $localStorage.business.id
+        });
+        var filterArray = [];
+        $scope.searchByName = function() {
+            filterArray = [];
+            var filterObject = {
+                    // fname: {
+                    //     "like": '.*' + $scope.customerNameQuery + '.*',
+                    //     "options": "i"
+                    // }
+                    fname: $scope.customerNameQuery
+                }
+                //filterArray.push(filterObject);
+                //$scope.tableParams.reload();
+            $scope.tableParams.filter({
+                fname: $scope.customerNameQuery
+            });
+        }
+
         Business.customers({
             id: $localStorage.business.id
         }, function(customers) {
-            $scope.parentScope.customers = customers;
+            //$scope.parentScope.customers = customers;
             angular.forEach(customers, function(customer) {
                 customer.since = calculateSince(customer.lastVisit);
                 customer.user = Appuser.findById({
@@ -22,15 +42,18 @@ app.controller('dashboardCtrl', ["$scope", "$localStorage", "Business", "Offer",
             })
             $scope.newLastWeek = customers.filter(lastWeekFilter).length;
         });
-
-        Business.visits({
-            id: $localStorage.business.id
+        Business.activities({
+            id: $localStorage.business.id,
+            filter: {
+                where: {
+                    type: 'VISIT'
+                }
+            }
         }, function(visits) {
+            $scope.business.totalVisits = visits.length;
             $scope.visitsLastWeek = visits.filter(totalLastWeekVisits).length;
         })
-        $scope.business = Business.findById({
-            id: $localStorage.business.id
-        });
+
         $scope.customerCount = Customer.count({
             filter: {
                 where: {
@@ -116,6 +139,51 @@ app.controller('dashboardCtrl', ["$scope", "$localStorage", "Business", "Offer",
                 console.log(err);
             });
         }
+        $scope.tableParams = new ngTableParams({
+            page: 1, // show first page
+            count: 10, // count per page
+            filter: {
+
+            },
+        }, {
+            total: 0, // length of data
+            getData: function($defer, params) {
+                if (filterArray.length == 0)
+                    filterArray.push({});
+                Business.customers({
+                    id: $localStorage.business.id,
+                    filter: {
+                        where: {
+                            and: filterArray
+                        }
+                    }
+                }, function(customers) {
+                    angular.forEach(customers, function(customer) {
+                        customer.since = calculateSince(customer.lastVisit);
+                        customer.user = Appuser.findById({
+                            id: customer.appuserId
+                        }, function(user) {
+                            customer.fname = user.fname
+                        });
+
+                    });
+                    applyData(customers);
+                });
+                var applyData = function(data) {
+                    params.total(data.length);
+                    var orderedData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+                    orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()) : orderedData;
+                    $scope.vendors = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    params.total(orderedData.length);
+                    // set total for recalc pagination
+                    $defer.resolve($scope.vendors);
+
+                }
+
+            }
+
+
+        });
 
     }
 ]);

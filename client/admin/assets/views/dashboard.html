@@ -29,10 +29,10 @@
 									<form role="form" class="form-horizontal">
 										<div class="form-group">
 											<div class="col-sm-9">
-												<input type="text" ng-model="searchCustomer" placeholder="Search Customers" id="search" class="form-control">
+												<input type="text" ng-model="customerNameQuery" placeholder="Search Customers" id="search" class="form-control" ng-keyup="$event.keyCode == 13 && searchByName()">
 											</div>
 											<label class="control-label" for="search">
-												<i class="ti-search"></i>
+												<a href="" ng-click="searchByName()"><i class="ti-search"></i></a>
 											</label>
 											<div class="padding-right-10 pull-right">
 												<a class="btn btn-wide btn-blue" href="#">
@@ -43,6 +43,94 @@
 										</div>
 									</form>
 
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="panel panel-white" id="panel1">
+
+										<div class="panel-body">
+											<p class="text-blue" style="font-size:18px">
+												Not visited since:
+											</p>
+											<div>
+												<div class="radio clip-radio radio-primary radio-inline">
+													<input type="radio" id="radio1" name="inline" value="radio1">
+													<label for="radio1">
+														7 Days
+													</label>
+												</div>
+												<div class="radio clip-radio radio-primary radio-inline">
+													<input type="radio" id="radio2" name="inline" value="radio2" checked="checked">
+													<label for="radio2">
+														15 Days
+													</label>
+												</div>
+												<div class="radio clip-radio radio-primary radio-inline">
+													<input type="radio" id="radio3" name="inline" value="radio2" checked="checked">
+													<label for="radio3">
+														30 Days
+													</label>
+												</div>
+												<div class="radio clip-radio radio-primary radio-inline">
+													<input type="radio" id="radio4" name="inline" value="radio2" checked="checked">
+													<label for="radio4">
+														60 Days
+													</label>
+												</div>
+											</div>
+											<p class="text-blue" style="font-size:18px">
+												Visits more than:
+											</p>
+											<div>
+												<div class="radio clip-radio radio-primary radio-inline">
+													<input type="radio" id="radio10" name="inline2" value="radio1">
+													<label for="radio10">
+														10 visits
+													</label>
+												</div>
+												<div class="radio clip-radio radio-primary radio-inline">
+													<input type="radio" id="radio20" name="inline2" value="radio2" checked="checked">
+													<label for="radio20">
+														25 visits
+													</label>
+												</div>
+												<div class="radio clip-radio radio-primary radio-inline">
+													<input type="radio" id="radio30" name="inline2" value="radio2" checked="checked">
+													<label for="radio30">
+														50 visits
+													</label>
+												</div>
+												<div class="radio clip-radio radio-primary radio-inline">
+													<input type="radio" id="radio40" name="inline2" value="radio2" checked="checked">
+													<label for="radio40">
+														75 visits
+													</label>
+												</div>
+											</div>
+											<p class="text-blue" style="font-size:18px">
+												Events:
+											</p>
+											<div>
+												<div class="checkbox clip-check check-primary checkbox-inline">
+													<input type="checkbox" id="checkbox4" value="1" checked="">
+													<label for="checkbox4">
+														Upcoming birthdays
+													</label>
+												</div>
+											</div>
+										</div>
+										<div class="panel-footer">
+											<button class="btn btn-wide btn-blue" href="#">
+												<i class="fa fa-check"></i>
+												Apply
+											</button>
+											<button class="btn btn-wide btn-red" href="#">
+												<i class="fa fa-times"></i>
+												Clear
+											</button>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="row">
@@ -164,7 +252,7 @@
 							<div class="row">
 								<h5 class="panel-title col-sm-9"><span style="color:#ffffff;font-weight:400">Manage Rewards program</span></h5>
 								<div class="col-sm-3">
-								<a ui-sref="app.table.rewards" class="btn btn-primary btn-sm pull-right">Edit</a>
+									<a ui-sref="app.table.rewards" class="btn btn-primary btn-sm pull-right">Edit</a>
 								</div>
 								
 							</div>

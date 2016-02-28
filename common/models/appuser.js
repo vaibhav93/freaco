@@ -85,6 +85,7 @@ module.exports = function(Appuser) {
                 if (err) {
                     cb(null, err)
                 } else {
+                    console.log(token);
                     var businessModel = app.models.Business;
                     businessModel.findOne({
                         where: {
@@ -101,10 +102,9 @@ module.exports = function(Appuser) {
                                 error: err
                             });
                         } else {
-                            business.updateAttributes({
-                                totalVisits: business.totalVisits + 1
-                            });
-
+                            // business.updateAttributes({
+                            //     totalVisits: business.totalVisits + 1
+                            // });
                             var customerModel = app.models.Customer;
                             customerModel.findOrCreate({
                                 where: {
@@ -127,9 +127,10 @@ module.exports = function(Appuser) {
                                 if (err) {
                                     cb(null, err)
                                 } else {
-                                    business.visits.create({
+                                    business.activities.create({
                                         time: Date.now(),
-                                        customerId: customer.id
+                                        customerId: customer.id,
+                                        type: 'VISIT'
                                     }, function(err, visit) {
                                         console.log(visit);
                                     });

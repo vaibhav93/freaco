@@ -35,7 +35,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
         }).state('app.dashboard', {
             url: "/dashboard",
             templateUrl: "assets/views/dashboard.html",
-            resolve: loadSequence('moment', 'angularMoment', 'dashboardCtrl'),
+            resolve: loadSequence('moment', 'ngTable', 'angularMoment', 'dashboardCtrl'),
             title: 'Dashboard',
             ncyBreadcrumb: {
                 label: 'Dashboard'

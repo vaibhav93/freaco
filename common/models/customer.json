@@ -1,48 +1,56 @@
 {
-    "name": "customer",
-    "base": "PersistedModel",
-    "idInjection": true,
-    "options": {
-        "validateUpsert": true
+  "name": "customer",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "points": {
+      "type": "number",
+      "required": true
     },
-    "properties": {
-        "points": {
-            "type": "number",
-            "required": true
-        },
-        "visitCount": {
-            "type": "number",
-            "required": true
-        }
+    "visitCount": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "appuser": {
+      "type": "belongsTo",
+      "model": "appuser",
+      "foreignKey": ""
     },
-    "validations": [],
-    "relations": {
-        "appuser": {
-            "type": "belongsTo",
-            "model": "appuser",
-            "foreignKey": ""
-        },
-        "business": {
-            "type": "belongsTo",
-            "model": "business",
-            "foreignKey": ""
-        },
-        "visits": {
-            "type": "hasMany",
-            "model": "visit",
-            "foreignKey": ""
-        }
+    "business": {
+      "type": "belongsTo",
+      "model": "business",
+      "foreignKey": ""
     },
-    "acls": [{
-        "accessType": "WRITE",
-        "principalType": "ROLE",
-        "principalId": "$authenticated",
-        "permission": "ALLOW"
-    }, {
-        "accessType": "READ",
-        "principalType": "ROLE",
-        "principalId": "$authenticated",
-        "permission": "ALLOW"
-    }],
-    "methods": {}
+    "visits": {
+      "type": "hasMany",
+      "model": "visit",
+      "foreignKey": ""
+    },
+    "activities": {
+      "type": "hasMany",
+      "model": "activity",
+      "foreignKey": ""
+    }
+  },
+  "acls": [
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
 }

@@ -48,6 +48,11 @@
       "type": "hasMany",
       "model": "visit",
       "foreignKey": ""
+    },
+    "activities": {
+      "type": "hasMany",
+      "model": "activity",
+      "foreignKey": ""
     }
   },
   "acls": [
