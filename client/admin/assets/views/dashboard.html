@@ -35,17 +35,17 @@
 												<a href="" ng-click="searchByName()"><i class="ti-search"></i></a>
 											</label>
 											<div class="padding-right-10 pull-right">
-												<a class="btn btn-wide btn-blue" href="#">
+												<button class="btn btn-wide btn-blue" ng-click="showFilter()">
 													<i class="fa fa-filter"></i>
 													Apply filters
-												</a>
+												</button>
 											</div>
 										</div>
 									</form>
 
 								</div>
 							</div>
-							<div class="row">
+							<div class="row" ng-show="showFilterAttributes">
 								<div class="col-md-12">
 									<div class="panel panel-white" id="panel1">
 
@@ -128,6 +128,10 @@
 											<button class="btn btn-wide btn-red" ng-click="clearFilter()">
 												<i class="fa fa-times"></i>
 												Clear
+											</button>
+											<button class="btn btn-wide btn-green pull-right" ng-click="clearFilter()">
+												<i class="fa fa-gift"></i>
+												Push offers to filtered customers
 											</button>
 										</div>
 									</div>

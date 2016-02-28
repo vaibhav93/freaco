@@ -4,6 +4,8 @@
  */
 app.controller('dashboardCtrl', ["$scope", "$localStorage", "Business", "Offer", "Appuser", "$filter", "usSpinnerService", "$timeout", "moment", "Customer", "ngTableParams",
     function($scope, $localStorage, Business, Offer, Appuser, $filter, usSpinnerService, $timeout, moment, Customer, ngTableParams) {
+        $scope.showFilterAttributes = false;
+        $scope.selectedFilter;
         $scope.redemptionCode;
         $scope.validationRes = false;
         $scope.resStatus = false
@@ -14,7 +16,12 @@ app.controller('dashboardCtrl', ["$scope", "$localStorage", "Business", "Offer",
         $scope.business = Business.findById({
             id: $localStorage.business.id
         });
-
+        $scope.showFilter = function() {
+            if ($scope.showFilterAttributes)
+                $scope.showFilterAttributes = false;
+            else
+                $scope.showFilterAttributes = true;
+        }
         $scope.applyFilter = function() {
             //reset filter object and array
             filterArray = [];
@@ -56,6 +63,7 @@ app.controller('dashboardCtrl', ["$scope", "$localStorage", "Business", "Offer",
             $scope.filter = {};
             filterArray = [];
             $scope.tableParams.reload();
+            // $scope.showFilterAttributes = false;
         }
         $scope.searchByName = function() {
             filterArray = [];
