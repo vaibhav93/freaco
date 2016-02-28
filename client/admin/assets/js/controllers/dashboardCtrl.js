@@ -18,6 +18,7 @@ app.controller('dashboardCtrl', ["$scope", "$localStorage", "Business", "Offer",
             id: $localStorage.business.id
         });
         $scope.pushOffer = function() {
+            usSpinnerService.spin('spinner-2');
             console.log($scope.filteredList);
             Vendor.pushOffer({
                 customerList: $scope.filteredList,
@@ -27,6 +28,7 @@ app.controller('dashboardCtrl', ["$scope", "$localStorage", "Business", "Offer",
                 }
             }, function(res) {
                 console.log(res);
+                usSpinnerService.stop('spinner-2');
             })
         }
         $scope.showFilter = function() {
@@ -159,50 +161,54 @@ app.controller('dashboardCtrl', ["$scope", "$localStorage", "Business", "Offer",
             }
         }
         $scope.redemptionValidate = function() {
-            usSpinnerService.spin('spinner-1');
+
             $scope.resStatus = false;
-            Business.codes({
-                id: $localStorage.business.id,
-                filter: {
-                    where: {
-                        uid: $scope.redemptionCode
+
+            if ($scope.redemptionCode.length > 0) {
+                usSpinnerService.spin('spinner-1');
+                Business.codes({
+                    id: $localStorage.business.id,
+                    filter: {
+                        where: {
+                            uid: $scope.redemptionCode
+                        }
                     }
-                }
-            }, function(res) {
-                console.log(res.length);
-                //show alert
-                $scope.validationRes = true;
-                if (res.length > 0) {
-                    $scope.resStatus = true;
-                    var code = res[0];
-                    Offer.findById({
-                        id: code.offerId
-                    }, function(offer) {
-                        Appuser.notify({
-                            appUserId: code.userId,
-                            businessId: $localStorage.business.id,
-                            offer: offer,
-                            message: 'Offer redeemed',
-                            description: 'You have successfully redeemed ' + offer.name
-                        }, function(res) {
-                            if (res.err) {
-                                $scope.resStatus = false;
-                            }
+                }, function(res) {
+                    console.log(res.length);
+                    //show alert
+                    $scope.validationRes = true;
+                    if (res.length > 0) {
+                        $scope.resStatus = true;
+                        var code = res[0];
+                        Offer.findById({
+                            id: code.offerId
+                        }, function(offer) {
+                            Appuser.notify({
+                                appUserId: code.userId,
+                                businessId: $localStorage.business.id,
+                                offer: offer,
+                                message: 'Offer redeemed',
+                                description: 'You have successfully redeemed ' + offer.name
+                            }, function(res) {
+                                if (res.err) {
+                                    $scope.resStatus = false;
+                                }
+                            })
+                        }, function(err) {
+                            $scope.resStatus = false;
                         })
-                    }, function(err) {
+                    }
+                    $timeout(function() {
+                        $scope.validationRes = false;
                         $scope.resStatus = false;
-                    })
-                }
-                $timeout(function() {
-                    $scope.validationRes = false;
-                    $scope.resStatus = false;
-                }, 10000);
-                usSpinnerService.stop('spinner-1');
-            }, function(err) {
-                $scope.validationRes = true;
-                usSpinnerService.stop('spinner-1');
-                console.log(err);
-            });
+                    }, 10000);
+                    usSpinnerService.stop('spinner-1');
+                }, function(err) {
+                    $scope.validationRes = true;
+                    usSpinnerService.stop('spinner-1');
+                    console.log(err);
+                });
+            }
         }
         $scope.tableParams = new ngTableParams({
             page: 1, // show first page

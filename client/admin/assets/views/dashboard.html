@@ -48,7 +48,7 @@
 							<div class="row" ng-show="showFilterAttributes">
 								<div class="col-md-12">
 									<div class="panel panel-white" id="panel1">
-
+									<span us-spinner="{radius:20, width:4, length: 15,color:'red'}" spinner-key="spinner-2"></span>
 										<div class="panel-body">
 											<p class="text-blue" style="font-size:18px">
 												Not visited since:
@@ -129,9 +129,12 @@
 												<i class="fa fa-times"></i>
 												Clear
 											</button>
+											
+											
 											<button class="btn btn-wide btn-green pull-right" ng-click="pushOffer()">
 												<i class="fa fa-gift"></i>
 												Push offers to filtered customers
+
 											</button>
 										</div>
 									</div>
