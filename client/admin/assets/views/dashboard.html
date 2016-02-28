@@ -55,25 +55,25 @@
 											</p>
 											<div>
 												<div class="radio clip-radio radio-primary radio-inline">
-													<input type="radio" id="radio1" name="inline" value="radio1">
+													<input type="radio" id="radio1" name="inline" value="7" ng-model="filter.days">
 													<label for="radio1">
 														7 Days
 													</label>
 												</div>
 												<div class="radio clip-radio radio-primary radio-inline">
-													<input type="radio" id="radio2" name="inline" value="radio2" checked="checked">
+													<input type="radio" id="radio2" name="inline" value="15" ng-model="filter.days">
 													<label for="radio2">
 														15 Days
 													</label>
 												</div>
 												<div class="radio clip-radio radio-primary radio-inline">
-													<input type="radio" id="radio3" name="inline" value="radio2" checked="checked">
+													<input type="radio" id="radio3" name="inline" value="30" ng-model="filter.days">
 													<label for="radio3">
 														30 Days
 													</label>
 												</div>
 												<div class="radio clip-radio radio-primary radio-inline">
-													<input type="radio" id="radio4" name="inline" value="radio2" checked="checked">
+													<input type="radio" id="radio4" name="inline" value="60" ng-model="filter.days">
 													<label for="radio4">
 														60 Days
 													</label>
@@ -84,27 +84,27 @@
 											</p>
 											<div>
 												<div class="radio clip-radio radio-primary radio-inline">
-													<input type="radio" id="radio10" name="inline2" value="radio1">
+													<input type="radio" id="radio10" name="inline2" value="10" ng-model="filter.visits">
 													<label for="radio10">
 														10 visits
 													</label>
 												</div>
 												<div class="radio clip-radio radio-primary radio-inline">
-													<input type="radio" id="radio20" name="inline2" value="radio2" checked="checked">
+													<input type="radio" id="radio20" name="inline2" value="15" ng-model="filter.visits">
 													<label for="radio20">
+														15 visits
+													</label>
+												</div>
+												<div class="radio clip-radio radio-primary radio-inline">
+													<input type="radio" id="radio30" name="inline2" value="25" ng-model="filter.visits">
+													<label for="radio30">
 														25 visits
 													</label>
 												</div>
 												<div class="radio clip-radio radio-primary radio-inline">
-													<input type="radio" id="radio30" name="inline2" value="radio2" checked="checked">
-													<label for="radio30">
-														50 visits
-													</label>
-												</div>
-												<div class="radio clip-radio radio-primary radio-inline">
-													<input type="radio" id="radio40" name="inline2" value="radio2" checked="checked">
+													<input type="radio" id="radio40" name="inline2" value="30" ng-model="filter.visits">
 													<label for="radio40">
-														75 visits
+														30 visits
 													</label>
 												</div>
 											</div>
@@ -113,7 +113,7 @@
 											</p>
 											<div>
 												<div class="checkbox clip-check check-primary checkbox-inline">
-													<input type="checkbox" id="checkbox4" value="1" checked="">
+													<input type="checkbox" id="checkbox4" value="1" ng-model="filter.birthday">
 													<label for="checkbox4">
 														Upcoming birthdays
 													</label>
@@ -121,11 +121,11 @@
 											</div>
 										</div>
 										<div class="panel-footer">
-											<button class="btn btn-wide btn-blue" href="#">
+											<button class="btn btn-wide btn-blue" ng-click="applyFilter()">
 												<i class="fa fa-check"></i>
 												Apply
 											</button>
-											<button class="btn btn-wide btn-red" href="#">
+											<button class="btn btn-wide btn-red" ng-click="clearFilter()">
 												<i class="fa fa-times"></i>
 												Clear
 											</button>

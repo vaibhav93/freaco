@@ -8,11 +8,55 @@ app.controller('dashboardCtrl', ["$scope", "$localStorage", "Business", "Offer",
         $scope.validationRes = false;
         $scope.resStatus = false
         $scope.parentScope = {};
+        $scope.filter = {};
         $scope.newLastWeek = 0;
+        var filterArray = [];
         $scope.business = Business.findById({
             id: $localStorage.business.id
         });
-        var filterArray = [];
+
+        $scope.applyFilter = function() {
+            //reset filter object and array
+            filterArray = [];
+            var filterObject = {};
+            if ($scope.filter.visits) {
+                filterObject = {
+
+                    visitCount: {
+                        gte: $scope.filter.visits
+                    }
+                }
+                filterArray.push(filterObject);
+                filterObject = {};
+            }
+            if ($scope.filter.days) {
+                var filterDate = moment().subtract(7, 'days').toDate();
+                filterObject = {
+                    lastVisit: {
+                        lt: filterDate
+                    }
+                };
+                filterArray.push(filterObject);
+                filterObject = {};
+            }
+            if ($scope.filter.birthday) {
+                var filterDate = moment().add(7, 'days').toDate();
+                filterObject = {
+                    birthday: {
+                        lte: filterDate
+                    }
+                };
+                filterArray.push(filterObject);
+                filterObject = {};
+            }
+            // console.log(filterArray);
+            $scope.tableParams.reload();
+        }
+        $scope.clearFilter = function() {
+            $scope.filter = {};
+            filterArray = [];
+            $scope.tableParams.reload();
+        }
         $scope.searchByName = function() {
             filterArray = [];
             var filterObject = {

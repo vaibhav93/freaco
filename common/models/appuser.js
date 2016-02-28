@@ -5,7 +5,6 @@ var loopback = require('loopback');
 var moment = require('moment');
 var response = {};
 module.exports = function(Appuser) {
-
     Appuser.afterRemoteError('**', function(ctx, next) {
         console.log(ctx.error);
         if (ctx.error.statusCode == 401) {
@@ -85,7 +84,7 @@ module.exports = function(Appuser) {
                 if (err) {
                     cb(null, err)
                 } else {
-                    console.log(token);
+                    //console.log(token);
                     var businessModel = app.models.Business;
                     businessModel.findOne({
                         where: {
@@ -132,12 +131,12 @@ module.exports = function(Appuser) {
                                         customerId: customer.id,
                                         type: 'VISIT'
                                     }, function(err, visit) {
-                                        console.log(visit);
+                                        // console.log(visit);
                                     });
                                     (created) ? console.log('Created customer') : console.log('Found customer');
+
                                     if (!created) {
                                         var sinceLastVisit = moment.duration(moment() - customer.lastVisit).asHours();
-
                                         if (sinceLastVisit < 12) {
                                             customer.updateAttributes({
                                                 visitCount: customer.visitCount + 1,
@@ -157,7 +156,31 @@ module.exports = function(Appuser) {
                                             });
                                         }
                                     } else {
-                                        cb(null, customer);
+                                        customer.appuser(function(err, appuser) {
+                                            if (err || !customer) {
+                                                var err = new Error();
+                                                err.message = "No user of customer";
+                                                err.status = 501;
+                                                //console.log(error);
+                                                res.statusCode = 200;
+                                                res.send({
+                                                    error: err
+                                                });
+                                            } else {
+                                                var birthday;
+                                                if (!appuser.birthday) {
+                                                    birthday = null;
+                                                } else {
+                                                    birthday = appuser.birthday;
+                                                }
+                                                customer.updateAttributes({
+                                                    birthday: birthday
+                                                }, function(err, updatedCustomer) {
+                                                    cb(null, updatedCustomer)
+                                                })
+                                            }
+                                        })
+
                                     }
 
                                 }
