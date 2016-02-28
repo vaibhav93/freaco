@@ -37,6 +37,8 @@ app.controller('dashboardCtrl', ["$scope", "$localStorage", 'SweetAlert', "Busin
                     type: "success",
                     confirmButtonColor: "#007AFF"
                 });
+                $scope.showFilterAttributes = false;
+                $scope.filterArray = [];
             })
         }
         $scope.showFilter = function() {
