@@ -2,8 +2,8 @@
 /** 
  * controllers used for the dashboard
  */
-app.controller('dashboardCtrl', ["$scope", "$localStorage", "Business", "Offer", "Vendor", "Appuser", "$filter", "usSpinnerService", "$timeout", "moment", "Customer", "ngTableParams",
-    function($scope, $localStorage, Business, Offer, Vendor, Appuser, $filter, usSpinnerService, $timeout, moment, Customer, ngTableParams) {
+app.controller('dashboardCtrl', ["$scope", "$localStorage", 'SweetAlert', "Business", "Offer", "Vendor", "Appuser", "$filter", "usSpinnerService", "$timeout", "moment", "Customer", "ngTableParams",
+    function($scope, $localStorage, SweetAlert, Business, Offer, Vendor, Appuser, $filter, usSpinnerService, $timeout, moment, Customer, ngTableParams) {
         $scope.showFilterAttributes = false;
         $scope.selectedFilter;
         $scope.redemptionCode;
@@ -17,6 +17,7 @@ app.controller('dashboardCtrl', ["$scope", "$localStorage", "Business", "Offer",
         $scope.business = Business.findById({
             id: $localStorage.business.id
         });
+
         $scope.pushOffer = function() {
             usSpinnerService.spin('spinner-2');
             console.log($scope.filteredList);
@@ -29,6 +30,13 @@ app.controller('dashboardCtrl', ["$scope", "$localStorage", "Business", "Offer",
             }, function(res) {
                 console.log(res);
                 usSpinnerService.stop('spinner-2');
+
+                SweetAlert.swal({
+                    title: "Sucess!",
+                    text: "Offer pushed to customers!",
+                    type: "success",
+                    confirmButtonColor: "#007AFF"
+                });
             })
         }
         $scope.showFilter = function() {
