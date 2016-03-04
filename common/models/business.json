@@ -53,6 +53,16 @@
       "type": "hasMany",
       "model": "activity",
       "foreignKey": ""
+    },
+    "businessSecurities": {
+      "type": "hasOne",
+      "model": "BusinessSecurity",
+      "foreignKey": ""
+    },
+    "pushOffers": {
+      "type": "hasMany",
+      "model": "pushOffer",
+      "foreignKey": ""
     }
   },
   "acls": [

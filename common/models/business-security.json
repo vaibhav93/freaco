@@ -1,0 +1,24 @@
+{
+  "name": "BusinessSecurity",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "mpin": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "business": {
+      "type": "belongsTo",
+      "model": "business",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

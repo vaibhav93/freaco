@@ -63,5 +63,21 @@
   "visit": {
     "dataSource": "mongoDs",
     "public": true
+  },
+  "BusinessSecurity": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "Template": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "pushOffer": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "customerOffer": {
+    "dataSource": "mongoDs",
+    "public": true
   }
 }
