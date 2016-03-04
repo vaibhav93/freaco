@@ -115,10 +115,11 @@ module.exports = function(Appuser) {
                                 visitCount: 1,
                                 points: business.pointRules.perVisit,
                                 appuserId: token.userId,
+                                businessId: business.id,
                                 Business: {
-                                    id: business.id,
                                     name: business.name,
-                                    img: business.img
+                                    img: business.img,
+                                    requiresBill: business.pointRules.requiresBill
                                 },
                                 lastVisit: Date.now(),
                                 created: Date.now()
