@@ -28,6 +28,17 @@ module.exports = function(Appuser) {
             next();
         }
     })
+    Appuser.afterRemote('login', function(ctx, result, next) {
+        Appuser.findById(result.userId, function(err, appuser) {
+            if (err)
+                next(err);
+            else {
+                ctx.result.fname = appuser.fname;
+                console.log(ctx.result);
+                next();
+            }
+        })
+    })
     Appuser.beforeRemote('prototype.updateAttributes', function(ctx, result, next) {
         if (ctx.args.data.gcm_id) {
             app.sns.createPlatformEndpoint({
