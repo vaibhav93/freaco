@@ -4,7 +4,7 @@ var app = require('../../server/server'),
 var loopback = require('loopback');
 var moment = require('moment');
 var response = {};
-
+var appuserHelper = require('./appuserHelper.js')
 module.exports = function(Appuser) {
     Appuser.afterRemoteError('**', function(ctx, next) {
         console.log(ctx.error);
@@ -401,6 +401,38 @@ module.exports = function(Appuser) {
             http: {
                 path: '/notify',
                 verb: 'POST'
+            }
+        }
+
+    );
+    Appuser.getpushOffers = appuserHelper.getpushOffers;
+    Appuser.remoteMethod('getpushOffers', {
+            accepts: [{
+                arg: 'data',
+                type: 'object',
+                http: {
+                    source: 'body'
+                }
+            }, {
+                arg: 'req',
+                type: 'object',
+                'http': {
+                    source: 'req'
+                }
+            }, {
+                arg: 'res',
+                type: 'object',
+                'http': {
+                    source: 'res'
+                }
+            }],
+            returns: [{
+                arg: 'offers',
+                type: 'Array'
+            }],
+            http: {
+                path: '/pushOffers',
+                verb: 'GET'
             }
         }
 
