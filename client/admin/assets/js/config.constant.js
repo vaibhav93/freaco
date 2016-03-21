@@ -55,7 +55,7 @@ app.constant('JS_REQUIRES', {
         'cityCtrl': 'assets/js/controllers/cityCtrl.js',
         'rewardsCtrl': 'assets/js/controllers/rewardsCtrl.js',
         'vendorTableCtrl': 'assets/js/controllers/vendorTableCtrl.js',
-        'gMapsCtrl': 'assets/js/controllers/gMapsCtrl.js',
+        'newPOCtrl': 'assets/js/controllers/newPOCtrl.js',
         'offersListCtrl': 'assets/js/controllers/offersListCtrl.js',
 
         //*** Filters

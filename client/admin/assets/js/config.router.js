@@ -189,20 +189,15 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             ncyBreadcrumb: {
                 label: 'Push Offers'
             },
-            resolve: loadSequence('ui.select', 'uiSwitch', 'touchspin-plugin', 'monospaced.elastic', 'ui.mask', 'offersListCtrl')
-        }).state('app.table.booking', {
-            url: '/bookings',
-            templateUrl: "assets/views/table_booking.html",
-            title: 'Booking Table',
+            resolve: loadSequence('uiSwitch', 'touchspin-plugin', 'monospaced.elastic', 'ui.mask', 'offersListCtrl')
+        }).state('app.table.newPushOffers', {
+            url: '/newPushOffer',
+            templateUrl: "assets/views/table_newpushoffers.html",
+            title: 'New Push Offer',
             ncyBreadcrumb: {
                 label: 'Booking'
             },
-            resolve: loadSequence('monospaced.elastic', 'ui.mask', 'ngTable', 'bookingTableCtrl'),
-            data: {
-                permissions: {
-                    only: ['admin']
-                }
-            }
+            resolve: loadSequence('monospaced.elastic', 'ui.mask', 'newPOCtrl')
         }).state('app.table.responsive', {
             url: '/responsive',
             templateUrl: "assets/views/table_responsive.html",
