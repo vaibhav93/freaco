@@ -17,6 +17,17 @@ app.controller('offersListCtrl', ["$scope", "$filter", "$timeout", "Business", "
                     }, function(customerOffers) {
                         pushOffer.customerList = customerOffers;
                     })
+                    Business.activities({
+                            id: $localStorage.business.id,
+                            filter: {
+                                where: {
+                                    redeemId: pushOffer.id
+                                }
+                            }
+                        },
+                        function(activities) {
+                            pushOffer.activities = activities;
+                        })
                 })
             });
         }

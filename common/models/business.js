@@ -40,11 +40,12 @@ module.exports = function(Business) {
                                 });
                             } else { // customer found. Process according to type of mpin validation
                                 //log activity
-                                var updateActivity = function() {
+                                var updateActivity = function(redeemId) {
                                     business.activities.create({
                                         time: Date.now(),
                                         customerId: customer.id,
-                                        type: body.type
+                                        type: body.type,
+                                        redeemId: redeemId
                                     }, function(err, activity) {
                                         // console.log(visit);
                                     });
@@ -57,7 +58,7 @@ module.exports = function(Business) {
                                                 points: business.pointRules.perVisit + customer.points + business.pointRules.billRules.points * (Math.floor(body.billValue / business.pointRules.billRules.value)),
                                                 lastVisit: Date.now()
                                             }, function(err, updatedCustomer) {
-                                                updateActivity();
+                                                updateActivity(null);
                                                 cb(null, updatedCustomer)
                                             })
                                         } else { //no bill value. just update visit points
@@ -66,7 +67,7 @@ module.exports = function(Business) {
                                                 points: business.pointRules.perVisit + customer.points,
                                                 lastVisit: Date.now()
                                             }, function(err, updatedCustomer) {
-                                                updateActivity();
+                                                updateActivity(null);
                                                 cb(null, updatedCustomer)
                                             })
                                         }
@@ -96,7 +97,7 @@ module.exports = function(Business) {
                                                             error: err
                                                         });
                                                     } else {
-                                                        updateActivity();
+                                                        updateActivity(offer.id);
                                                         cb(null, updatedCustomer);
                                                     }
                                                 })
@@ -114,6 +115,7 @@ module.exports = function(Business) {
                                                     error: 'No push offer found'
                                                 });
                                             } else {
+                                                updateActivity(pushOffer.id);
                                                 cb(null, pushOffer);
                                             }
                                         })

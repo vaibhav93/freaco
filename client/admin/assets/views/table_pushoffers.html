@@ -17,7 +17,7 @@
 				<div class="panel-heading  panel-primary">
 					<div class="row">
 						<div class="col-xs-12 col-md-4">
-							<h4 class="panel-title">{{pushOffer.title}}</h4>
+							<h4 class="panel-title" style="font-size:20px">{{pushOffer.title}}</h4>
 						</div>
 						<div class="col-xs-12 col-md-3">
 							Valid from: {{pushOffer.validFrom | date:'mediumDate'}}
@@ -55,7 +55,7 @@
 							Delete
 						</button>
 						<span class="custom-text-style pull-right">Eligible Customers : <strong>{{pushOffer.customerList.length}}</strong></span>
-						<span class="custom-text-style pull-right" style="padding-right:50px">Redemptions : <strong>{{pushOffer.customerList.length}}</strong></span>
+						<span class="custom-text-style pull-right" style="padding-right:50px">Redemptions : <strong>{{pushOffer.activities.length}}</strong></span>
 					</div>
 				</div>
 			</div>
