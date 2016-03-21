@@ -6,6 +6,15 @@
  */
 app.controller('offersListCtrl', ["$scope", "$filter", "$timeout", "Business", "PushOffer", "$localStorage", "Vendor", "$q", "$modal",
     function($scope, $filter, $timeout, Business, PushOffer, $localStorage, Vendor, $q, $modal) {
+        $scope.updateStatus = function(pushOffer) {
+            var status;
+            //pushOffer.status ? status = 'enabled' : status = 'disabled';
+            PushOffer.prototype$updateAttributes({
+                id: pushOffer.id
+            }, {
+                status: pushOffer.status
+            })
+        }
         var getpushOffers = function() {
             Business.pushOffers({
                 id: $localStorage.business.id
