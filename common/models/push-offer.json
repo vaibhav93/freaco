@@ -17,6 +17,9 @@
         },
         "validTill": {
             "type": "Date"
+        },
+        "status": {
+            "type": "Boolean"
         }
     },
     "validations": [],
