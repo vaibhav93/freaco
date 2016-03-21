@@ -5,7 +5,9 @@
 			<h1 class="mainTitle">Live offers</h1>
 			<span class="mainDescription">Manage Live offers and Create new ones</span>
 		</div>
-		<div ncy-breadcrumb></div>
+		<div class="col-sm-4">
+			<button type="button" class="btn btn-wide btn-success pull-right">New campaign</button>
+		</div>
 	</div>
 </section>
 <div ng-controller="offersListCtrl" class="container-fluid container-fullw bg-white">
@@ -37,26 +39,29 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<button type="button" class="btn btn-o btn-wide btn-primary">Extend validity</button>
+							<button type="button" class="btn btn-o btn-wide btn-success">Push Notification</button>
 							<button
-								class="btn btn-danger btn-o btn-wide"
-								mwl-confirm
-								title="{{ title }}"
-								message="Do you wish to delete ?"
-								confirm-text="Confirm"
-								cancel-text="Cancel"
-								placement="top"
-								on-confirm="deletePushOffer(pushOffer.id)"
-								on-cancel="cancelClicked = true"
-								confirm-button-type="danger"
-								cancel-button-type="success">
-								Delete
-							</button>
-						</div>
+							class="btn btn-danger btn-o btn-wide"
+							mwl-confirm
+							title="{{ title }}"
+							message="Do you wish to delete ?"
+							confirm-text="Confirm"
+							cancel-text="Cancel"
+							placement="top"
+							on-confirm="deletePushOffer(pushOffer.id)"
+							on-cancel="cancelClicked = true"
+							confirm-button-type="danger"
+							cancel-button-type="success">
+							Delete
+						</button>
+						<span class="custom-text-style pull-right">Eligible Customers : <strong>{{pushOffer.customerList.length}}</strong></span>
+						<span class="custom-text-style pull-right" style="padding-right:50px">Redemptions : <strong>{{pushOffer.customerList.length}}</strong></span>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 <!-- end: PAGE TITLE -->
 <!-- start: YOUR CONTENT HERE -->

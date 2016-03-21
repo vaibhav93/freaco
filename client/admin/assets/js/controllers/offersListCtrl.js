@@ -4,15 +4,30 @@
  
  * Simple table with sorting and filtering on AngularJS
  */
-app.controller('offersListCtrl', ["$scope", "$filter", "$timeout", "Business", "$localStorage", "Vendor", "$q", "$modal",
-    function($scope, $filter, $timeout, Business, $localStorage, Vendor, $q, $modal) {
-        Business.pushOffers({
-            id: $localStorage.business.id
-        }, function(pushOffers) {
-            $scope.pushOffers = pushOffers;
-        });
+app.controller('offersListCtrl', ["$scope", "$filter", "$timeout", "Business", "PushOffer", "$localStorage", "Vendor", "$q", "$modal",
+    function($scope, $filter, $timeout, Business, PushOffer, $localStorage, Vendor, $q, $modal) {
+        var getpushOffers = function() {
+            Business.pushOffers({
+                id: $localStorage.business.id
+            }, function(pushOffers) {
+                $scope.pushOffers = pushOffers;
+                angular.forEach(pushOffers, function(pushOffer) {
+                    PushOffer.customerOffers({
+                        id: pushOffer.id
+                    }, function(customerOffers) {
+                        pushOffer.customerList = customerOffers;
+                    })
+                })
+            });
+        }
+        getpushOffers();
         $scope.deletePushOffer = function(pushOfferId) {
-            console.log('delete');
+            Business.pushOffers.destroyById({
+                id: $localStorage.business.id,
+                fk: pushOfferId
+            }, function(success) {
+                getpushOffers();
+            })
         }
         $scope.switchsetting = true;
     }
