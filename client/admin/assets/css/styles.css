@@ -5951,7 +5951,7 @@ input[type="radio"], input[type="checkbox"] {
   border-color: #4cae4c;
 }
 .btn-success:focus {
-  background-color: #91cf91;
+  /*background-color: #91cf91;*/
   border-color: #91cf91;
 }
 .btn-success.disabled:hover, .btn-success.disabled:focus, .btn-success.disabled:active, .btn-success.disabled.active, .btn-success[disabled], .btn-success[disabled]:hover, .btn-success[disabled]:focus, .btn-success[disabled]:active, .btn-success[disabled].active, fieldset[disabled] .btn-success:hover, fieldset[disabled] .btn-success:focus, fieldset[disabled] .btn-success:active, fieldset[disabled] .btn-success.active {
@@ -6112,37 +6112,37 @@ input[type="radio"], input[type="checkbox"] {
   border-bottom: 4px solid #ffffff;
 }
 
-/*.btn-danger {
+.btn-danger {
   background-color: #d43f3a;
   border-color: #d43f3a;
   color: #ffffff;
-}*/
-/*.open .btn-danger.dropdown-toggle {
+}
+.open .btn-danger.dropdown-toggle {
   background-color: #e27c79;
   border-color: #e27c79;
-}*/
+}
 .btn-danger:hover {
   background-color: #dd6864 !important;
   border-color: #dd6864;
   color: #ffffff;
 }
-/*.btn-danger:active, .btn-danger.active, .btn-danger.active:focus, .btn-danger:active:focus, .btn-danger:active:hover, .btn-danger.dropdown-toggle:active:hover {
+.btn-danger:active, .btn-danger.active, .btn-danger.active:focus, .btn-danger:active:focus, .btn-danger:active:hover, .btn-danger.dropdown-toggle:active:hover {
   background-color: #c9312c !important;
   border-color: #c9312c;
-}*/
-/*.btn-danger:focus {
-  background-color: #e27c79;
+}
+.btn-danger:focus {
+  /*background-color: #e27c79;*/
   border-color: #e27c79;
 }
 .btn-danger.disabled:hover, .btn-danger.disabled:focus, .btn-danger.disabled:active, .btn-danger.disabled.active, .btn-danger[disabled], .btn-danger[disabled]:hover, .btn-danger[disabled]:focus, .btn-danger[disabled]:active, .btn-danger[disabled].active, fieldset[disabled] .btn-danger:hover, fieldset[disabled] .btn-danger:focus, fieldset[disabled] .btn-danger:active, fieldset[disabled] .btn-danger.active {
   background-color: #e6918e;
   border-color: #e6918e;
   color: #ffffff;
-}*/
-/*.btn-danger.btn-o {
+}
+.btn-danger.btn-o {
   border: 1px solid #d43f3a;
   color: #d43f3a;
-}*/
+}
 .btn-danger.btn-o:hover {
   color: #dd6864;
   border-color: #dd6864;

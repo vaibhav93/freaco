@@ -182,11 +182,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 label: 'Rewards'
             },
             resolve: loadSequence('monospaced.elastic', 'ui.mask', 'ngTable', 'rewardsCtrl')
-            // data:{
-            //     permissions:{
-            //         only:['admin']
-            //     }
-            // }
+        }).state('app.table.pushoffers', {
+            url: '/pushoffers',
+            templateUrl: "assets/views/table_pushoffers.html",
+            title: 'Offers Table',
+            ncyBreadcrumb: {
+                label: 'Push Offers'
+            },
+            resolve: loadSequence('ui.select', 'uiSwitch', 'touchspin-plugin', 'monospaced.elastic', 'ui.mask', 'offersListCtrl')
         }).state('app.table.booking', {
             url: '/bookings',
             templateUrl: "assets/views/table_booking.html",

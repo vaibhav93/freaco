@@ -55,19 +55,17 @@ app.constant('JS_REQUIRES', {
         'cityCtrl': 'assets/js/controllers/cityCtrl.js',
         'rewardsCtrl': 'assets/js/controllers/rewardsCtrl.js',
         'vendorTableCtrl': 'assets/js/controllers/vendorTableCtrl.js',
-        'gMapsCtrl' : 'assets/js/controllers/gMapsCtrl.js',
-        'bookingTableCtrl': 'assets/js/controllers/bookingTableCtrl.js',
-        
+        'gMapsCtrl': 'assets/js/controllers/gMapsCtrl.js',
+        'offersListCtrl': 'assets/js/controllers/offersListCtrl.js',
+
         //*** Filters
         'htmlToPlaintext': 'assets/js/filters/htmlToPlaintext.js'
     },
     //*** angularJS Modules
-    modules: [
-    {
+    modules: [{
         name: 'angularSpinner',
         files: ['../bower_components/angular-spinner/angular-spinner.js']
-    },
-    {
+    }, {
         name: 'angularMoment',
         files: ['../bower_components/angular-moment/angular-moment.min.js']
     }, {
