@@ -6,56 +6,56 @@
 			<span class="mainDescription">Call back your customers now !</span>
 		</div>
 		<div class="col-sm-4">
-			<button type="button" class="btn btn-wide btn-success pull-right">New campaign</button>
+			<a ui-sref="app.table.pushoffers" class="btn btn-wide btn-success pull-right">Go back</a>
 		</div>
 	</div>
 </section>
 <div ng-controller="newPOCtrl" class="container-fluid container-fullw bg-white">
-	<div class="row" ng-repeat="pushOffer in pushOffers">
-		<div class="col-md-12">
-			<div class="panel panel-white">
-				<div class="panel-heading  panel-primary">
+	<div class="panel panel-white" id="panel1">
+		<div class="panel-heading">
+			<h4 class="panel-title text-primary" style="text-transform:uppercase"><span class="text-orange">Step 1.</span> Choose Offer Template</h4>
+			<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+		</div>
+		<div collapse="panel1" ng-init="panel1=false" class="panel-wrapper">
+			<div class="panel-body">
+				<div class="container-fluid">
 					<div class="row">
-						<div class="col-xs-12 col-md-4">
-							<h4 class="panel-title" style="font-size:20px">{{pushOffer.title}}</h4>
-						</div>
-						<div class="col-xs-12 col-md-3">
-							Valid from: {{pushOffer.validFrom | date:'mediumDate'}}
-						</div>
-						<div class="col-xs-12 col-md-3">
-							Valid till: {{pushOffer.validTill | date:'mediumDate'}}
-						</div>
-						<div class="col-xs-12 col-md-2">
-							<div class="checkbox pull-right" style="margin:0">
-								<switch ng-model="pushOffer.status" ng-change="updateStatus(pushOffer)" class="green"></switch>
+						<a href="javascript:void(0)">
+							<div class="col-xs-2 text-center custom-box margin-right-10">
+								<div class="padding-top-5">
+									<p>
+										<i class="fa fa-angellist"></i>
+									</p>
+									<p class="text-uppercase">
+										Call back customers
+									</p>
+								</div>							
 							</div>
-						</div>
-					</div>
-				</div>
-				<div class="panel-body">
-					<p>
-						{{pushOffer.description}}
-					</p>
-					<div class="row">
-						<div class="col-xs-12">
-							<button type="button" class="btn btn-o btn-wide btn-primary">Extend validity</button>
-							<button type="button" class="btn btn-o btn-wide btn-success">Push Notification</button>
-							<button
-							class="btn btn-danger btn-o btn-wide"
-							mwl-confirm
-							title="{{ title }}"
-							message="Do you wish to delete ?"
-							confirm-text="Confirm"
-							cancel-text="Cancel"
-							placement="top"
-							on-confirm="deletePushOffer(pushOffer.id)"
-							on-cancel="cancelClicked = true"
-							confirm-button-type="danger"
-							cancel-button-type="success">
-							Delete
-						</button>
-						<span class="custom-text-style pull-right">Eligible Customers : <strong>{{pushOffer.customerList.length}}</strong></span>
-						<span class="custom-text-style pull-right" style="padding-right:50px">Redemptions : <strong>{{pushOffer.activities.length}}</strong></span>
+						</a>
+						<a href="javascript:void(0)">
+							<div class="col-xs-2 text-center custom-box margin-right-10">
+								<div class="padding-top-5">
+									<p>
+										<i class="fa fa-birthday-cake"></i>
+									</p>
+									<p class="text-uppercase">
+										Birthday offers
+									</p>
+								</div>							
+							</div>
+						</a>
+						<a href="javascript:void(0)">
+							<div class="col-xs-2 text-center custom-box margin-right-10">
+								<div class="padding-top-5">
+									<p>
+										<i class="fa fa-birthday-cake"></i>
+									</p>
+									<p class="text-uppercase">
+										Festive Occasion
+									</p>
+								</div>							
+							</div>
+						</a>
 					</div>
 				</div>
 			</div>
