@@ -6,16 +6,26 @@
  */
 app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushOffer", "$localStorage", "Vendor", "$q", "$modal",
     function($scope, $filter, $timeout, Business, PushOffer, $localStorage, Vendor, $q, $modal) {
-        var currentTemplate = ''
+        $scope.currentTemplate = '';
         $scope.setTemplate = function(template) {
             console.log(template);
-            currentTemplate = template;
+            $scope.currentTemplate = template;
         }
         $scope.setBackground = function(template) {
-            if (template == currentTemplate) {
+            if (template == $scope.currentTemplate) {
                 return 'greenBG';
             }
         }
+        $scope.currentFestival = '';
+        $scope.festivals = [{
+            name: 'Diwali'
+        }, {
+            name: 'Holi'
+        }, {
+            name: 'Valentines Day'
+        }, {
+            name: 'Eid'
+        }]
     }
 ]);
 

@@ -1,4 +1,3 @@
-<!-- start: PAGE TITLE -->
 <section id="page-title">
 	<div class="row">
 		<div class="col-sm-8">
@@ -76,6 +75,39 @@
 								</div>						
 							</div>
 						</a>
+						<a ng-click="setTemplate('popup')">
+							<div class="col-xs-12 col-md-4 col-lg-3 text-center padding-top-15">
+								<div class="custom-box" ng-class="setBackground('popup')">
+									<div class="padding-top-5">
+										<p>
+											<i class="fa fa-birthday-cake"></i>
+										</p>
+										<p class="text-uppercase">
+											Create custom offer
+										</p>
+									</div>	
+								</div>						
+							</div>
+						</a>
+					</div>
+					<!-- select festive occastion -->
+					<div class="row padding-top-50" ng-show="currentTemplate =='festive'">
+						<div class="col-md-12 col-lg-6">
+							<form class="form form-horizontal">
+							<label class="col-xs-4 control-label text-left" for="festivalSelect"> Select festival occasion: </label>
+								<div class="col-xs-8">
+									<select id="festivalSelect" ng-model="currentFestival" class="form-control">
+										<option ng-repeat="festival in festivals" value="{{festival.name}}">{{festival.name}}</option>
+									</select>
+								</div>
+							</form>
+						</div>
+						<div class="col-xs-12 col-lg-1">
+							<span class="text-center" style="font-size:20px">OR</span>							
+						</div>
+						<div class="col-xs-12 col-lg-1">
+							<button type="button"class="btn btn-wide btn-success">Add your festival</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -85,4 +117,4 @@
 </div>
 <!-- end: PAGE TITLE -->
 <!-- start: YOUR CONTENT HERE -->
-<!-- end: YOUR CONTENT HERE -->
+<!-- end: YOUR CONTENT HERE

@@ -374,12 +374,18 @@ h5.over-title {
 .padding-0 {
   padding:0 !important;
 }
+.padding-top-50 {
+  padding-top:50px !important;
+}
 .margin-15{
   margin: 0 9px !important;
 }
 .greenBG{
   background-color:#5cb85c !important;
   color:#ffffff !important;
+}
+.test-left{
+  text-align: left !important;
 }
 
 .custom-box{
