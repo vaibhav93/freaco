@@ -371,14 +371,27 @@ h5.over-title {
 .custom-box:hover{
   background-color: #EEE;
 }
+.padding-0 {
+  padding:0 !important;
+}
+.margin-15{
+  margin: 0 9px !important;
+}
+.greenBG{
+  background-color:#5cb85c !important;
+  color:#ffffff !important;
+}
+
 .custom-box{
   border: 3px solid #304357;
   /*background-color: #EEE;*/
   border-radius: 6px;
-/*  -webkit-box-shadow: 4px 4px 10px -1px rgba(0,0,0,0.6);
--moz-box-shadow: 4px 4px 10px -1px rgba(0,0,0,0.6);
-box-shadow: 4px 4px 10px -1px rgba(0,0,0,0.6);*/
-  /*padding: 0 !important;*/
+}
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
 }
 @media (min-width: 768px) {
   .navbar .navbar-header {

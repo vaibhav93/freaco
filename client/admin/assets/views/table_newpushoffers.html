@@ -20,40 +20,60 @@
 			<div class="panel-body">
 				<div class="container-fluid">
 					<div class="row">
-						<a href="javascript:void(0)">
-							<div class="col-xs-2 text-center custom-box margin-right-10">
-								<div class="padding-top-5">
-									<p>
-										<i class="fa fa-angellist"></i>
-									</p>
-									<p class="text-uppercase">
-										Call back customers
-									</p>
-								</div>							
+						<a ng-click="setTemplate('cbCustomer')">
+							<div class="col-xs-12 col-md-4 col-lg-3 text-center">
+								<div class="custom-box" ng-class="setBackground('cbCustomer')">
+									<div class="padding-top-5">
+										<p>
+											<i class="fa fa-angellist"></i>
+										</p>
+										<p class="text-uppercase">
+											Call back customers
+										</p>
+									</div>	
+								</div>						
 							</div>
 						</a>
-						<a href="javascript:void(0)">
-							<div class="col-xs-2 text-center custom-box margin-right-10">
-								<div class="padding-top-5">
-									<p>
-										<i class="fa fa-birthday-cake"></i>
-									</p>
-									<p class="text-uppercase">
-										Birthday offers
-									</p>
-								</div>							
+						<a ng-click="setTemplate('birthday')">
+							<div class="col-xs-12 col-md-4 col-lg-3 text-center">
+								<div class="custom-box" ng-class="setBackground('birthday')">
+									<div class="padding-top-5">
+										<p>
+											<i class="fa fa-birthday-cake"></i>
+										</p>
+										<p class="text-uppercase">
+											Birthday offers
+										</p>
+									</div>	
+								</div>						
 							</div>
 						</a>
-						<a href="javascript:void(0)">
-							<div class="col-xs-2 text-center custom-box margin-right-10">
-								<div class="padding-top-5">
-									<p>
-										<i class="fa fa-birthday-cake"></i>
-									</p>
-									<p class="text-uppercase">
-										Festive Occasion
-									</p>
-								</div>							
+						<a ng-click="setTemplate('festive')">
+							<div class="col-xs-12 col-md-4 col-lg-3 text-center">
+								<div class="custom-box" ng-class="setBackground('festive')">
+									<div class="padding-top-5">
+										<p>
+											<i class="fa fa-birthday-cake"></i>
+										</p>
+										<p class="text-uppercase">
+											Festive Occasion
+										</p>
+									</div>	
+								</div>						
+							</div>
+						</a>
+						<a ng-click="setTemplate('weekend')">
+							<div class="col-xs-12 col-md-4 col-lg-3 text-center">
+								<div class="custom-box" ng-class="setBackground('weekend')">
+									<div class="padding-top-5">
+										<p>
+											<i class="fa fa-birthday-cake"></i>
+										</p>
+										<p class="text-uppercase">
+											Weekend offer
+										</p>
+									</div>	
+								</div>						
 							</div>
 						</a>
 					</div>
