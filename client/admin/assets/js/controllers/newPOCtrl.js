@@ -6,30 +6,41 @@
  */
 app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushOffer", "$localStorage", "Vendor", "$q", "$modal",
     function($scope, $filter, $timeout, Business, PushOffer, $localStorage, Vendor, $q, $modal) {
-        $scope.currentTemplate = '';
+        $scope.filter = {
+            allCustomers: false;
+        }
+        $scope.currentTemplate = '
+                ';
         $scope.setTemplate = function(template) {
             console.log(template);
             $scope.currentTemplate = template;
         }
         $scope.setBackground = function(template) {
             if (template == $scope.currentTemplate) {
-                return 'greenBG';
+                return '
+                greenBG ';
             }
         }
-        $scope.currentFestival = '';
+        $scope.currentFestival = '
+                ';
         $scope.festivals = [{
-            name: 'Diwali'
+            name: '
+                Diwali '
         }, {
-            name: 'Holi'
+            name: '
+                Holi '
         }, {
-            name: 'Valentines Day'
+            name: '
+                Valentines Day '
         }, {
-            name: 'Eid'
+            name: '
+                Eid '
         }]
     }
 ]);
 
-app.controller('ModalInstanceCtrl', ["$scope", "$modalInstance", "business", "Business",
+app.controller('
+                ModalInstanceCtrl ', ["$scope", "$modalInstance", "business", "Business",
     function($scope, $modalInstance, business, Business) {
 
         Business.businessCategory({
@@ -52,7 +63,8 @@ app.controller('ModalInstanceCtrl', ["$scope", "$modalInstance", "business", "Bu
         };
 
         $scope.cancel = function() {
-            $modalInstance.dismiss('cancel');
+            $modalInstance.dismiss('
+                cancel ');
         };
     }
 ]);

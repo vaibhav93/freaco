@@ -94,7 +94,7 @@
 					<div class="row padding-top-50" ng-show="currentTemplate =='festive'">
 						<div class="col-md-12 col-lg-6">
 							<form class="form form-horizontal">
-							<label class="col-xs-4 control-label text-left" for="festivalSelect"> Select festival occasion: </label>
+								<label class="col-xs-4 control-label text-left" for="festivalSelect"> Select festival occasion: </label>
 								<div class="col-xs-8">
 									<select id="festivalSelect" ng-model="currentFestival" class="form-control">
 										<option ng-repeat="festival in festivals" value="{{festival.name}}">{{festival.name}}</option>
@@ -109,6 +109,77 @@
 							<button type="button"class="btn btn-wide btn-success">Add your festival</button>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- panel 1 ends here -->
+	<!-- panel2 start -->
+	<div class="panel panel-white" id="panel2">
+		<div class="panel-heading">
+			<h4 class="panel-title text-primary" style="text-transform:uppercase"><span class="text-orange">Step 2.</span> Choose Customers</h4>
+			<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+		</div>
+		<div collapse="panel2" ng-init="panel2=false" class="panel-wrapper">
+			<div class="panel-body">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12 col-lg-3">
+							<div class="checkbox clip-check check-primary checkbox-inline">
+								<input type="checkbox" id="checkbox4" value="filter.allCustomers">
+								<label for="checkbox4">
+									<span class="text-blue" style="font-size:18px">
+										All Customers
+									</span>
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-12 col-lg-2">
+							<p class="text-blue" style="font-size:18px;margin-top:3px">
+								Not visited since:
+							</p>
+						</div>
+						<div class="col-xs-12 col-lg-3">
+							<div>
+								<div class="radio clip-radio radio-primary radio-inline">
+									<input type="radio" id="radio1" name="inline" value="7" ng-model="filter.days">
+									<label for="radio1">
+										7 Days
+									</label>
+								</div>
+								<div class="radio clip-radio radio-primary radio-inline">
+									<input type="radio" id="radio2" name="inline" value="15" ng-model="filter.days">
+									<label for="radio2">
+										15 Days
+									</label>
+								</div>
+								<div class="radio clip-radio radio-primary radio-inline">
+									<input type="radio" id="radio3" name="inline" value="30" ng-model="filter.days">
+									<label for="radio3">
+										30 Days
+									</label>
+								</div>
+								<div class="radio clip-radio radio-primary radio-inline">
+									<input type="radio" id="radio3" name="inline" value="45" ng-model="filter.days">
+									<label for="radio3">
+										45 Days
+									</label>
+								</div>
+								<div class="radio clip-radio radio-primary inline-radio custom-radio">
+									
+									<input type="radio" id="radio-value" name="inline" value="-1" ng-model="filter.days">
+									
+									<label for="radio-value" style="margin-bottom:0">
+									<input id="result-value" class="form-control" name="value" type="text" ng-model="filter.xDays" placeholer="x" />
+									<span style="line-height:34px">Days</span>
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+
+					
 				</div>
 			</div>
 		</div>

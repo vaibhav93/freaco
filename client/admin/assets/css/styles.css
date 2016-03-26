@@ -380,6 +380,15 @@ h5.over-title {
 .margin-15{
   margin: 0 9px !important;
 }
+.custom-radio label::before{
+  bottom:7px !important;
+}
+.custom-radio label::after{
+  bottom:7px !important;
+}
+.inline-radio label{vertical-align: middle}
+.inline-radio input[type=text]{width: 20%;display:inline-block;height: 30px}
+
 .greenBG{
   background-color:#5cb85c !important;
   color:#ffffff !important;
