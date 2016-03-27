@@ -387,7 +387,7 @@ h5.over-title {
   bottom:7px !important;
 }
 .inline-radio label{vertical-align: middle}
-.inline-radio input[type=text]{width: 20%;display:inline-block;height: 30px}
+.inline-radio input[type=number]{width: 20%;display:inline-block;height: 30px}
 
 .greenBG{
   background-color:#5cb85c !important;
