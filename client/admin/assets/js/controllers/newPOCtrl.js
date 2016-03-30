@@ -4,16 +4,47 @@
  
  * Simple table with sorting and filtering on AngularJS
  */
-app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushOffer", "$localStorage", "Vendor", "$q", "$modal",
-    function($scope, $filter, $timeout, Business, PushOffer, $localStorage, Vendor, $q, $modal) {
+app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushOffer", "$localStorage", "Vendor", "Template", "$q", "$modal",
+    function($scope, $filter, $timeout, Business, PushOffer, $localStorage, Vendor, Template, $q, $modal) {
         $scope.filter = {
             allCustomers: false,
             filter: -1,
             visits: null
         }
         $scope.currentTemplate = '';
+        $scope.newPO = {
+
+        };
+
+        Template.find({
+            filter: {
+                where: {
+                    and: [{
+                        festive: true
+                    }, {
+                        businessId: 0
+                    }]
+                }
+            }
+        }, function(festiveTemplates) {
+            $scope.festivals = festiveTemplates;
+        })
         $scope.setTemplate = function(template) {
-            console.log(template);
+            if (template != 'festive') {
+                Template.find({
+                    filter: {
+                        where: {
+                            name: template
+                        }
+                    }
+                }, function(templates) {
+                    // console.log(templates);
+                    $scope.newPO.title = templates[0].title;
+                    $scope.newPO.description = templates[0].description;
+                    // console.log($scope.newPO);
+                })
+            }
+            $scope.panel2 = false;
             $scope.currentTemplate = template;
         }
         $scope.setBackground = function(template) {
@@ -22,15 +53,15 @@ app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushO
             }
         }
         $scope.currentFestival = '';
-        $scope.festivals = [{
-            name: 'Diwali '
-        }, {
-            name: 'Holi '
-        }, {
-            name: 'Valentines Day '
-        }, {
-            name: 'Eid '
-        }]
+        // $scope.festivals = [{
+        //     name: 'Diwali '
+        // }, {
+        //     name: 'Holi '
+        // }, {
+        //     name: 'Valentines Day '
+        // }, {
+        //     name: 'Eid '
+        // }]
         $scope.today = function() {
             $scope.dt = new Date();
         };

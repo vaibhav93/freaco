@@ -96,8 +96,10 @@
 							<form class="form form-horizontal">
 								<label class="col-xs-4 control-label text-left" for="festivalSelect"> Select festival occasion: </label>
 								<div class="col-xs-8">
-									<select id="festivalSelect" ng-model="currentFestival" class="form-control">
-										<option ng-repeat="festival in festivals" value="{{festival.name}}">{{festival.name}}</option>
+									<!-- <select id="festivalSelect" ng-change="festivalSelect()" ng-model="selectedFestival" class="form-control">
+										<option ng-repeat="festival in festivals" value="{{festival}}">{{festival.name}}</option>
+									</select> -->
+									<select class="form-control" ng-model="newPO" ng-options="festival.name for festival in festivals track by festival">
 									</select>
 								</div>
 							</form>
@@ -120,7 +122,7 @@
 			<h4 class="panel-title text-primary" style="text-transform:uppercase"><span class="text-orange">Step 2.</span> Choose Customers</h4>
 			<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
 		</div>
-		<div collapse="panel2" ng-init="panel2=false" class="panel-wrapper">
+		<div collapse="panel2" ng-init="panel2=true" class="panel-wrapper">
 			<div class="panel-body">
 				<div class="container-fluid">
 					<div class="row padding-bottom-15">
@@ -241,12 +243,12 @@
 	</div>
 	<!-- panel2 ends here -->
 	<!-- panel 3 begins -->
-	<div class="panel panel-white" id="panel2">
+	<div class="panel panel-white" id="panel3">
 		<div class="panel-heading">
 			<h4 class="panel-title text-primary" style="text-transform:uppercase"><span class="text-orange">Step 3.</span> Edit Offer</h4>
 			<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
 		</div>
-		<div collapse="panel2" ng-init="panel2=false" class="panel-wrapper">
+		<div collapse="panel3" ng-init="panel3=true" class="panel-wrapper">
 			<div class="panel-body">
 				<div class="container-fluid">
 					<div class="row">
@@ -258,36 +260,36 @@
 								<input type="text" class="form-control" datepicker-popup="dd MMM yy" ng-model="end" is-open="endOpened" ng-init="endOpened = false" min-date="start" max-date="'2017-12-30'" ng-required="true" close-text="Close"  ng-click="endOpen($event)" />
 							</div>
 						</div>
-					
-					
-					<div class="col-md-6">
-						<form role="form" class="form-horizontal">
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="inputEmail3">
-									Title
-								</label>
-								<div class="col-sm-10">
-									<input type="text" ng-model="newPO.title" id="inputEmail3" class="form-control">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-2 control-label" for="inputPassword3">
-									Description
-								</label>
-								<div class="col-sm-10">
-									<textarea rows="8" id="inputPassword3" ng-model="newPO.description" class="form-control"></textarea>
-								</div>
-							</div>
 
-							<div class="form-group margin-bottom-0">
-								<div class="col-sm-offset-2 col-sm-10">
-									<button class="btn btn-o btn-primary" type="submit">
-										Submit Offer
-									</button>
+
+						<div class="col-md-6">
+							<form role="form" class="form-horizontal">
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="inputEmail3">
+										Title
+									</label>
+									<div class="col-sm-10">
+										<input type="text" ng-model="newPO.title" id="inputEmail3" class="form-control">
+									</div>
 								</div>
-							</div>
-						</form>
-					</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label" for="inputPassword3">
+										Description
+									</label>
+									<div class="col-sm-10">
+										<textarea rows="8" id="inputPassword3" ng-model="newPO.description" class="form-control"></textarea>
+									</div>
+								</div>
+
+								<div class="form-group margin-bottom-0">
+									<div class="col-sm-offset-2 col-sm-10">
+										<button class="btn btn-o btn-primary" type="submit">
+											Submit Offer
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
