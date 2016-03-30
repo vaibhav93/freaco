@@ -31,6 +31,72 @@ app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushO
         }, {
             name: 'Eid '
         }]
+        $scope.today = function() {
+            $scope.dt = new Date();
+        };
+        $scope.today();
+
+        $scope.clear = function() {
+            $scope.dt = null;
+        };
+
+
+        $scope.open = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.opened = !$scope.opened;
+        };
+        $scope.endOpen = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.startOpened = false;
+            $scope.endOpened = !$scope.endOpened;
+        };
+        $scope.startOpen = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.endOpened = false;
+            $scope.startOpened = !$scope.startOpened;
+        };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[0];
+
+        $scope.hstep = 1;
+        $scope.mstep = 15;
+
+        // Time Picker
+        $scope.options = {
+            hstep: [1, 2, 3],
+            mstep: [1, 5, 10, 15, 25, 30]
+        };
+
+        $scope.ismeridian = true;
+        $scope.toggleMode = function() {
+            $scope.ismeridian = !$scope.ismeridian;
+        };
+
+        $scope.update = function() {
+            var d = new Date();
+            d.setHours(14);
+            d.setMinutes(0);
+            $scope.dt = d;
+        };
+
+        $scope.changed = function() {
+            $log.log('Time changed to: ' + $scope.dt);
+        };
+
+        $scope.clear = function() {
+            $scope.dt = null;
+        };
+
     }
 ]);
 
