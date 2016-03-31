@@ -15,7 +15,14 @@ app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushO
         $scope.newPO = {
 
         };
-
+        $scope.allCustomersChange = function() {
+            $scope.filter.days = false;
+            $scope.filter.xDays = undefined;
+            $scope.filter.gtxVisits = false;
+            $scope.filter.ltxVisits = false;
+            $scope.filter.bday = false;
+            console.log($scope.filter.allCustomers);
+        }
         Template.find({
             filter: {
                 where: {

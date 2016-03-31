@@ -135,7 +135,7 @@
 					<div class="row">
 						<div class="col-xs-12 col-lg-2">
 							<div class="checkbox clip-check check-primary checkbox-inline">
-								<input type="checkbox" id="checkbox4" value="filter.allCustomers">
+								<input type="checkbox" id="checkbox4" ng-model="filter.allCustomers" ng-change="allCustomersChange()">
 								<label for="checkbox4">
 									<span class="text-blue" style="font-size:18px">
 										All Customers
@@ -151,35 +151,35 @@
 						<div class="col-xs-12 col-lg-3">
 							<div>
 								<div class="radio clip-radio radio-primary radio-inline">
-									<input type="radio" id="radio1" name="inline" value="7" ng-model="filter.days">
+									<input type="radio" id="radio1" name="inline" value="7" ng-model="filter.days" ng-disabled="filter.allCustomers">
 									<label for="radio1">
 										7 Days
 									</label>
 								</div>
 								<div class="radio clip-radio radio-primary radio-inline">
-									<input type="radio" id="radio2" name="inline" value="15" ng-model="filter.days">
+									<input type="radio" id="radio2" name="inline" value="15" ng-model="filter.days" ng-disabled="filter.allCustomers">
 									<label for="radio2">
 										15 Days
 									</label>
 								</div>
 								<div class="radio clip-radio radio-primary radio-inline">
-									<input type="radio" id="radio3" name="inline" value="30" ng-model="filter.days">
+									<input type="radio" id="radio3" name="inline" value="30" ng-model="filter.days" ng-disabled="filter.allCustomers">
 									<label for="radio3">
 										30 Days
 									</label>
 								</div>
 								<div class="radio clip-radio radio-primary radio-inline">
-									<input type="radio" id="radio4" name="inline" value="45" ng-model="filter.days">
+									<input type="radio" id="radio4" name="inline" value="45" ng-model="filter.days" ng-disabled="filter.allCustomers">
 									<label for="radio4">
 										45 Days
 									</label>
 								</div>
 								<div class="radio clip-radio radio-primary inline-radio custom-radio">
 									
-									<input type="radio" id="radio-value" name="inline" value="-1" ng-model="filter.days">
+									<input type="radio" id="radio-value" name="inline" value="-1" ng-model="filter.days" ng-disabled="filter.allCustomers">
 									
 									<label for="radio-value" style="margin-bottom:0">
-										<input id="result-value" class="form-control" name="value" type="number" ng-model="filter.xDays" placeholer="x" />
+										<input id="result-value" class="form-control" name="value" type="number" ng-model="filter.xDays" placeholer="x" ng-disabled="filter.allCustomers"/>
 										<span style="line-height:34px">Days</span>
 									</label>
 								</div>
@@ -190,13 +190,13 @@
 								Customers having Birthdays:
 							</p>
 							<div class="radio clip-radio radio-primary radio-inline">
-								<input type="radio" id="bdayradio1" name="inline" value="0" ng-model="filter.bday">
+								<input type="radio" id="bdayradio1" name="inline" value="0" ng-model="filter.bday" ng-disabled="filter.allCustomers">
 								<label for="bdayradio1">
 									This month
 								</label>
 							</div>
 							<div class="radio clip-radio radio-primary radio-inline">
-								<input type="radio" id="bdayradio2" name="inline" value="1" ng-model="filter.bday">
+								<input type="radio" id="bdayradio2" name="inline" value="1" ng-model="filter.bday" ng-disabled="filter.allCustomers">
 								<label for="bdayradio2">
 									Next month
 								</label>
@@ -213,7 +213,7 @@
 									<span class="text-blue" style="font-size:18px;margin-top:4px;line-height:34px">
 										Customers having more than
 									</span>
-									<input id="filterVisitsDays" class="form-control" name="value" type="number" ng-model="filter.gtxVisits" placeholer="x" />
+									<input id="filterVisitsDays" class="form-control" name="value" type="number" ng-model="filter.gtxVisits" placeholer="x" ng-disabled="filter.allCustomers"/>
 									<span class="text-blue" style="font-size:18px;margin-top:4px;line-height:34px">visits</span>
 								</label>
 							</div>
@@ -229,7 +229,7 @@
 									<span class="text-blue" style="font-size:18px;margin-top:4px;line-height:34px">
 										Customers having less than
 									</span>
-									<input id="filterVisitsDays2" class="form-control" name="value" type="number" ng-model="filter.ltxVisits" placeholer="x" />
+									<input id="filterVisitsDays2" class="form-control" name="value" type="number" ng-model="filter.ltxVisits" placeholer="x" ng-disabled="filter.allCustomers"/>
 									<span class="text-blue" style="font-size:18px;margin-top:4px;line-height:34px">visits</span>
 								</label>
 							</div>
