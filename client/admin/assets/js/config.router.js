@@ -197,7 +197,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             ncyBreadcrumb: {
                 label: 'Booking'
             },
-            resolve: loadSequence('monospaced.elastic', 'ui.mask', 'newPOCtrl')
+            resolve: loadSequence('monospaced.elastic', 'moment', 'angularMoment', 'ui.mask', 'newPOCtrl')
         }).state('app.table.responsive', {
             url: '/responsive',
             templateUrl: "assets/views/table_responsive.html",

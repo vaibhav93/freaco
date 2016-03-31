@@ -15,13 +15,76 @@ app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushO
         $scope.newPO = {
 
         };
+        $scope.customers = [];
         $scope.allCustomersChange = function() {
-            $scope.filter.days = false;
+            if ($scope.filter.allCustomers) {
+                Business.customers({
+                    id: $localStorage.business.id
+                }, function(customers) {
+                    $scope.customers = customers;
+                })
+            } else {
+                $scope.customers = [];
+            }
+            $scope.filter.days = 0;
             $scope.filter.xDays = undefined;
-            $scope.filter.gtxVisits = false;
-            $scope.filter.ltxVisits = false;
-            $scope.filter.bday = false;
+            $scope.filter.gtxVisits = 0;
+            $scope.filter.ltxVisits = 0;
+            $scope.filter.bday = 0;
             console.log($scope.filter.allCustomers);
+        }
+        //filter to get customers with birthdays next/this month
+        var filterBirthdays = function(customer) {
+            if (!customer.birthday)
+                return false;
+            else {
+                var momentBday = moment(customer.birthday);
+                var daysLeft = moment.duration((momentBday.month() + 1) * 30 + momentBday.date() - ((moment().month + 1) * 30 + moment().date())).asDays()
+
+                if ($scope.filter.bday == 30 && $scope.filter.bday > daysLeft)
+                    return true;
+                else if ($scope.filter.bday == 60 && daysLeft <= 60 && daysLeft >= 30)
+                    return true;
+                else
+                    return false;
+            }
+
+        }
+        $scope.bdayChange = function() {
+            if ($scope.filter.bday > 0) {
+                Business.customers({
+                    id: $localStorage.business.id
+                }, function(customers) {
+                    $scope.customers = customers.filter(filterBirthdays);
+                })
+            }
+        }
+        $scope.daysChanged = function() {
+            $scope.customers = [];
+            var filterDate;
+            if ($scope.filter.days > 0)
+                filterDate = moment().subtract($scope.filter.days, 'days').toDate();
+            else {
+                if ($scope.filter.xDays)
+                    filterDate = moment().subtract($scope.filter.xDays, 'days').toDate();
+                else
+                    filterDate = 0;
+            }
+            Business.customers({
+                id: $localStorage.business.id,
+                filter: {
+                    where: {
+                        lastVisit: {
+                            lt: filterDate
+                        }
+                    }
+                }
+            }, function(customers) {
+                $scope.customers = customers;
+            })
+
+
+            console.log(filterDate);
         }
         Template.find({
             filter: {
