@@ -50,6 +50,38 @@ app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushO
             }
 
         }
+        $scope.visitsChange = function() {
+            if ($scope.filter.visits > 0) {
+                if ($scope.filter.visits == 22) {
+                    Business.customers({
+                        id: $localStorage.business.id,
+                        filter: {
+                            where: {
+                                visitCount: {
+                                    gt: $scope.filter.gtxVisits
+                                }
+                            }
+                        }
+                    }, function(customers) {
+                        $scope.customers = customers;
+                    })
+                } else {
+                    Business.customers({
+                        id: $localStorage.business.id,
+                        filter: {
+                            where: {
+                                visitCount: {
+                                    lt: $scope.filter.ltxVisits
+                                }
+                            }
+                        }
+                    }, function(customers) {
+                        $scope.customers = customers;
+                    })
+                }
+
+            }
+        }
         $scope.bdayChange = function() {
             if ($scope.filter.bday > 0) {
                 Business.customers({
