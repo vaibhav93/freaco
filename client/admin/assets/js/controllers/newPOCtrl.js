@@ -31,6 +31,7 @@ app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushO
             $scope.filter.gtxVisits = 0;
             $scope.filter.ltxVisits = 0;
             $scope.filter.bday = 0;
+            $scope.filter.visits = 0;
             console.log($scope.filter.allCustomers);
         }
         //filter to get customers with birthdays next/this month
@@ -81,6 +82,9 @@ app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushO
                 }
 
             }
+        }
+        $scope.gotoStep3 = function() {
+            $scope.panel3 = false;
         }
         $scope.bdayChange = function() {
             if ($scope.filter.bday > 0) {
@@ -155,15 +159,26 @@ app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushO
             }
         }
         $scope.currentFestival = '';
-        // $scope.festivals = [{
-        //     name: 'Diwali '
-        // }, {
-        //     name: 'Holi '
-        // }, {
-        //     name: 'Valentines Day '
-        // }, {
-        //     name: 'Eid '
-        // }]
+        $scope.createOffer = function() {
+            Business.pushOffers.create({
+                id: $localStorage.business.id
+            }, {
+                title: $scope.newPO.title,
+                description: $scope.newPO.description,
+                validFrom: $scope.start,
+                validTill: $scope.end
+            }, function(pushOffer) {
+                console.log(pushOffer);
+                Vendor.pushOffer({
+
+                    pushOffer: pushOffer,
+                    customerList: $scope.customers
+
+                }, function(res) {
+                    console.log(res);
+                })
+            })
+        }
         $scope.today = function() {
             $scope.dt = new Date();
         };
@@ -172,7 +187,6 @@ app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushO
         $scope.clear = function() {
             $scope.dt = null;
         };
-
 
         $scope.open = function($event) {
             $event.preventDefault();

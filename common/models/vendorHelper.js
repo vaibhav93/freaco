@@ -10,9 +10,9 @@ exports.pushOffer = function(body, req, res, cb) {
         default: 'Hello World',
         GCM: {
             data: {
-                message: body.offer.message,
-                description: body.offer.description
-                // type: 'OFFER'
+                message: body.pushOffer.message,
+                description: body.pushOffer.description,
+                type: 'PUSHOFFER'
             }
         }
     };
@@ -39,6 +39,7 @@ exports.pushOffer = function(body, req, res, cb) {
             pushoffer: {
                 title: body.pushOffer.title,
                 description: body.pushOffer.description,
+                validFrom: body.pushOffer.validFrom,
                 validTill: body.pushOffer.validTill,
                 businessId: body.pushOffer.businessId
             }
@@ -51,21 +52,30 @@ exports.pushOffer = function(body, req, res, cb) {
 
             }
         })
-        // if (customer.user.EndpointArn) {
-        //     app.sns.publish({
-        //         Message: payload,
-        //         MessageStructure: 'json',
-        //         TargetArn: customer.user.EndpointArn
-        //     }, function(err, data) {
-        //         if (err) {
-        //             console.log(err);
-        //         }
-        //         console.log('push sent');
-        //         // console.log(data);
-        //     });
-        // } else {
-        //     console.log('No sns endpoint found for ' + customer.user.fname);
-        // }
+        var appUserModel = app.models.Appuser;
+        appUserModel.findById(customer.appuserId, function(err, appUser) {
+            if (err || !appUser) {
+                console.log('No app user found for customer id' + customer.id);
+            } else {
+                // console.log(appUser);
+                if (appUser.EndpointArn) {
+                    app.sns.publish({
+                        Message: payload,
+                        MessageStructure: 'json',
+                        TargetArn: appUser.EndpointArn
+                    }, function(err, data) {
+                        if (err) {
+                            console.log(err);
+                        }
+                        console.log('push sent');
+                        // console.log(data);
+                    });
+                } else {
+                    console.log('No sns endpoint found for ' + appUser.fname);
+                }
+            }
+        })
+
     })
     // console.log(body.offer);
     cb(null, 'success');

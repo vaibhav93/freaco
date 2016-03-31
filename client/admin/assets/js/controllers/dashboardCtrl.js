@@ -47,7 +47,9 @@ app.controller('dashboardCtrl', ["$scope", "$localStorage", 'SweetAlert', "Busin
             else
                 $scope.showFilterAttributes = true;
         }
+        $scope.gotoStep3 = function() {
 
+        }
         $scope.applyFilter = function() {
             //reset filter object and array
             filterArray = [];

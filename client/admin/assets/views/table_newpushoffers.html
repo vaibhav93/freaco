@@ -13,7 +13,7 @@
 	<div class="panel panel-white" id="panel1">
 		<div class="panel-heading">
 			<h4 class="panel-title text-primary" style="text-transform:uppercase"><span class="text-orange">Step 1.</span> Choose Offer Template</h4>
-			<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+			<!-- <ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool> -->
 		</div>
 		<div collapse="panel1" ng-init="panel1=false" class="panel-wrapper">
 			<div class="panel-body">
@@ -120,7 +120,7 @@
 	<div class="panel panel-white" id="panel2">
 		<div class="panel-heading">
 			<h4 class="panel-title text-primary" style="text-transform:uppercase"><span class="text-orange">Step 2.</span> Choose Customers</h4>
-			<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+			<!-- <ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool> -->
 		</div>
 		<div collapse="panel2" ng-init="panel2=true" class="panel-wrapper">
 			<div class="panel-body">
@@ -235,7 +235,11 @@
 							</div>
 						</div>
 					</div>
-					
+					<div class="row">
+						<div class="col-xs-12 col-lg-6">
+							<button type="button" ng-click="gotoStep3()" class="btn btn-primary">Next</button>
+						</div>
+					</div>
 					
 				</div>
 			</div>
@@ -246,7 +250,7 @@
 	<div class="panel panel-white" id="panel3">
 		<div class="panel-heading">
 			<h4 class="panel-title text-primary" style="text-transform:uppercase"><span class="text-orange">Step 3.</span> Edit Offer</h4>
-			<ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool>
+			<!-- <ct-paneltool class="panel-tools" tool-collapse="tool-collapse"><a href="javascript:void(0)"></a></ct-paneltool> -->
 		</div>
 		<div collapse="panel3" ng-init="panel3=true" class="panel-wrapper">
 			<div class="panel-body">
@@ -283,7 +287,7 @@
 
 								<div class="form-group margin-bottom-0">
 									<div class="col-sm-offset-2 col-sm-10">
-										<button class="btn btn-o btn-primary" type="submit">
+										<button class="btn btn-o btn-primary" ng-disabled="!start || !end" ng-click="createOffer()" type="submit">
 											Submit Offer
 										</button>
 									</div>
