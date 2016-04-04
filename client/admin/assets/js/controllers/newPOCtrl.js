@@ -175,7 +175,7 @@ app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushO
                     customerList: $scope.customers
 
                 }, function(res) {
-                    console.log(res);
+
                 })
             })
         }
