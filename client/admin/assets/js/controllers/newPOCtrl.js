@@ -163,6 +163,7 @@ app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushO
             Business.pushOffers.create({
                 id: $localStorage.business.id
             }, {
+                businessName: $localStorage.business.name,
                 title: $scope.newPO.title,
                 description: $scope.newPO.description,
                 validFrom: $scope.start,
