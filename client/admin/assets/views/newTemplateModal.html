@@ -1,0 +1,41 @@
+<div class="modal-header">
+	<h3 class="modal-title">New Push Offer template</h3>
+</div>
+<div class="modal-body">
+	<div class="container-fluid">
+		<form role="form" class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="name">
+				
+				<span ng-if="!festive">Name of template</span>
+				<span ng-if="festive">Festive occasion</span>
+
+				</label>
+				<div class="col-sm-10">
+					<input type="text" ng-model="template.name" id="name" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="title">
+					Offer Title
+				</label>
+				<div class="col-sm-10">
+					<input type="text" ng-model="template.title" id="title" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="desc">
+					Offer Description
+				</label>
+				<div class="col-sm-10">
+					<textarea ng-model="template.description" id="desc" class="form-control"></textarea> 
+				</div>
+			</div>
+		</form>
+
+	</div>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="ok()">OK</button>
+	<button class="btn btn-primary btn-o" ng-click="cancel()">Cancel</button>
+</div>

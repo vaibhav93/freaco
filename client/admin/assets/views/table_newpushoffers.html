@@ -75,9 +75,25 @@
 								</div>						
 							</div>
 						</a>
-						<a ng-click="setTemplate('popup')">
+						<div ng-repeat="businessTemplate in businessTemplates">
+							<a ng-click="setTemplate(businessTemplate.name)">
 							<div class="col-xs-12 col-md-4 col-lg-3 text-center padding-top-15">
-								<div class="custom-box" ng-class="setBackground('popup')">
+								<div class="custom-box" ng-class="setBackground(businessTemplate.name)">
+									<div class="padding-top-5">
+										<p>
+											<i class="fa fa-birthday-cake"></i>
+										</p>
+										<p class="text-uppercase">
+											{{businessTemplate.name}}
+										</p>
+									</div>	
+								</div>						
+							</div>
+						</a>
+						</div>
+						<a ng-click="openModal(false)">
+							<div class="col-xs-12 col-md-4 col-lg-3 text-center padding-top-15">
+								<div class="custom-box">
 									<div class="padding-top-5">
 										<p>
 											<i class="fa fa-birthday-cake"></i>
@@ -108,7 +124,7 @@
 							<span class="text-center" style="font-size:20px">OR</span>							
 						</div>
 						<div class="col-xs-12 col-lg-1">
-							<button type="button"class="btn btn-wide btn-success">Add your festival</button>
+							<button type="button"class="btn btn-wide btn-success" ng-click="openModal(true)">Add your festival</button>
 						</div>
 					</div>
 				</div>

@@ -15,6 +15,18 @@ app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushO
         $scope.newPO = {
 
         };
+        $scope.openModal = function(festive) {
+            console.log(festive)
+            var modalInstance = $modal.open({
+                templateUrl: 'assets/views/newTemplateModal.html',
+                controller: 'newTemplateCtrl',
+                resolve: {
+                    festive: function() {
+                        return festive;
+                    }
+                }
+            });
+        };
         $scope.customers = [];
         $scope.allCustomersChange = function() {
             if ($scope.filter.allCustomers) {
@@ -128,12 +140,30 @@ app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushO
                     and: [{
                         festive: true
                     }, {
-                        businessId: 0
+                        or: [{
+                            businessId: 0
+                        }, {
+                            ownerBusiness: $localStorage.business.id.toString()
+                        }]
+
                     }]
                 }
             }
         }, function(festiveTemplates) {
             $scope.festivals = festiveTemplates;
+        })
+        Template.find({
+            filter: {
+                where: {
+                    and: [{
+                        festive: false
+                    }, {
+                        ownerBusiness: $localStorage.business.id.toString()
+                    }]
+                }
+            }
+        }, function(businessTemplates) {
+            $scope.businessTemplates = businessTemplates;
         })
         $scope.setTemplate = function(template) {
             if (template != 'festive') {
@@ -248,26 +278,44 @@ app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushO
     }
 ]);
 
-app.controller('ModalInstanceCtrl ', ["$scope", "$modalInstance", "business", "Business",
-    function($scope, $modalInstance, business, Business) {
+app.controller('newTemplateCtrl', ["$scope", "$modalInstance", "$localStorage", "Business", "festive", "SweetAlert", "Template",
+    function($scope, $modalInstance, $localStorage, Business, festive, SweetAlert, Template) {
 
-        Business.businessCategory({
-            id: business.id
-        }, function(busCat) {
-            $scope.business.businessCategory = busCat.name;
-        })
-        Business.city({
-            id: business.id
-        }, function(city) {
-            $scope.business.city = city.name;
-        })
-        $scope.business = business;
-        $scope.selected = {
-
-        };
-
+        $scope.festive = festive;
+        $scope.template = {
+            name: '',
+            title: '',
+            description: '',
+            festive: festive,
+            ownerBusiness: $localStorage.business.id.toString()
+        }
         $scope.ok = function() {
-            $modalInstance.close();
+            Template.create(
+                $scope.template, function(success) {
+                    $modalInstance.close();
+                    setTimeout(function() {
+                        SweetAlert.swal({
+                            title: "Sucess!",
+                            text: "Template created",
+                            type: "success",
+                            confirmButtonColor: "#007AFF"
+                        }, function(isConfirm) {
+
+                        });
+                    }, 500);
+                }, function(error) {
+                    setTimeout(function() {
+                        SweetAlert.swal({
+                            title: "Error!",
+                            text: "Could not create template",
+                            type: "danger",
+                            confirmButtonColor: "#007AFF"
+                        }, function(isConfirm) {
+
+                        });
+                    }, 500);
+                })
+
         };
 
         $scope.cancel = function() {
