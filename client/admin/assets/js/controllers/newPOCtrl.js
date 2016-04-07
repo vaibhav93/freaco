@@ -4,8 +4,8 @@
  
  * Simple table with sorting and filtering on AngularJS
  */
-app.controller('newPOCtrl', ["$scope", "$rootScope", "$filter", "$timeout", "Business", "PushOffer", "$localStorage", "Vendor", "Template", "$q", "$modal",
-    function($scope, $rootScope, $filter, $timeout, Business, PushOffer, $localStorage, Vendor, Template, $q, $modal) {
+app.controller('newPOCtrl', ["$scope", "$rootScope", "$filter", "$timeout", "SweetAlert", "$state", "Business", "PushOffer", "$localStorage", "Vendor", "Template", "$q", "$modal",
+    function($scope, $rootScope, $filter, $timeout, SweetAlert, $state, Business, PushOffer, $localStorage, Vendor, Template, $q, $modal) {
         $scope.filter = {
             allCustomers: false,
             filter: -1,
@@ -219,8 +219,24 @@ app.controller('newPOCtrl', ["$scope", "$rootScope", "$filter", "$timeout", "Bus
                     customerList: $scope.customers
 
                 }, function(res) {
-
+                    SweetAlert.swal({
+                        title: "Sucess!",
+                        text: "Offer created and sent to customers",
+                        type: "success",
+                        confirmButtonColor: "#007AFF"
+                    }, function(isConfirm) {
+                        $state.go('app.table.pushoffers');
+                    });
                 })
+            }, function(err) {
+                SweetAlert.swal({
+                    title: "Error!",
+                    text: "Some error occured",
+                    type: "error",
+                    confirmButtonColor: "#007AFF"
+                }, function(isConfirm) {
+                    // $state.go(app.table.pushoffers);
+                });
             })
         }
         $scope.today = function() {
