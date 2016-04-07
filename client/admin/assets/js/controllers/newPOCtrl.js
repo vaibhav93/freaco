@@ -4,8 +4,8 @@
  
  * Simple table with sorting and filtering on AngularJS
  */
-app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushOffer", "$localStorage", "Vendor", "Template", "$q", "$modal",
-    function($scope, $filter, $timeout, Business, PushOffer, $localStorage, Vendor, Template, $q, $modal) {
+app.controller('newPOCtrl', ["$scope", "$rootScope", "$filter", "$timeout", "Business", "PushOffer", "$localStorage", "Vendor", "Template", "$q", "$modal",
+    function($scope, $rootScope, $filter, $timeout, Business, PushOffer, $localStorage, Vendor, Template, $q, $modal) {
         $scope.filter = {
             allCustomers: false,
             filter: -1,
@@ -134,36 +134,49 @@ app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushO
 
             console.log(filterDate);
         }
-        Template.find({
-            filter: {
-                where: {
-                    and: [{
-                        festive: true
-                    }, {
-                        or: [{
-                            businessId: 0
+        var fetchFestiveTempaltes = function() {
+            Template.find({
+                filter: {
+                    where: {
+                        and: [{
+                            festive: true
                         }, {
-                            ownerBusiness: $localStorage.business.id.toString()
-                        }]
+                            or: [{
+                                businessId: 0
+                            }, {
+                                ownerBusiness: $localStorage.business.id.toString()
+                            }]
 
-                    }]
+                        }]
+                    }
                 }
+            }, function(festiveTemplates) {
+                $scope.festivals = festiveTemplates;
+            })
+        }
+        var fetchTemplates = function() {
+                Template.find({
+                    filter: {
+                        where: {
+                            and: [{
+                                festive: false
+                            }, {
+                                ownerBusiness: $localStorage.business.id.toString()
+                            }]
+                        }
+                    }
+                }, function(businessTemplates) {
+                    $scope.businessTemplates = businessTemplates;
+                })
             }
-        }, function(festiveTemplates) {
-            $scope.festivals = festiveTemplates;
-        })
-        Template.find({
-            filter: {
-                where: {
-                    and: [{
-                        festive: false
-                    }, {
-                        ownerBusiness: $localStorage.business.id.toString()
-                    }]
-                }
-            }
-        }, function(businessTemplates) {
-            $scope.businessTemplates = businessTemplates;
+            //fetch all templates on page load
+        fetchFestiveTempaltes();
+        fetchTemplates();
+        $rootScope.$on('templateCreated', function(event, data) {
+            console.log(data);
+            fetchTemplates();
+            fetchFestiveTempaltes();
+            $scope.setTemplate(data.name);
         })
         $scope.setTemplate = function(template) {
             if (template != 'festive') {
@@ -278,8 +291,8 @@ app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushO
     }
 ]);
 
-app.controller('newTemplateCtrl', ["$scope", "$modalInstance", "$localStorage", "Business", "festive", "SweetAlert", "Template",
-    function($scope, $modalInstance, $localStorage, Business, festive, SweetAlert, Template) {
+app.controller('newTemplateCtrl', ["$scope", "$rootScope", "$modalInstance", "$localStorage", "Business", "festive", "SweetAlert", "Template", "$state",
+    function($scope, $rootScope, $modalInstance, $localStorage, Business, festive, SweetAlert, Template, $state) {
 
         $scope.festive = festive;
         $scope.template = {
@@ -300,7 +313,7 @@ app.controller('newTemplateCtrl', ["$scope", "$modalInstance", "$localStorage", 
                             type: "success",
                             confirmButtonColor: "#007AFF"
                         }, function(isConfirm) {
-
+                            $rootScope.$emit('templateCreated', success);
                         });
                     }, 500);
                 }, function(error) {
