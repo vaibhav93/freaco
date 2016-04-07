@@ -41,7 +41,8 @@ exports.pushOffer = function(body, req, res, cb) {
                 description: body.pushOffer.description,
                 validFrom: body.pushOffer.validFrom,
                 validTill: body.pushOffer.validTill,
-                businessId: body.pushOffer.businessId
+                businessId: body.pushOffer.businessId,
+                businessName: body.pushOffer.businessName
             }
         }, function(err, customerOffer, created) {
             if (err) {
