@@ -57,6 +57,8 @@ app.constant('JS_REQUIRES', {
         'vendorTableCtrl': 'assets/js/controllers/vendorTableCtrl.js',
         'newPOCtrl': 'assets/js/controllers/newPOCtrl.js',
         'offersListCtrl': 'assets/js/controllers/offersListCtrl.js',
+        'newRPCtrl': 'assets/js/controllers/newRPCtrl.js',
+        'administrationCtrl': 'assets/js/controllers/administrationCtrl.js',
 
         //*** Filters
         'htmlToPlaintext': 'assets/js/filters/htmlToPlaintext.js'

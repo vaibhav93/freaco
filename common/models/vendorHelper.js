@@ -10,7 +10,7 @@ exports.pushOffer = function(body, req, res, cb) {
         default: 'Hello World',
         GCM: {
             data: {
-                message: body.pushOffer.message,
+                title: body.pushOffer.title,
                 description: body.pushOffer.description,
                 type: 'PUSHOFFER'
             }

@@ -213,7 +213,7 @@ app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushO
         $scope.today = function() {
             $scope.dt = new Date();
         };
-        $scope.todayDate = new Date();
+        $scope.today();
 
         $scope.clear = function() {
             $scope.dt = null;

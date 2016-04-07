@@ -232,6 +232,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 label: 'Elements'
             },
             resolve: loadSequence('ui.select', 'monospaced.elastic', 'ui.mask', 'touchspin-plugin', 'selectCtrl')
+        }).state('app.form.newRP', {
+            url: '/rewardsprogram',
+            templateUrl: "assets/views/form_newRP.html",
+            title: 'Rewards Program',
+            ncyBreadcrumb: {
+                label: 'Rewards'
+            },
+            resolve: loadSequence('ui.select', 'newRPCtrl')
         }).state('app.form.vendor', {
             url: '/vendor/:vendorId',
             templateUrl: "assets/views/form_vendor.html",
@@ -322,6 +330,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             title: 'User Profile',
             ncyBreadcrumb: {
                 label: 'User Profile'
+            },
+            resolve: loadSequence('administrationCtrl')
+        }).state('app.pages.administration', {
+            url: '/administration',
+            templateUrl: "assets/views/page_administration.html",
+            title: 'Profile',
+            ncyBreadcrumb: {
+                label: 'Profile'
             },
             resolve: loadSequence('flow', 'userCtrl')
         }).state('app.pages.invoice', {

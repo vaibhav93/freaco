@@ -275,9 +275,9 @@
 						<div class="col-md-6">
 							<h5 class="text-bold margin-bottom-15">Offer validity (From - Till)</h5>
 							<div class="input-group">
-								<input type="text" class="form-control" datepicker-popup="dd MMM yyyy" ng-model="start"  is-open="startOpened" ng-init="startOpened = false" min-date="todayDate" max-date="end" ng-required="true" close-text="Close"  ng-click="startOpen($event)"/>
+								<input type="text" class="form-control" datepicker-popup="dd MMM yy" ng-model="start"  is-open="startOpened" ng-init="startOpened = false" min-date="'1970-12-31'" max-date="end" ng-required="true" close-text="Close"  ng-click="startOpen($event)"/>
 								<span class="input-group-addon">to</span>
-								<input type="text" class="form-control" datepicker-popup="dd MMM yyyy" ng-model="end" is-open="endOpened" ng-init="endOpened = false" min-date="start" max-date="'2017-12-30'" ng-required="true" close-text="Close"  ng-click="endOpen($event)" />
+								<input type="text" class="form-control" datepicker-popup="dd MMM yy" ng-model="end" is-open="endOpened" ng-init="endOpened = false" min-date="start" max-date="'2017-12-30'" ng-required="true" close-text="Close"  ng-click="endOpen($event)" />
 							</div>
 						</div>
 

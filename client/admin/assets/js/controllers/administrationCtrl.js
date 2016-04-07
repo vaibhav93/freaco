@@ -4,7 +4,7 @@
  
  * Simple table with sorting and filtering on AngularJS
  */
-app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushOffer", "$localStorage", "Vendor", "Template", "$q", "$modal",
+app.controller('administrationCtrl', ["$scope", "$filter", "$timeout", "Business", "PushOffer", "$localStorage", "Vendor", "Template", "$q", "$modal",
     function($scope, $filter, $timeout, Business, PushOffer, $localStorage, Vendor, Template, $q, $modal) {
         $scope.filter = {
             allCustomers: false,
@@ -213,7 +213,7 @@ app.controller('newPOCtrl', ["$scope", "$filter", "$timeout", "Business", "PushO
         $scope.today = function() {
             $scope.dt = new Date();
         };
-        $scope.todayDate = new Date();
+        $scope.today();
 
         $scope.clear = function() {
             $scope.dt = null;
