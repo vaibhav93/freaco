@@ -221,7 +221,7 @@ app.controller('newPOCtrl', ["$scope", "$rootScope", "$filter", "$timeout", "Swe
                 }, function(res) {
                     SweetAlert.swal({
                         title: "Sucess!",
-                        text: "Offer created and sent to customers",
+                        text: "Hooray ! Offer created and sent to customers.",
                         type: "success",
                         confirmButtonColor: "#007AFF"
                     }, function(isConfirm) {

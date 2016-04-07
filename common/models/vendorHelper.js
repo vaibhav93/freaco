@@ -35,7 +35,7 @@ exports.pushOffer = function(body, req, res, cb) {
             }
         }, {
             customerId: customer.id,
-            pushOfferId: body.pushOfferId,
+            pushOfferId: body.pushOffer.id,
             pushoffer: {
                 title: body.pushOffer.title,
                 description: body.pushOffer.description,
