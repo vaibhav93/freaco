@@ -15,6 +15,22 @@ app.controller('offersListCtrl', ["$scope", "$filter", "$timeout", "Business", "
                 status: pushOffer.status
             })
         }
+        $scope.pushNotification = function(pushOffer) {
+            Vendor.pushOffer({
+
+                pushOffer: pushOffer,
+                type: 'PUSH_OFFER_NOTIFICATION'
+            }, function(res) {
+                SweetAlert.swal({
+                    title: "Sucess!",
+                    text: "Hooray ! Offer sent to customers.",
+                    type: "success",
+                    confirmButtonColor: "#007AFF"
+                }, function(isConfirm) {
+                    $state.go('app.table.pushoffers');
+                });
+            })
+        }
         var getpushOffers = function() {
             Business.pushOffers({
                 id: $localStorage.business.id

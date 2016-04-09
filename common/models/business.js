@@ -45,7 +45,7 @@ module.exports = function(Business) {
                                         time: Date.now(),
                                         customerId: customer.id,
                                         type: body.type,
-                                        redeemId: redeemId
+                                        redeemId: redeemId //can be rewardId or pushOfferId depending on context
                                     }, function(err, activity) {
                                         // console.log(visit);
                                     });

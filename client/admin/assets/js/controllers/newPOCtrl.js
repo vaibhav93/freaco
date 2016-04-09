@@ -216,8 +216,8 @@ app.controller('newPOCtrl', ["$scope", "$rootScope", "$filter", "$timeout", "Swe
                 Vendor.pushOffer({
 
                     pushOffer: pushOffer,
-                    customerList: $scope.customers
-
+                    customerList: $scope.customers,
+                    type: 'CREATE_PUSH_OFFER'
                 }, function(res) {
                     SweetAlert.swal({
                         title: "Sucess!",

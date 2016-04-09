@@ -4,7 +4,8 @@ var app = require('../../server/server');
 exports.pushOffer = function(body, req, res, cb) {
     /* body attributes
      *   pushOffer (required)
-     *   customerList (required)
+     *   customerList (required) can be embedded in pushOffer
+     *   type : 'CREATE_PUSH_OFFER'/'PUSH_OFFER_NOTIFICATION'
      */
     var payload = {
         default: 'Hello World',
@@ -20,6 +21,22 @@ exports.pushOffer = function(body, req, res, cb) {
     payload.GCM = JSON.stringify(payload.GCM);
     // then have to stringify the entire message payload
     payload = JSON.stringify(payload);
+    var customerList;
+    if (body.hasOwnProperty("customerList"))
+        customerList = body.customerList;
+    else if (body.pushOffer.hasOwnProperty("customerList"))
+        customerList = body.pushOffer.customerList;
+    //update business activity that push is sent
+
+    app.models.Activity.create({
+        time: Date.now(),
+        customerId: 0,
+        type: body.type,
+        redeemId: redeemId, //can be rewardId or pushOfferId depending on context
+        businessId: body.pushOffer.businessId
+    }, function(err, activity) {
+        // console.log(visit);
+    });
 
     //push for each in list 
     body.customerList.forEach(function(customer) {
