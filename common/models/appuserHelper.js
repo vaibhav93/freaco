@@ -29,9 +29,10 @@ exports.getpushOffers = function(body, req, res, cb) {
                             cb(null, offers);
                         })
                     })
+
                 }
             })
-        }
 
+        }
     })
 }

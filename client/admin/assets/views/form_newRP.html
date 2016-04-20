@@ -1,132 +1,52 @@
 <section id="page-title">
 	<div class="row">
 		<div class="col-sm-8">
-			<h1 class="mainTitle">New Push Offer</h1>
-			<span class="mainDescription">Call back your customers now !</span>
-		</div>
-		<div class="col-sm-4">
-			<a ui-sref="app.table.pushoffers" class="btn btn-wide btn-success pull-right">Go back</a>
+			<h1 class="mainTitle">Manage Rewards Program</h1>
+			<span class="mainDescription">Create/Edit your loyalty program</span>
 		</div>
 	</div>
 </section>
-<div ng-controller="newPOCtrl" class="container-fluid container-fullw bg-white">
+<div ng-controller="newRPCtrl" class="container-fluid container-fullw bg-white">
 	<div class="panel panel-white" id="panel1">
 		<div class="panel-heading">
-			<h4 class="panel-title text-primary" style="text-transform:uppercase"><span class="text-orange">Step 1.</span> Choose Offer Template</h4>
+			<h4 class="panel-title text-primary" style="text-transform:uppercase"><span class="text-orange">Step 1.</span> Set reward earning rules.</h4>
 			<!-- <ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool> -->
 		</div>
 		<div collapse="panel1" ng-init="panel1=false" class="panel-wrapper">
 			<div class="panel-body">
 				<div class="container-fluid">
 					<div class="row">
-						<a ng-click="setTemplate('cbCustomer')">
-							<div class="col-xs-12 col-md-4 col-lg-3 text-center">
-								<div class="custom-box" ng-class="setBackground('cbCustomer')">
-									<div class="padding-top-5">
-										<p>
-											<i class="fa fa-angellist"></i>
-										</p>
-										<p class="text-uppercase">
-											Call back customers
-										</p>
-									</div>	
-								</div>						
-							</div>
-						</a>
-						<a ng-click="setTemplate('birthday')">
-							<div class="col-xs-12 col-md-4 col-lg-3 text-center">
-								<div class="custom-box" ng-class="setBackground('birthday')">
-									<div class="padding-top-5">
-										<p>
-											<i class="fa fa-birthday-cake"></i>
-										</p>
-										<p class="text-uppercase">
-											Birthday offers
-										</p>
-									</div>	
-								</div>						
-							</div>
-						</a>
-						<a ng-click="setTemplate('festive')">
-							<div class="col-xs-12 col-md-4 col-lg-3 text-center">
-								<div class="custom-box" ng-class="setBackground('festive')">
-									<div class="padding-top-5">
-										<p>
-											<i class="fa fa-birthday-cake"></i>
-										</p>
-										<p class="text-uppercase">
-											Festive Occasion
-										</p>
-									</div>	
-								</div>						
-							</div>
-						</a>
-						<a ng-click="setTemplate('weekend')">
-							<div class="col-xs-12 col-md-4 col-lg-3 text-center">
-								<div class="custom-box" ng-class="setBackground('weekend')">
-									<div class="padding-top-5">
-										<p>
-											<i class="fa fa-birthday-cake"></i>
-										</p>
-										<p class="text-uppercase">
-											Weekend offer
-										</p>
-									</div>	
-								</div>						
-							</div>
-						</a>
-						<div ng-repeat="businessTemplate in businessTemplates">
-							<a ng-click="setTemplate(businessTemplate.name)">
-							<div class="col-xs-12 col-md-4 col-lg-3 text-center padding-top-15">
-								<div class="custom-box" ng-class="setBackground(businessTemplate.name)">
-									<div class="padding-top-5">
-										<p>
-											<i class="fa fa-birthday-cake"></i>
-										</p>
-										<p class="text-uppercase">
-											{{businessTemplate.name}}
-										</p>
-									</div>	
-								</div>						
-							</div>
-						</a>
-						</div>
-						<a ng-click="openModal(false)">
-							<div class="col-xs-12 col-md-4 col-lg-3 text-center padding-top-15">
-								<div class="custom-box">
-									<div class="padding-top-5">
-										<p>
-											<i class="fa fa-birthday-cake"></i>
-										</p>
-										<p class="text-uppercase">
-											Create custom offer
-										</p>
-									</div>	
-								</div>						
-							</div>
-						</a>
-					</div>
-					<!-- select festive occastion -->
-					<div class="row padding-top-50" ng-show="currentTemplate =='festive'">
-						<div class="col-md-12 col-lg-6">
-							<form class="form form-horizontal">
-								<label class="col-xs-4 control-label text-left" for="festivalSelect"> Select festival occasion: </label>
-								<div class="col-xs-8">
-									<!-- <select id="festivalSelect" ng-change="festivalSelect()" ng-model="selectedFestival" class="form-control">
-										<option ng-repeat="festival in festivals" value="{{festival}}">{{festival.name}}</option>
-									</select> -->
-									<select class="form-control" ng-model="newPO" ng-options="festival.name for festival in festivals track by festival">
-									</select>
+						<form class="form form-horizontal">
+							<div class="form-group">
+								<label for="form-field-mask-3" class="col-xs-4 control-label" style="text-align:left">
+									How much do you wish to give back in points ?
+								</label>
+								<div class="input-group col-xs-1">
+									<input type="number" class="form-control" name="masked" ng-model="x">
+									<span class="input-group-addon"> <i class="fa fa-percent"></i> </span>
 								</div>
-							</form>
+							</div>
+							<div class="form-group">
+								<label for="how" class="col-xs-3 control-label" style="text-align:left">
+									How your customer earn points ?
+								</label>
+								<div class="input-group col-xs-6">
+									<div class="radio clip-radio radio-primary radio-inline" style="padding-top:0">
+										<input type="radio" id="radio1" name="inline" value="radio1">
+										<label for="radio1">
+											On every visit
+										</label>
+									</div>
+									<div class="radio clip-radio radio-primary radio-inline" style="padding-top:0">
+										<input type="radio" id="radio2" name="inline" value="radio2" checked="checked">
+										<label for="radio2">
+											On every purchase
+										</label>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="col-xs-12 col-lg-1">
-							<span class="text-center" style="font-size:20px">OR</span>							
-						</div>
-						<div class="col-xs-12 col-lg-1">
-							<button type="button"class="btn btn-wide btn-success" ng-click="openModal(true)">Add your festival</button>
-						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>
