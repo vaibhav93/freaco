@@ -30,7 +30,7 @@
 								<label for="how" class="col-xs-3 control-label" style="text-align:left">
 									How your customer earn points ?
 								</label>
-								<div class="input-group col-xs-6">
+								<div class="input-group col-xs-6 ">
 									<div class="radio clip-radio radio-primary radio-inline" style="padding-top:0">
 										<input type="radio" id="radio1" name="inline" value="radio1">
 										<label for="radio1">
@@ -45,197 +45,224 @@
 									</div>
 								</div>
 							</div>
-						</div>
-					</form>
-				</div>
+						</form>
+						<form role="form" class="form-inline">
+							For every 
+							<div class="form-group"  style="padding:0 5px">
+								<div class="input-group" style="width:100px">
+									<input type="number" id="exampleInputPassword2" class="form-control">
+									<span class="input-group-addon"> <i class="fa fa-inr"></i> </span>
+								</div>
+							</div>
+							purchase, your customer earns
+							<div class="form-group" style="padding:0 5px">
+								<div class="input-group" style="width:100px">
+									<input type="number" id="points" class="form-control">
+								</div>
+							</div>
+							points
+						</form>
+						<form role="form" class="form-inline">
+							How much your customers spend on average at your business? 
+							<div class="form-group"  style="padding:0 5px">
+								<div class="input-group" style="width:100px">
+									<input type="number" id="spndAmount" class="form-control">
+									<span class="input-group-addon"> <i class="fa fa-inr"></i> </span>
+								</div>
+							</div>
+							
+						</form>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
-	<!-- panel 1 ends here -->
-	<!-- panel2 start -->
-	<div class="panel panel-white" id="panel2">
-		<div class="panel-heading">
-			<h4 class="panel-title text-primary" style="text-transform:uppercase"><span class="text-orange">Step 2.</span> Choose Customers</h4>
-			<!-- <ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool> -->
-		</div>
-		<div collapse="panel2" ng-init="panel2=true" class="panel-wrapper">
-			<div class="panel-body">
-				<div class="container-fluid">
-					<div class="row padding-bottom-15">
-						<div class="col-xs-12 col-lg-12  text-center">
-							<span class="custom-box" style="padding:10px;border-width:1px">
-								<span class="text-green" style="font-size:18px;">Number of Customers selected: </span><span class="text-red" style="font-size:18px;">{{customers.length}}</span>
-							</span>
+</div>
+<!-- panel 1 ends here -->
+<!-- panel2 start -->
+<div class="panel panel-white" id="panel2">
+	<div class="panel-heading">
+		<h4 class="panel-title text-primary" style="text-transform:uppercase"><span class="text-orange">Step 2.</span> Choose Customers</h4>
+		<!-- <ct-paneltool class="panel-tools" tool-collapse="tool-collapse"></ct-paneltool> -->
+	</div>
+	<div collapse="panel2" ng-init="panel2=true" class="panel-wrapper">
+		<div class="panel-body">
+			<div class="container-fluid">
+				<div class="row padding-bottom-15">
+					<div class="col-xs-12 col-lg-12  text-center">
+						<span class="custom-box" style="padding:10px;border-width:1px">
+							<span class="text-green" style="font-size:18px;">Number of Customers selected: </span><span class="text-red" style="font-size:18px;">{{customers.length}}</span>
+						</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-lg-2">
+						<div class="checkbox clip-check check-primary checkbox-inline">
+							<input type="checkbox" id="checkbox4" ng-model="filter.allCustomers" ng-change="allCustomersChange()">
+							<label for="checkbox4">
+								<span class="text-blue" style="font-size:18px">
+									All Customers
+								</span>
+							</label>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-xs-12 col-lg-2">
-							<div class="checkbox clip-check check-primary checkbox-inline">
-								<input type="checkbox" id="checkbox4" ng-model="filter.allCustomers" ng-change="allCustomersChange()">
-								<label for="checkbox4">
-									<span class="text-blue" style="font-size:18px">
-										All Customers
-									</span>
-								</label>
-							</div>
-						</div>
-						<div class="col-xs-12 col-lg-2">
-							<p class="text-blue" style="font-size:18px;margin-top:4px">
-								Not visited since:
-							</p>
-						</div>
-						<div class="col-xs-12 col-lg-3">
-							<div>
-								<div class="radio clip-radio radio-primary radio-inline">
-									<input type="radio" id="radio1" name="inline" value="7" ng-change="daysChanged()" ng-model="filter.days" ng-disabled="filter.allCustomers">
-									<label for="radio1">
-										7 Days
-									</label>
-								</div>
-								<div class="radio clip-radio radio-primary radio-inline">
-									<input type="radio" id="radio2" name="inline" value="15" ng-change="daysChanged()" ng-model="filter.days" ng-disabled="filter.allCustomers">
-									<label for="radio2">
-										15 Days
-									</label>
-								</div>
-								<div class="radio clip-radio radio-primary radio-inline">
-									<input type="radio" id="radio3" name="inline" value="30" ng-change="daysChanged()" ng-model="filter.days" ng-disabled="filter.allCustomers">
-									<label for="radio3">
-										30 Days
-									</label>
-								</div>
-								<div class="radio clip-radio radio-primary radio-inline">
-									<input type="radio" id="radio4" name="inline" value="45" ng-change="daysChanged()" ng-model="filter.days" ng-disabled="filter.allCustomers">
-									<label for="radio4">
-										45 Days
-									</label>
-								</div>
-								<div class="radio clip-radio radio-primary inline-radio custom-radio">
-									
-									<input type="radio" id="radio-value" name="inline" value="-1" ng-change="daysChanged()" ng-model="filter.days" ng-disabled="filter.allCustomers">
-									
-									<label for="radio-value" style="margin-bottom:0">
-										<input id="result-value" class="form-control" name="value" type="number" ng-model="filter.xDays" placeholer="x" ng-disabled="filter.allCustomers" ng-change="daysChanged()"/>
-										<span style="line-height:34px">Days</span>
-									</label>
-								</div>
-							</div>
-						</div>
-						<div class="col-xs-12 col-lg-4">
-							<p class="text-blue" style="font-size:18px;margin-top:4px">
-								Customers having Birthdays:
-							</p>
+					<div class="col-xs-12 col-lg-2">
+						<p class="text-blue" style="font-size:18px;margin-top:4px">
+							Not visited since:
+						</p>
+					</div>
+					<div class="col-xs-12 col-lg-3">
+						<div>
 							<div class="radio clip-radio radio-primary radio-inline">
-								<input type="radio" id="bdayradio1" name="inline" value="30" ng-model="filter.bday" ng-disabled="filter.allCustomers" ng-change="bdayChange()">
-								<label for="bdayradio1">
-									This month
+								<input type="radio" id="radio1" name="inline" value="7" ng-change="daysChanged()" ng-model="filter.days" ng-disabled="filter.allCustomers">
+								<label for="radio1">
+									7 Days
 								</label>
 							</div>
 							<div class="radio clip-radio radio-primary radio-inline">
-								<input type="radio" id="bdayradio2" name="inline" value="60" ng-model="filter.bday" ng-disabled="filter.allCustomers" ng-change="bdayChange()">
-								<label for="bdayradio2">
-									Next month
+								<input type="radio" id="radio2" name="inline" value="15" ng-change="daysChanged()" ng-model="filter.days" ng-disabled="filter.allCustomers">
+								<label for="radio2">
+									15 Days
 								</label>
 							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-12 col-lg-6">
+							<div class="radio clip-radio radio-primary radio-inline">
+								<input type="radio" id="radio3" name="inline" value="30" ng-change="daysChanged()" ng-model="filter.days" ng-disabled="filter.allCustomers">
+								<label for="radio3">
+									30 Days
+								</label>
+							</div>
+							<div class="radio clip-radio radio-primary radio-inline">
+								<input type="radio" id="radio4" name="inline" value="45" ng-change="daysChanged()" ng-model="filter.days" ng-disabled="filter.allCustomers">
+								<label for="radio4">
+									45 Days
+								</label>
+							</div>
 							<div class="radio clip-radio radio-primary inline-radio custom-radio">
 
-								<input type="radio" id="filterVisits" name="inline" value="22" ng-model="filter.visits" ng-disabled="filter.allCustomers">
+								<input type="radio" id="radio-value" name="inline" value="-1" ng-change="daysChanged()" ng-model="filter.days" ng-disabled="filter.allCustomers">
 
-								<label for="filterVisits" style="margin-bottom:0">
-									<span class="text-blue" style="font-size:18px;margin-top:4px;line-height:34px">
-										Customers having more than
-									</span>
-									<input id="filterVisitsDays" class="form-control" name="value" type="number" ng-model="filter.gtxVisits" placeholer="x" ng-disabled="filter.allCustomers" ng-change="visitsChange()"/>
-									<span class="text-blue" style="font-size:18px;margin-top:4px;line-height:34px">visits</span>
+								<label for="radio-value" style="margin-bottom:0">
+									<input id="result-value" class="form-control" name="value" type="number" ng-model="filter.xDays" placeholer="x" ng-disabled="filter.allCustomers" ng-change="daysChanged()"/>
+									<span style="line-height:34px">Days</span>
 								</label>
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-xs-12 col-lg-6">
-							<div class="radio clip-radio radio-primary inline-radio custom-radio">
+					<div class="col-xs-12 col-lg-4">
+						<p class="text-blue" style="font-size:18px;margin-top:4px">
+							Customers having Birthdays:
+						</p>
+						<div class="radio clip-radio radio-primary radio-inline">
+							<input type="radio" id="bdayradio1" name="inline" value="30" ng-model="filter.bday" ng-disabled="filter.allCustomers" ng-change="bdayChange()">
+							<label for="bdayradio1">
+								This month
+							</label>
+						</div>
+						<div class="radio clip-radio radio-primary radio-inline">
+							<input type="radio" id="bdayradio2" name="inline" value="60" ng-model="filter.bday" ng-disabled="filter.allCustomers" ng-change="bdayChange()">
+							<label for="bdayradio2">
+								Next month
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-lg-6">
+						<div class="radio clip-radio radio-primary inline-radio custom-radio">
 
-								<input type="radio" id="filterVisits2" name="inline" value="33" ng-model="filter.visits" ng-disabled="filter.allCustomers">
+							<input type="radio" id="filterVisits" name="inline" value="22" ng-model="filter.visits" ng-disabled="filter.allCustomers">
 
-								<label for="filterVisits2" style="margin-bottom:0">
-									<span class="text-blue" style="font-size:18px;margin-top:4px;line-height:34px">
-										Customers having less than
-									</span>
-									<input id="filterVisitsDays2" class="form-control" name="value" type="number" ng-model="filter.ltxVisits" placeholer="x" ng-disabled="filter.allCustomers" ng-change="visitsChange()"/>
-									<span class="text-blue" style="font-size:18px;margin-top:4px;line-height:34px">visits</span>
+							<label for="filterVisits" style="margin-bottom:0">
+								<span class="text-blue" style="font-size:18px;margin-top:4px;line-height:34px">
+									Customers having more than
+								</span>
+								<input id="filterVisitsDays" class="form-control" name="value" type="number" ng-model="filter.gtxVisits" placeholer="x" ng-disabled="filter.allCustomers" ng-change="visitsChange()"/>
+								<span class="text-blue" style="font-size:18px;margin-top:4px;line-height:34px">visits</span>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-lg-6">
+						<div class="radio clip-radio radio-primary inline-radio custom-radio">
+
+							<input type="radio" id="filterVisits2" name="inline" value="33" ng-model="filter.visits" ng-disabled="filter.allCustomers">
+
+							<label for="filterVisits2" style="margin-bottom:0">
+								<span class="text-blue" style="font-size:18px;margin-top:4px;line-height:34px">
+									Customers having less than
+								</span>
+								<input id="filterVisitsDays2" class="form-control" name="value" type="number" ng-model="filter.ltxVisits" placeholer="x" ng-disabled="filter.allCustomers" ng-change="visitsChange()"/>
+								<span class="text-blue" style="font-size:18px;margin-top:4px;line-height:34px">visits</span>
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-lg-6">
+						<button type="button" ng-click="gotoStep3()" class="btn btn-primary">Next</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<!-- panel2 ends here -->
+<!-- panel 3 begins -->
+<div class="panel panel-white" id="panel3">
+	<div class="panel-heading">
+		<h4 class="panel-title text-primary" style="text-transform:uppercase"><span class="text-orange">Step 3.</span> Edit Offer</h4>
+		<!-- <ct-paneltool class="panel-tools" tool-collapse="tool-collapse"><a href="javascript:void(0)"></a></ct-paneltool> -->
+	</div>
+	<div collapse="panel3" ng-init="panel3=true" class="panel-wrapper">
+		<div class="panel-body">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						<h5 class="text-bold margin-bottom-15">Offer validity (From - Till)</h5>
+						<div class="input-group">
+							<input type="text" class="form-control" datepicker-popup="dd MMM yy" ng-model="start"  is-open="startOpened" ng-init="startOpened = false" min-date="'1970-12-31'" max-date="end" ng-required="true" close-text="Close"  ng-click="startOpen($event)"/>
+							<span class="input-group-addon">to</span>
+							<input type="text" class="form-control" datepicker-popup="dd MMM yy" ng-model="end" is-open="endOpened" ng-init="endOpened = false" min-date="start" max-date="'2017-12-30'" ng-required="true" close-text="Close"  ng-click="endOpen($event)" />
+						</div>
+					</div>
+
+
+					<div class="col-md-6">
+						<form role="form" class="form-horizontal">
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="inputEmail3">
+									Title
 								</label>
+								<div class="col-sm-10">
+									<input type="text" ng-model="newPO.title" id="inputEmail3" class="form-control">
+								</div>
 							</div>
-						</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="inputPassword3">
+									Description
+								</label>
+								<div class="col-sm-10">
+									<textarea rows="8" id="inputPassword3" ng-model="newPO.description" class="form-control"></textarea>
+								</div>
+							</div>
+
+							<div class="form-group margin-bottom-0">
+								<div class="col-sm-offset-2 col-sm-10">
+									<button class="btn btn-o btn-primary" ng-disabled="!start || !end" ng-click="createOffer()" type="submit">
+										Submit Offer
+									</button>
+								</div>
+							</div>
+						</form>
 					</div>
-					<div class="row">
-						<div class="col-xs-12 col-lg-6">
-							<button type="button" ng-click="gotoStep3()" class="btn btn-primary">Next</button>
-						</div>
-					</div>
-					
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- panel2 ends here -->
-	<!-- panel 3 begins -->
-	<div class="panel panel-white" id="panel3">
-		<div class="panel-heading">
-			<h4 class="panel-title text-primary" style="text-transform:uppercase"><span class="text-orange">Step 3.</span> Edit Offer</h4>
-			<!-- <ct-paneltool class="panel-tools" tool-collapse="tool-collapse"><a href="javascript:void(0)"></a></ct-paneltool> -->
-		</div>
-		<div collapse="panel3" ng-init="panel3=true" class="panel-wrapper">
-			<div class="panel-body">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-6">
-							<h5 class="text-bold margin-bottom-15">Offer validity (From - Till)</h5>
-							<div class="input-group">
-								<input type="text" class="form-control" datepicker-popup="dd MMM yy" ng-model="start"  is-open="startOpened" ng-init="startOpened = false" min-date="'1970-12-31'" max-date="end" ng-required="true" close-text="Close"  ng-click="startOpen($event)"/>
-								<span class="input-group-addon">to</span>
-								<input type="text" class="form-control" datepicker-popup="dd MMM yy" ng-model="end" is-open="endOpened" ng-init="endOpened = false" min-date="start" max-date="'2017-12-30'" ng-required="true" close-text="Close"  ng-click="endOpen($event)" />
-							</div>
-						</div>
-
-
-						<div class="col-md-6">
-							<form role="form" class="form-horizontal">
-								<div class="form-group">
-									<label class="col-sm-2 control-label" for="inputEmail3">
-										Title
-									</label>
-									<div class="col-sm-10">
-										<input type="text" ng-model="newPO.title" id="inputEmail3" class="form-control">
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label" for="inputPassword3">
-										Description
-									</label>
-									<div class="col-sm-10">
-										<textarea rows="8" id="inputPassword3" ng-model="newPO.description" class="form-control"></textarea>
-									</div>
-								</div>
-
-								<div class="form-group margin-bottom-0">
-									<div class="col-sm-offset-2 col-sm-10">
-										<button class="btn btn-o btn-primary" ng-disabled="!start || !end" ng-click="createOffer()" type="submit">
-											Submit Offer
-										</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- panel 3 ends -->
+</div>
+<!-- panel 3 ends -->
 </div>
 </div>
 <!-- end: PAGE TITLE -->
