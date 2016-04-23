@@ -4,8 +4,8 @@
  
  * Simple table with sorting and filtering on AngularJS
  */
-app.controller('newRPCtrl', ["$scope", "$filter", "$timeout", "Business", "PushOffer", "$localStorage", "Vendor", "Template", "$q", "$modal",
-    function($scope, $filter, $timeout, Business, PushOffer, $localStorage, Vendor, Template, $q, $modal) {
+app.controller('newRPCtrl', ["$scope", "$filter", "$compile", "$timeout", "Business", "PushOffer", "$localStorage", "Vendor", "Template", "$q", "$modal",
+    function($scope, $filter, $compile, $timeout, Business, PushOffer, $localStorage, Vendor, Template, $q, $modal) {
         $scope.filter = {
             allCustomers: false,
             filter: -1,
@@ -15,6 +15,47 @@ app.controller('newRPCtrl', ["$scope", "$filter", "$timeout", "Business", "PushO
         $scope.newPO = {
 
         };
+        $scope.submit = function() {
+            retriveValue();
+        }
+        $scope.config = {}
+
+        // calculate each point worth
+        $scope.$watch('config.basket', function() {
+            if ($scope.config.type && $scope.config.type == 'visit') {
+                $scope.config.pointWorth = $scope.config / 100;
+                // points per visit
+                $scope.config.ppv = $scope.config.basket;
+            } else {
+
+            }
+        })
+        // get rewards from directives
+        var retriveValue = function() {
+            var rewardList = [];
+            var ChildHeads = [$scope.$$childHead];
+            var currentScope;
+            while (ChildHeads.length) {
+                currentScope = ChildHeads.shift();
+                while (currentScope) {
+                    if (currentScope.reward !== undefined)
+                        console.log(currentScope.reward);
+                    // rewardList.push(currentScope.reward);
+                    // UserContacts.push({
+                    //     ContactType: GetContactType(currentScope.ContactType),
+                    //     ContactValue: currentScope.ContactValue
+                    // });
+
+                    currentScope = currentScope.$$nextSibling;
+                }
+            }
+            return rewardList;
+        }
+        $scope.addReward = function() {
+            var compiledDirective = $compile('<purchase-rewards ppv="config.ppv" percent="config.percent"></purchase-rewards>');
+            var directiveElement = compiledDirective($scope);
+            $('.rewardslist-container').append(directiveElement);
+        }
         $scope.openModal = function(festive) {
             console.log(festive)
             var modalInstance = $modal.open({
