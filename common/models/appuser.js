@@ -460,7 +460,10 @@ module.exports = function(Appuser) {
             } else {
                 console.log(res);
                 response.id = res.id;
-                response.email = res.email;
+                if (res.email)
+                    response.email = res.email;
+                else
+                    response.email = res.id + '@facebook.com';
                 response.first_name = res.first_name + ' ' + res.last_name;
                 response.img = res.picture.data.url;
                 response.gender = res.gender;
@@ -489,7 +492,7 @@ module.exports = function(Appuser) {
                         //create user here
                         Appuser.create({
                             fname: response.first_name,
-                            email: query.email,
+                            email: response.email,
                             username: response.id,
                             img: response.img,
                             birthday: response.birthday,
