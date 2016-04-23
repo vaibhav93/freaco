@@ -16,19 +16,36 @@ app.controller('newRPCtrl', ["$scope", "$filter", "$compile", "$timeout", "Busin
 
         };
         $scope.submit = function() {
+            console.log($scope.config);
             retriveValue();
         }
-        $scope.config = {}
+        $scope.config = {
+            extra: {
+                signup: {
+                    points: null,
+                    worth: null
+                }
+            }
+        }
+        $scope.extraDropdown = -1;
+        $scope.dropDownChange = function(value) {
 
+        }
         // calculate each point worth
         $scope.$watch('config.basket', function() {
             if ($scope.config.type && $scope.config.type == 'visit') {
-                $scope.config.pointWorth = $scope.config / 100;
+                $scope.config.pointWorth = $scope.config.percent / 100;
                 // points per visit
                 $scope.config.ppv = $scope.config.basket;
             } else {
 
             }
+        });
+        $scope.$watch('config.extra.signup.points', function() {
+            $scope.config.extra.signup.worth = $scope.config.extra.signup.points * $scope.config.pointWorth;
+        })
+        $scope.$watch('config.extra.signup.worth', function() {
+            $scope.config.extra.signup.points = $scope.config.extra.signup.worth / $scope.config.pointWorth;
         })
         // get rewards from directives
         var retriveValue = function() {

@@ -91,45 +91,19 @@
 								give
 								<div class="form-group" style="padding:0 5px">
 									<div class="input-group" style="width:150px">
-										<input type="number"  class="form-control">
-										<span class="input-group-addon"> points</span>
+										<input type="number" ng-model="config.extra.signup.points" class="form-control">
+										<span class="input-group-addon">points</span>
 									</div>
 								</div>
 								or
 								<div class="form-group"  style="padding:0 5px">
 									<div class="input-group" style="width:100px">
-										<input type="number" id="spndAmount" class="form-control">
+										<input type="number" id="spndAmount" ng-model="config.extra.signup.worth" class="form-control">
 										<span class="input-group-addon"> <i class="fa fa-inr"></i> </span>
 									</div>
 								</div>
 							</form>
-							<form role="form" class="form-inline padding-top-15">
-								For every 
-								<div class="form-group"  style="padding:0 5px">
-									<div class="input-group">
-										<select class="form-control">
-											<option value="-1">Select option</option>
-											<option value="1">New customer refered</option>
-											<option value="2" disabled>facebook page like (coming soon)</option>
-										</select> 
-										
-									</div>
-								</div>
-								give
-								<div class="form-group" style="padding:0 5px">
-									<div class="input-group" style="width:150px">
-										<input type="number"  class="form-control">
-										<span class="input-group-addon"> points</span>
-									</div>
-								</div>
-								or
-								<div class="form-group"  style="padding:0 5px">
-									<div class="input-group" style="width:100px">
-										<input type="number" id="spndAmount" class="form-control">
-										<span class="input-group-addon"> <i class="fa fa-inr"></i> </span>
-									</div>
-								</div>
-							</form>
+							<extra-points pointworth="config.pointWorth"></extra-points>
 							
 						</div>
 					</div>
