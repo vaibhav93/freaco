@@ -35,7 +35,7 @@ app.directive('purchaseRewards', function() {
                 //remove element and also destoy the scope that element
                 if ($scope.reward.id)
                     Business.offers.destroyById({
-                        id: businessId,
+                        id: $scope.businessId,
                         fk: $scope.reward.id
                     }, function() {
                         $element.remove();
