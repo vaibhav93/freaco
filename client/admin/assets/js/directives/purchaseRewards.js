@@ -33,8 +33,19 @@ app.directive('purchaseRewards', function() {
             }
             $scope.Delete = function(e) {
                 //remove element and also destoy the scope that element
-                $element.remove();
-                $scope.$destroy();
+                if ($scope.reward.id)
+                    Business.offers.destroyById({
+                        id: businessId,
+                        fk: $scope.reward.id
+                    }, function() {
+                        $element.remove();
+                        $scope.$destroy();
+                    })
+                else {
+                    $element.remove();
+                    $scope.$destroy();
+                }
+
             }
             $scope.Save = function() {
                 // create reward
