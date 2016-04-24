@@ -8,7 +8,8 @@ app.directive('purchaseRewards', function() {
         restrict: 'E',
         scope: {
             percent: '=',
-            ppv: '='
+            ppv: '=',
+            reward: '='
         },
         templateUrl: 'assets/views/purchase_rewards.html',
         controller: function($rootScope, $scope, $element) {
@@ -18,7 +19,8 @@ app.directive('purchaseRewards', function() {
                 this.points = null;
                 this.worth = null;
             }
-            $scope.reward = new rewardCons();
+            if (!$scope.reward)
+                $scope.reward = new rewardCons();
             $scope.$watchGroup(['reward.visits', 'percent'], function() {
                 $scope.reward.points = $scope.reward.visits * $scope.ppv;
                 $scope.reward.worth = $scope.reward.points * ($scope.percent / 100);

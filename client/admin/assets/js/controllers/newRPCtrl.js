@@ -15,22 +15,47 @@ app.controller('newRPCtrl', ["$scope", "$filter", "$compile", "$timeout", "Busin
         $scope.newPO = {
 
         };
-        $scope.submit = function() {
-            console.log($scope.config);
-            retriveValue();
+        $scope.saveConfig = function() {
+            var extraPoints = [];
+            extraPoints.length = 0;
+            $scope.config.extra = {};
+            extraPoints = retriveValue('extraPoints');
+            //add signup extra
+            if ($scope.signup.points > 0) {
+                extraPoints.push($scope.signup)
+            } else {
+                // no sign up extra points
+                extraPoints.push({
+                    type: 'signup',
+                    points: 0,
+                    worth: 0
+                })
+            }
+            // console.log(extraPoints);
+            //$scope.config.extra = extraPoints.slice();
+            angular.forEach(extraPoints, function(object) {
+                $scope.config.extra[object.type] = object;
+            });
+            Business.prototype$updateAttributes({
+                id: $localStorage.business.id
+            }, {
+                config: $scope.config
+            }, function(success) {
+                console.log(success);
+            }, function(err) {
+                console.log(err);
+            })
+        }
+        var extraRules = [];
+        $scope.signup = {
+            type: 'signup',
+            points: null,
+            worth: null
         }
         $scope.config = {
-            extra: {
-                signup: {
-                    points: null,
-                    worth: null
-                }
-            }
+            extra: {}
         }
-        $scope.extraDropdown = -1;
-        $scope.dropDownChange = function(value) {
 
-        }
         // calculate each point worth
         $scope.$watch('config.basket', function() {
             if ($scope.config.type && $scope.config.type == 'visit') {
@@ -41,32 +66,30 @@ app.controller('newRPCtrl', ["$scope", "$filter", "$compile", "$timeout", "Busin
 
             }
         });
-        $scope.$watch('config.extra.signup.points', function() {
-            $scope.config.extra.signup.worth = $scope.config.extra.signup.points * $scope.config.pointWorth;
+        $scope.$watch('signup.points', function() {
+            $scope.signup.worth = $scope.signup.points * $scope.config.pointWorth;
         })
-        $scope.$watch('config.extra.signup.worth', function() {
-            $scope.config.extra.signup.points = $scope.config.extra.signup.worth / $scope.config.pointWorth;
+        $scope.$watch('signup.worth', function() {
+            $scope.signup.points = $scope.signup.worth / $scope.config.pointWorth;
         })
         // get rewards from directives
-        var retriveValue = function() {
-            var rewardList = [];
+        var retriveValue = function(type) {
+            var List = [];
             var ChildHeads = [$scope.$$childHead];
             var currentScope;
             while (ChildHeads.length) {
                 currentScope = ChildHeads.shift();
                 while (currentScope) {
-                    if (currentScope.reward !== undefined)
-                        console.log(currentScope.reward);
-                    // rewardList.push(currentScope.reward);
-                    // UserContacts.push({
-                    //     ContactType: GetContactType(currentScope.ContactType),
-                    //     ContactValue: currentScope.ContactValue
-                    // });
+                    if (type == 'rewards' && currentScope.reward !== undefined)
+                        List.push(currentScope.reward);
+                    else if (type == 'extraPoints' && currentScope.extra !== undefined)
+                        if (currentScope.extra.type != -1)
+                            List.push(currentScope.extra);
 
                     currentScope = currentScope.$$nextSibling;
                 }
             }
-            return rewardList;
+            return List;
         }
         $scope.addReward = function() {
             var compiledDirective = $compile('<purchase-rewards ppv="config.ppv" percent="config.percent"></purchase-rewards>');

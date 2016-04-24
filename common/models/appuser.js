@@ -124,13 +124,18 @@ module.exports = function(Appuser) {
                                 }
                             }, {
                                 visitCount: 1,
-                                points: business.pointRules.perVisit,
+                                //give signup points
+                                points: business.config.extra.signup.points,
                                 appuserId: token.userId,
                                 businessId: business.id,
                                 Business: {
                                     name: business.name,
                                     img: business.img,
-                                    requiresBill: business.pointRules.requiresBill
+                                    // requiresBill: business.pointRules.requiresBill,
+                                    // visit or purchase based
+                                    type: business.config.type,
+                                    // points per visit
+                                    ppv: business.config.ppv
                                 },
                                 lastVisit: Date.now(),
                                 created: Date.now()
@@ -142,6 +147,8 @@ module.exports = function(Appuser) {
                                     if (!created) {
                                         var sinceLastVisit = moment.duration(moment() - customer.lastVisit).asHours();
                                         if (sinceLastVisit < 1200) {
+                                            //TODO : update last visited here.
+                                            //Done: This is updated after mpin is validated in business.js
                                             cb(null, customer)
                                         } else {
                                             var err = new Error();

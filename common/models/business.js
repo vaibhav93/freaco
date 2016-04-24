@@ -53,18 +53,22 @@ module.exports = function(Business) {
                                 switch (body.type) {
                                     case 'QR_SCAN':
                                         if (body.billValue) {
+                                            var newPoints = 0;
                                             customer.updateAttributes({
                                                 visitCount: customer.visitCount + 1,
-                                                points: business.pointRules.perVisit + customer.points + business.pointRules.billRules.points * (Math.floor(body.billValue / business.pointRules.billRules.value)),
+                                                points: newPoints,
                                                 lastVisit: Date.now()
                                             }, function(err, updatedCustomer) {
                                                 updateActivity(null);
                                                 cb(null, updatedCustomer)
                                             })
                                         } else { //no bill value. just update visit points
+                                            var newPoints
+                                            if (business.config.type == 'visit')
+                                                newPoints = customer.points + business.config.ppv;
                                             customer.updateAttributes({
                                                 visitCount: customer.visitCount + 1,
-                                                points: business.pointRules.perVisit + customer.points,
+                                                points: newPoints,
                                                 lastVisit: Date.now()
                                             }, function(err, updatedCustomer) {
                                                 updateActivity(null);
