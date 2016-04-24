@@ -15,6 +15,18 @@ app.controller('newRPCtrl', ["$scope", "$filter", "$compile", "$timeout", "Busin
         $scope.newPO = {
 
         };
+        $scope.saveRewards = function() {
+            var rewardList = retriveValue('rewards');
+            var promises = [];
+            angular.forEach(rewardList, function(reward) {
+                promises.push(Business.offers.create({
+                    id: $localStorage.business.id
+                }, reward).$promise)
+            })
+            $q.all(promises).then(function() {
+                console.log('success');
+            })
+        }
         $scope.saveConfig = function() {
             var extraPoints = [];
             extraPoints.length = 0;
