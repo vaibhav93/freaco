@@ -4,14 +4,16 @@
  
  * Simple table with sorting and filtering on AngularJS
  */
-app.controller('newRPCtrl', ["$scope", "$filter", "$compile", "$timeout", "Business", "PushOffer", "$localStorage", "Vendor", "Template", "$q", "$modal",
-    function($scope, $filter, $compile, $timeout, Business, PushOffer, $localStorage, Vendor, Template, $q, $modal) {
+app.controller('newRPCtrl', ["$scope", "$filter", "$compile", "$timeout", "Offer", "Business", "PushOffer", "$localStorage", "Vendor", "Template", "$q", "$modal",
+    function($scope, $filter, $compile, $timeout, Offer, Business, PushOffer, $localStorage, Vendor, Template, $q, $modal) {
         // load existing
         function createRewardsDirective(rewards) {
             $scope.rewards = rewards;
             angular.forEach(rewards, function(reward, index) {
-                console.log('index value: ' + index);
-                var compiledDirective = $compile('<purchase-rewards ppv="config.ppv" reward="rewards[' + index + ']" percent="config.percent"></purchase-rewards>');
+                if (reward.businessId == 0) {
+                    delete reward.id;
+                }
+                var compiledDirective = $compile('<purchase-rewards ppv="config.ppv" reward="rewards[' + index + ']" percent="config.percent" business-id="' + $localStorage.business.id + '"></purchase-rewards>');
                 var directiveElement = compiledDirective($scope);
                 $('.rewardslist-container').append(directiveElement);
             })
@@ -23,19 +25,27 @@ app.controller('newRPCtrl', ["$scope", "$filter", "$compile", "$timeout", "Busin
             }, function(business) {
                 if (business.config) {
                     $scope.config = business.config;
-                    var test = [{
-                        name: "helloo",
-                        visits: 2
-                    }, {
-                        name: "helloo 2",
-                        visits: 3
-                    }]
-
                     // load rewards
-                    createRewardsDirective(test);
-                    // Business.offers({id:business.id},function(offers){
-                    //     angular.forEach(offers,function)
-                    // })
+
+                    Business.offers({
+                        id: business.id
+                    }, function(offers) {
+                        // if business has no prior offers saved
+                        if (offers.length == 0)
+                            Offer.find({
+                                filter: {
+                                    where: {
+                                        businessId: 0
+                                    }
+                                }
+                            }, function(offers) {
+                                createRewardsDirective(offers);
+                            })
+                        else {
+                            // business has offers. load them
+                            createRewardsDirective(offers);
+                        }
+                    })
                     // load signup
                     if (business.config.extra.signup)
                         $scope.signup = business.config.extra.signup;
@@ -132,7 +142,7 @@ app.controller('newRPCtrl', ["$scope", "$filter", "$compile", "$timeout", "Busin
             return List;
         }
         $scope.addReward = function() {
-            var compiledDirective = $compile('<purchase-rewards ppv="config.ppv" percent="config.percent"></purchase-rewards>');
+            var compiledDirective = $compile('<purchase-rewards ppv="config.ppv" percent="config.percent" business-id="' + $localStorage.business.id + '"></purchase-rewards>');
             var directiveElement = compiledDirective($scope);
             $('.rewardslist-container').append(directiveElement);
         }

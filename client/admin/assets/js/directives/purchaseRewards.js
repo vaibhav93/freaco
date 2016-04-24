@@ -9,10 +9,11 @@ app.directive('purchaseRewards', function() {
         scope: {
             percent: '=',
             ppv: '=',
-            reward: '=?'
+            reward: '=?',
+            businessId: '@'
         },
         templateUrl: 'assets/views/purchase_rewards.html',
-        controller: function($rootScope, $scope, $element) {
+        controller: function($rootScope, $scope, $element, Business) {
 
             function rewardCons() {
                 this.visits = null;
@@ -34,6 +35,26 @@ app.directive('purchaseRewards', function() {
                 //remove element and also destoy the scope that element
                 $element.remove();
                 $scope.$destroy();
+            }
+            $scope.Save = function() {
+                // create reward
+                if (!$scope.reward.id) {
+                    Business.offers.create({
+                        id: $scope.businessId
+                    }, $scope.reward, function(createdReward) {
+                        $scope.reward = createdReward;
+                        console.log('created reward');
+                    })
+                } else {
+                    // update
+                    Business.offers.updateById({
+                        id: $scope.businessId,
+                        fk: $scope.reward.id
+                    }, $scope.reward, function(updatedReward) {
+                        $scope.reward = updatedReward;
+                        console.log('update reward');
+                    })
+                }
             }
         }
     };
