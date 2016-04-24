@@ -6,15 +6,43 @@
  */
 app.controller('newRPCtrl', ["$scope", "$filter", "$compile", "$timeout", "Business", "PushOffer", "$localStorage", "Vendor", "Template", "$q", "$modal",
     function($scope, $filter, $compile, $timeout, Business, PushOffer, $localStorage, Vendor, Template, $q, $modal) {
-        $scope.filter = {
-            allCustomers: false,
-            filter: -1,
-            visits: null
+        // load existing
+        function createRewardsDirective(rewards) {
+            $scope.rewards = rewards;
+            angular.forEach(rewards, function(reward, index) {
+                console.log('index value: ' + index);
+                var compiledDirective = $compile('<purchase-rewards ppv="config.ppv" reward="rewards[' + index + ']" percent="config.percent"></purchase-rewards>');
+                var directiveElement = compiledDirective($scope);
+                $('.rewardslist-container').append(directiveElement);
+            })
         }
-        $scope.currentTemplate = '';
-        $scope.newPO = {
 
+        function loadSavedConfig() {
+            Business.findById({
+                id: $localStorage.business.id
+            }, function(business) {
+                if (business.config) {
+                    $scope.config = business.config;
+                    var test = [{
+                        name: "helloo",
+                        visits: 2
+                    }, {
+                        name: "helloo 2",
+                        visits: 3
+                    }]
+
+                    // load rewards
+                    createRewardsDirective(test);
+                    // Business.offers({id:business.id},function(offers){
+                    //     angular.forEach(offers,function)
+                    // })
+                    // load signup
+                    if (business.config.extra.signup)
+                        $scope.signup = business.config.extra.signup;
+                }
+            })
         };
+        loadSavedConfig();
         $scope.saveRewards = function() {
             var rewardList = retriveValue('rewards');
             var promises = [];
