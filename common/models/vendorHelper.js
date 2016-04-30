@@ -32,7 +32,7 @@ exports.pushOffer = function(body, req, res, cb) {
         time: Date.now(),
         customerId: 0,
         type: body.type,
-        redeemId: redeemId, //can be rewardId or pushOfferId depending on context
+        redeemId: body.pushOffer.id, //can be rewardId or pushOfferId depending on context
         businessId: body.pushOffer.businessId
     }, function(err, activity) {
         // console.log(visit);
