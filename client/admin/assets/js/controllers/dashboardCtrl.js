@@ -160,14 +160,14 @@ app.controller('dashboardCtrl', ["$scope", "$localStorage", 'SweetAlert', "Busin
                 return false;
         }
         var calculateSince = function(lastVisit) {
-            var mins = Math.round(moment.duration(moment() - lastVisit).asMinutes());
+            var mins = Math.round(moment.duration(moment() - moment(lastVisit)).asMinutes());
             if (mins <= 60) {
                 return mins + ' minutes ago';
             } else if (mins > 60 && mins <= 24 * 60) {
-                var hours = Math.floor(moment.duration(moment() - lastVisit).asHours());
+                var hours = Math.floor(moment.duration(moment() - moment(lastVisit)).asHours());
                 return hours + ' hours ago';
             } else {
-                var days = Math.floor(moment.duration(moment() - lastVisit).asDays());
+                var days = Math.floor(moment.duration(moment() - moment(lastVisit)).asDays());
                 return days + ' days ago';
             }
         }

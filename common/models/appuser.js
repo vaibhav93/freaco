@@ -135,7 +135,7 @@ module.exports = function(Appuser) {
                                     // visit or purchase based
                                     type: business.config.type,
                                     // send
-                                    //config: business.config
+                                    config: business.config
                                 },
                                 lastVisit: Date.now(),
                                 created: Date.now()
