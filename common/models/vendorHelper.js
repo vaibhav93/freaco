@@ -39,7 +39,7 @@ exports.pushOffer = function(body, req, res, cb) {
     });
 
     //push for each in list 
-    body.customerList.forEach(function(customer) {
+    customerList.forEach(function(customer) {
         //if endpoint is present, then send notification
         var customerOfferModel = app.models.customerOffer;
         customerOfferModel.findOrCreate({
