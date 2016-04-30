@@ -1,5 +1,27 @@
 var app = require('../../server/server');
 module.exports = function(Business) {
+
+    Business.beforeRemote('prototype.updateAttributes', function(ctx, result, next) {
+        // config getting updated
+        if (ctx.args.data.config) {
+            // update all customers
+            Business.findById(ctx.req.params.id, function(err, business) {
+                if (err || !business)
+                    next(err);
+                else {
+                    business.customers(function(err, customers) {
+                        customers.forEach(function(customer) {
+                            customer.updateAttributes({
+                                requiresBill: ctx.args.data.config.type == 'purchase' ? true : false,
+                                config: ctx.args.data.config
+                            })
+                        })
+                        next();
+                    })
+                }
+            })
+        }
+    })
     Business.validateMPIN = function(body, req, res, cb) {
         /*
          *  Body attributes

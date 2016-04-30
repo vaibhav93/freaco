@@ -131,11 +131,11 @@ module.exports = function(Appuser) {
                                 Business: {
                                     name: business.name,
                                     img: business.img,
-                                    // requiresBill: business.pointRules.requiresBill,
+                                    requiresBill: business.config.type == 'purchase' ? true : false,
                                     // visit or purchase based
                                     type: business.config.type,
-                                    // points per visit
-                                    ppv: business.config.ppv
+                                    // send
+                                    //config: business.config
                                 },
                                 lastVisit: Date.now(),
                                 created: Date.now()
