@@ -4,8 +4,8 @@
  
  * Simple table with sorting and filtering on AngularJS
  */
-app.controller('newRPCtrl', ["$scope", "$filter", "$compile", "$timeout", "Offer", "Business", "PushOffer", "$localStorage", "Vendor", "Template", "$q", "$modal",
-    function($scope, $filter, $compile, $timeout, Offer, Business, PushOffer, $localStorage, Vendor, Template, $q, $modal) {
+app.controller('newRPCtrl', ["$scope", "$filter", "$compile", 'SweetAlert', "$timeout", "Offer", "Business", "PushOffer", "$localStorage", "Vendor", "Template", "$q", "$modal",
+    function($scope, $filter, $compile, SweetAlert, $timeout, Offer, Business, PushOffer, $localStorage, Vendor, Template, $q, $modal) {
         // load existing
         function createRewardsDirective(rewards) {
             $scope.rewards = rewards;
@@ -13,9 +13,15 @@ app.controller('newRPCtrl', ["$scope", "$filter", "$compile", "$timeout", "Offer
                 if (reward.businessId == 0) {
                     delete reward.id;
                 }
-                var compiledDirective = $compile('<purchase-rewards ppv="config.ppv" reward="rewards[' + index + ']" percent="config.percent" business-id="' + $localStorage.business.id + '"></purchase-rewards>');
-                var directiveElement = compiledDirective($scope);
-                $('.rewardslist-container').append(directiveElement);
+                if (reward.type == 'visit') {
+                    var compiledDirective = $compile('<visit-rewards ppv="config.ppv" reward="rewards[' + index + ']" percent="config.percent" business-id="' + $localStorage.business.id + '"></visit-rewards>');
+                    var directiveElement = compiledDirective($scope);
+                    $('.visitRewardslist-container').append(directiveElement);
+                } else if (reward.type == 'purchase') {
+                    var compiledDirective = $compile('<purchase-rewards pw="config.pointWorth" pointWorth="config.pointWorth" reward="rewards[' + index + ']" percent="config.percent" business-id="' + $localStorage.business.id + '"></purchase-rewards>');
+                    var directiveElement = compiledDirective($scope);
+                    $('.purchaseRewardslist-container').append(directiveElement);
+                }
             })
         }
 
@@ -26,7 +32,9 @@ app.controller('newRPCtrl', ["$scope", "$filter", "$compile", "$timeout", "Offer
                 if (business.config) {
                     $scope.config = business.config;
                     // load rewards
-
+                    if (business.config.extra.referal) {
+                        $scope.savedExtra = business.config.extra.referal;
+                    }
                     Business.offers({
                         id: business.id
                     }, function(offers) {
@@ -62,7 +70,7 @@ app.controller('newRPCtrl', ["$scope", "$filter", "$compile", "$timeout", "Offer
                 }, reward).$promise)
             })
             $q.all(promises).then(function() {
-                console.log('success');
+
             })
         }
         $scope.saveConfig = function() {
@@ -91,7 +99,12 @@ app.controller('newRPCtrl', ["$scope", "$filter", "$compile", "$timeout", "Offer
             }, {
                 config: $scope.config
             }, function(success) {
-                console.log(success);
+                SweetAlert.swal({
+                    title: "Sucess!",
+                    text: "Rewards rules saved successfully",
+                    type: "success",
+                    confirmButtonColor: "#007AFF"
+                });
             }, function(err) {
                 console.log(err);
             })
@@ -106,9 +119,10 @@ app.controller('newRPCtrl', ["$scope", "$filter", "$compile", "$timeout", "Offer
             extra: {}
         }
 
-        // calculate each point worth
-        $scope.$watch('config.basket', function() {
+        // calculate each point worth for visit
+        $scope.$watchGroup(['config.basket', 'config.percent', 'config.type'], function() {
             if ($scope.config.type && $scope.config.type == 'visit') {
+                console.log('basket changed');
                 $scope.config.pointWorth = $scope.config.percent / 100;
                 // points per visit
                 $scope.config.ppv = $scope.config.basket;
@@ -116,11 +130,34 @@ app.controller('newRPCtrl', ["$scope", "$filter", "$compile", "$timeout", "Offer
 
             }
         });
-        $scope.$watch('signup.points', function() {
-            $scope.signup.worth = $scope.signup.points * $scope.config.pointWorth;
+        // calcular point worh for purchase
+        $scope.$watchGroup(['config.purchase.points', 'config.purchase.value', 'config.percent', 'config.type'], function() {
+            if ($scope.config.type && $scope.config.type == 'purchase') {
+                $scope.config.pointWorth = ($scope.config.percent * $scope.config.purchase.value) / ($scope.config.purchase.points * 100);
+            }
         })
-        $scope.$watch('signup.worth', function() {
+
+        function calculateSignUpWorth() {
+            console.log('sign up worth calculate');
+            $scope.signup.worth = $scope.signup.points * $scope.config.pointWorth;
+        }
+
+        function calculateSignUpPoints() {
+            console.log('points changed');
             $scope.signup.points = $scope.signup.worth / $scope.config.pointWorth;
+            console.log($scope.signup.worth + '/' + $scope.config.pointWorth);
+        }
+        $scope.$watchGroup(['config.pointWorth'], function() {
+            calculateSignUpWorth();
+        })
+
+        $scope.$watchGroup(['signup.worth'], function() {
+            console.log('2');
+            calculateSignUpPoints();
+        })
+        $scope.$watch('signup.points', function() {
+            console.log('worth changed');
+            calculateSignUpWorth();
         })
         // get rewards from directives
         var retriveValue = function(type) {
@@ -141,10 +178,18 @@ app.controller('newRPCtrl', ["$scope", "$filter", "$compile", "$timeout", "Offer
             }
             return List;
         }
-        $scope.addReward = function() {
-            var compiledDirective = $compile('<purchase-rewards ppv="config.ppv" percent="config.percent" business-id="' + $localStorage.business.id + '"></purchase-rewards>');
-            var directiveElement = compiledDirective($scope);
-            $('.rewardslist-container').append(directiveElement);
+        $scope.addReward = function(type) {
+            if (type == 'visit') {
+                var compiledDirective = $compile('<visit-rewards ppv="config.ppv" percent="config.percent" business-id="' + $localStorage.business.id + '"></visit-rewards>');
+                var directiveElement = compiledDirective($scope);
+                $('.visitRewardslist-container').append(directiveElement);
+            } else if (type == 'purchase') {
+                console.log('prior pointWorth is ' + $scope.config.pointWorth);
+                var compiledDirective = $compile('<purchase-rewards pw="config.pointWorth" percent="config.percent" business-id="' + $localStorage.business.id + '"></purchase-rewards>');
+                var directiveElement = compiledDirective($scope);
+                $('.purchaseRewardslist-container').append(directiveElement);
+            }
+
         }
         $scope.openModal = function(festive) {
             console.log(festive)

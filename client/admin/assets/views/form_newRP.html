@@ -51,14 +51,14 @@
 								For every 
 								<div class="form-group"  style="padding:0 5px">
 									<div class="input-group" style="width:100px">
-										<input type="number" id="exampleInputPassword2" class="form-control">
+										<input type="number" ng-model="config.purchase.value" class="form-control">
 										<span class="input-group-addon"> <i class="fa fa-inr"></i> </span>
 									</div>
 								</div>
 								purchase, your customer earns
 								<div class="form-group" style="padding:0 5px">
 									<div class="input-group" style="width:150px">
-										<input type="number" id="points" class="form-control">
+										<input type="number" ng-model="config.purchase.points" ng-disabled="!config.purchase.value" id="points" class="form-control">
 										<span class="input-group-addon"> points</span>
 									</div>
 								</div>
@@ -79,7 +79,7 @@
 					<hr>
 					<div class="row padding-top-15">
 						<div class="col-xs-12">
-						<fieldset ng-disabled="!config.basket">
+						<fieldset ng-disabled="!config.basket && !config.purchase">
 							<h4>Set extra points for</h4>
 							<form role="form" class="form-inline">
 								For every 
@@ -104,7 +104,7 @@
 									</div>
 								</div>
 							</form>
-							<extra-points pointworth="config.pointWorth"></extra-points>
+							<extra-points pointworth="config.pointWorth" extra="savedExtra"></extra-points>
 							</fieldset>
 						</div>
 					</div>
@@ -128,7 +128,7 @@
 			<div class="panel-body">
 				<div class="container-fluid">
 					<div class="row padding-bottom-15">
-						<div class="col-xs-12 col-lg-12">
+						<div class="col-xs-12 col-lg-12" ng-show="config.type=='visit'">
 							<div class="row">
 								<div class="col-xs-1 text-center">
 									Visits
@@ -145,14 +145,41 @@
 								<div class="col-xs-3 text-center">
 									Reward
 								</div>	
-								<div class="col-xs-2 text-center">
+								<div class="col-xs-2">
 									Delete/Save
 								</div>
 							</div>
-							<div class="rewardslist-container">
+							<div class="visitRewardslist-container">
 								<!-- <purchase-rewards reward="test" ppv="config.ppv" percent="config.percent"></purchase-rewards> -->
 							</div>
-							<button type="button" class="btn btn-success" ng-click="addReward()">Add new</button>
+							<button type="button" class="btn btn-success" ng-click="addReward('visit')">Add new</button>
+							
+						</div>
+						<div class="col-xs-12 col-lg-12" ng-show="config.type=='purchase'">
+							<div class="row">
+								<div class="col-xs-1 text-center">
+									Amount spent
+								</div>	
+								<div class="col-xs-2 text-center">
+									Points
+								</div>	
+								<div class="col-xs-1 text-center">
+									Giveback
+								</div>	
+								<div class="col-xs-2 text-center">
+									Reward worth
+								</div>	
+								<div class="col-xs-3 text-center">
+									Reward
+								</div>	
+								<div class="col-xs-2">
+									Delete/Save
+								</div>
+							</div>
+							<div class="purchaseRewardslist-container">
+								<!-- <purchase-rewards reward="test" ppv="config.ppv" percent="config.percent"></purchase-rewards> -->
+							</div>
+							<button type="button" class="btn btn-success" ng-click="addReward('purchase')">Add new</button>
 							
 						</div>
 					</div>

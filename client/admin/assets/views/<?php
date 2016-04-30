@@ -1,0 +1,94 @@
+<?php
+// HTTP
+define('HTTP_SERVER', 'http://bullzkart.com/');
+
+// HTTPS
+define('HTTPS_SERVER', 'http://bullzkart.com/');
+
+// DIR
+define('DIR_APPLICATION', '/home/admin/web/bullzkart.com/public_html/catalog/');
+define('DIR_SYSTEM', '/home/admin/web/bullzkart.com/public_html/system/');
+define('DIR_LANGUAGE', '/home/admin/web/bullzkart.com/public_html/catalog/language/');
+define('DIR_TEMPLATE', '/home/admin/web/bullzkart.com/public_html/catalog/view/theme/');
+define('DIR_CONFIG', '/home/admin/web/bullzkart.com/public_html/system/config/');
+define('DIR_IMAGE', '/home/admin/web/bullzkart.com/public_html/image/');
+define('DIR_CACHE', '/home/admin/web/bullzkart.com/public_html/system/cache/');
+define('DIR_DOWNLOAD', '/home/admin/web/bullzkart.com/public_html/system/download/');
+define('DIR_UPLOAD', '/home/admin/web/bullzkart.com/public_html/system/upload/');
+define('DIR_MODIFICATION', '/home/admin/web/bullzkart.com/public_html/system/modification/');
+define('DIR_LOGS', '/home/admin/web/bullzkart.com/public_html/system/logs/');
+
+// DB
+define('DB_DRIVER', 'mysqli');
+define('DB_HOSTNAME', 'localhost');
+define('DB_USERNAME', 'admin_bullz');
+define('DB_PASSWORD', 'doodle123');
+define('DB_DATABASE', 'admin_bullz');
+define('DB_PORT', '3306');
+define('DB_PREFIX', 'oc_');
+
+
+<?php
+// HTTP
+define('HTTP_SERVER', 'http://bullzkart.com/admin/');
+define('HTTP_CATALOG', 'http://bullzkart.com/');
+
+// HTTPS
+define('HTTPS_SERVER', 'http://bullzkart.com/admin/');
+define('HTTPS_CATALOG', 'http://bullzkart.com/');
+
+// DIR
+define('DIR_APPLICATION', '/home/admin/web/bullzkart.com/public_html/admin/');
+define('DIR_SYSTEM', '/home/admin/web/bullzkart.com/public_html/system/');
+define('DIR_LANGUAGE', '/home/admin/web/bullzkart.com/public_html/admin/language/');
+define('DIR_TEMPLATE', '/home/admin/web/bullzkart.com/public_html/admin/view/template/');
+define('DIR_CONFIG', '/home/admin/web/bullzkart.com/public_html/system/config/');
+define('DIR_IMAGE', '/home/admin/web/bullzkart.com/public_html/image/');
+define('DIR_CACHE', '/home/admin/web/bullzkart.com/public_html/system/cache/');
+define('DIR_DOWNLOAD', '/home/admin/web/bullzkart.com/public_html/system/download/');
+define('DIR_UPLOAD', '/home/admin/web/bullzkart.com/public_html/system/upload/');
+define('DIR_LOGS', '/home/admin/web/bullzkart.com/public_html/system/logs/');
+define('DIR_MODIFICATION', '/home/admin/web/bullzkart.com/public_html/system/modification/');
+define('DIR_CATALOG', '/home/admin/web/bullzkart.com/public_html/catalog/');
+
+// DB
+define('DB_DRIVER', 'mysqli');
+define('DB_HOSTNAME', 'localhost');
+define('DB_USERNAME', 'admin_bullz');
+define('DB_PASSWORD', 'doodle123');
+define('DB_DATABASE', 'admin_bullz');
+define('DB_PORT', '3306');
+define('DB_PREFIX', 'oc_');
+
+
+
+<?php
+// HTTP
+define('HTTP_SERVER', 'http://falakenoorboutique.com/');
+
+// HTTPS
+define('HTTPS_SERVER', 'http://falakenoorboutique.com/');
+
+// DIR
+define('DIR_APPLICATION', '/home/falakeno/public_html/catalog/');
+define('DIR_SYSTEM', '/home/falakeno/public_html/system/');
+define('DIR_LANGUAGE', '/home/falakeno/public_html/catalog/language/');
+define('DIR_TEMPLATE', '/home/falakeno/public_html/catalog/view/theme/');
+define('DIR_CONFIG', '/home/falakeno/public_html/system/config/');
+define('DIR_IMAGE', '/home/falakeno/public_html/image/');
+define('DIR_CACHE', '/home/falakeno/public_html/system/cache/');
+define('DIR_DOWNLOAD', '/home/falakeno/public_html/system/download/');
+define('DIR_UPLOAD', '/home/falakeno/public_html/system/upload/');
+define('DIR_MODIFICATION', '/home/falakeno/public_html/system/modification/');
+define('DIR_LOGS', '/home/falakeno/public_html/system/logs/');
+
+// DB
+define('DB_DRIVER', 'mysqli');
+define('DB_HOSTNAME', 'localhost');
+define('DB_USERNAME', 'admin_bullz');
+define('DB_PASSWORD', 'doodle123');
+define('DB_DATABASE', 'admin_bullz');
+define('DB_PORT', '3306');
+define('DB_PREFIX', 'oc_');
+
+

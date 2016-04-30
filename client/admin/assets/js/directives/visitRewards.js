@@ -3,36 +3,35 @@
  * A directive used for "close buttons" (eg: alert box).
  * It hides its parent node that has the class with the name of its value.
  */
-app.directive('purchaseRewards', function() {
+app.directive('visitRewards', function() {
     return {
         restrict: 'E',
         scope: {
             percent: '=',
-            pw: '=',
+            ppv: '=',
             reward: '=?',
             businessId: '@'
         },
-        templateUrl: 'assets/views/purchase_rewards.html',
-        controller: function($rootScope, $scope, $element, Business, SweetAlert) {
+        templateUrl: 'assets/views/visit_rewards.html',
+        controller: function($rootScope, $scope, $element, Business) {
 
             function rewardCons() {
-                this.type = 'purchase';
-                this.amount = null;
+                this.type = 'visit';
+                this.visits = null;
                 this.points = null;
                 this.worth = null;
                 this.name = null;
             }
             if (!$scope.reward)
                 $scope.reward = new rewardCons();
-            $scope.$watchGroup(['reward.amount', 'percent', 'pw'], function() {
-                console.log('percent is :' + $scope.percent);
-                console.log('point worth: ' + $scope.pw);
-                $scope.reward.points = $scope.reward.amount * $scope.pw;
-                $scope.reward.worth = $scope.reward.amount * ($scope.percent / 100);
+            $scope.$watchGroup(['reward.visits', 'percent', 'ppv'], function() {
+                console.log('ppv changed');
+                $scope.reward.points = $scope.reward.visits * $scope.ppv;
+                $scope.reward.worth = $scope.reward.points * ($scope.percent / 100);
             })
             $scope.print = function() {
-                // console.log($scope.reward);
-                // console.log($scope.$parent.test);
+                console.log($scope.reward);
+                console.log($scope.$parent.test);
             }
             $scope.Delete = function(e) {
                 //remove element and also destoy the scope that element
@@ -58,13 +57,6 @@ app.directive('purchaseRewards', function() {
                     }, $scope.reward, function(createdReward) {
                         $scope.reward = createdReward;
                         console.log('created reward');
-                    }, function(err) {
-                        SweetAlert.swal({
-                            title: "Error",
-                            text: err.data.error.message,
-                            type: "error",
-                            confirmButtonColor: "#007AFF"
-                        });
                     })
                 } else {
                     // update
@@ -73,15 +65,7 @@ app.directive('purchaseRewards', function() {
                         fk: $scope.reward.id
                     }, $scope.reward, function(updatedReward) {
                         $scope.reward = updatedReward;
-
-                    }, function(err) {
-                        console.log(err);
-                        SweetAlert.swal({
-                            title: "Error",
-                            text: err.data.error.message,
-                            type: "error",
-                            confirmButtonColor: "#007AFF"
-                        });
+                        console.log('update reward');
                     })
                 }
             }

@@ -56,14 +56,14 @@ module.exports = function(Business) {
                                             var newPoints = 0;
                                             customer.updateAttributes({
                                                 visitCount: customer.visitCount + 1,
-                                                points: newPoints,
+                                                points: customer.points + Math.floor(body.billValue / business.config.pointWorth),
                                                 lastVisit: Date.now()
                                             }, function(err, updatedCustomer) {
                                                 updateActivity(null);
                                                 cb(null, updatedCustomer)
                                             })
                                         } else { //no bill value. just update visit points
-                                            var newPoints
+                                            var newPoints;
                                             if (business.config.type == 'visit')
                                                 newPoints = customer.points + business.config.ppv;
                                             customer.updateAttributes({
