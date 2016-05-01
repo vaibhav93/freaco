@@ -339,7 +339,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             ncyBreadcrumb: {
                 label: 'Profile'
             },
-            resolve: loadSequence('flow', 'userCtrl')
+            resolve: loadSequence('administrationCtrl')
         }).state('app.pages.invoice', {
             url: '/invoice',
             templateUrl: "assets/views/pages_invoice.html",

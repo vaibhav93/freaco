@@ -8,7 +8,64 @@
 	</div>
 </section>
 <div ng-controller="administrationCtrl" class="container-fluid container-fullw bg-white">
-		
+	<div class="row">
+		<div class="col-xs-7">
+			<form role="form" class="form-horizontal">
+				<div class="form-group">
+					<label class="col-sm-3 control-label" for="businessName">
+						Business Name
+					</label>
+					<div class="col-sm-9">
+						<input type="email" id="businessName" class="form-control" ng-model="busiess.name">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label" for="address">
+						Address
+					</label>
+					<div class="col-sm-9">
+						<textarea id="address" class="form-control" ng-model="busiess.address"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label" for="MPIN">
+						MPIN
+					</label>
+					<div class="col-sm-9">
+						<input type="number" max="99999" placeholder="MPIN" ng-model="mpin" id="mpin" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-10">
+						<div class="row">
+							<div class="col-sm-4">
+								<button type ="file" class="btn btn-wide btn-info btn-squared" ngf-select="upload($file,1)" multiple
+								accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+								Select Image</button>        						
+							</div>
+							<div class="col-sm-8" ng-show="f && addCity===1">
+								<!-- <li ng-show="f" class="small-image thumbnail"> -->
+								<span>{{f.name}}</span>
+								<div class="clearfix"></div>
+								<img ngf-src="f" style="width:50%;height:50%" class="img-thumbnail">
+								<progressbar value="progress" type="info" class="margin-top-5">
+									{{progress}}%
+								</progressbar>
+								<!-- </li> -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group margin-bottom-0">
+					<div class="col-sm-offset-3 col-sm-10">
+						<button class="btn btn-o btn-primary" type="submit" ng-click="saveBusiness()">
+							Save
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 	<!-- panel 3 ends -->
 </div>
 
