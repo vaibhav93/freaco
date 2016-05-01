@@ -16,7 +16,7 @@
 						Business Name
 					</label>
 					<div class="col-sm-9">
-						<input type="email" id="businessName" class="form-control" ng-model="busiess.name">
+						<input type="text" id="businessName" class="form-control" ng-model="business.name">
 					</div>
 				</div>
 				<div class="form-group">
@@ -24,7 +24,7 @@
 						Address
 					</label>
 					<div class="col-sm-9">
-						<textarea id="address" class="form-control" ng-model="busiess.address"></textarea>
+						<textarea id="address" class="form-control" ng-model="business.address"></textarea>
 					</div>
 				</div>
 				<div class="form-group">
@@ -32,7 +32,7 @@
 						MPIN
 					</label>
 					<div class="col-sm-9">
-						<input type="number" max="99999" placeholder="MPIN" ng-model="mpin" id="mpin" class="form-control">
+						<input required type="number" max="99999" placeholder="MPIN" ng-model="mpin" id="mpin" class="form-control">
 					</div>
 				</div>
 				<div class="form-group">
@@ -43,7 +43,7 @@
 								accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
 								Select Image</button>        						
 							</div>
-							<div class="col-sm-8" ng-show="f && addCity===1">
+							<div class="col-sm-8" ng-show="f">
 								<!-- <li ng-show="f" class="small-image thumbnail"> -->
 								<span>{{f.name}}</span>
 								<div class="clearfix"></div>
