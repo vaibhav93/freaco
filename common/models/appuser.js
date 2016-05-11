@@ -413,6 +413,7 @@ module.exports = function(Appuser) {
 
     );
     Appuser.getpushOffers = appuserHelper.getpushOffers;
+    Appuser.loginWithGoogle = appuserHelper.loginWithAccessTokenGoogle;
     Appuser.remoteMethod('getpushOffers', {
             accepts: [{
                 arg: 'data',
@@ -580,6 +581,46 @@ module.exports = function(Appuser) {
             }],
             http: {
                 path: '/loginWithFb',
+                verb: 'POST'
+            }
+        }
+    );
+    Appuser.remoteMethod(
+        'loginWithAccessTokenGoogle', {
+            accepts: [{
+                arg: 'data',
+                type: 'object',
+                http: {
+                    source: 'body'
+                }
+            }, {
+                arg: 'req',
+                type: 'object',
+                'http': {
+                    source: 'req'
+                }
+            }, {
+                arg: 'res',
+                type: 'object',
+                'http': {
+                    source: 'res'
+                }
+            }],
+            returns: [{
+                arg: 'accessToken',
+                type: 'string'
+            }, {
+                arg: 'email',
+                type: 'string'
+            }, {
+                arg: 'userId',
+                type: 'number'
+            }, {
+                arg: 'user',
+                type: 'object'
+            }],
+            http: {
+                path: '/loginWithGoogle',
                 verb: 'POST'
             }
         }
