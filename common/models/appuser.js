@@ -586,7 +586,7 @@ module.exports = function(Appuser) {
         }
     );
     Appuser.remoteMethod(
-        'loginWithAccessTokenGoogle', {
+        'loginWithGoogle', {
             accepts: [{
                 arg: 'data',
                 type: 'object',
