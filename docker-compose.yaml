@@ -1,0 +1,31 @@
+version: '3.2'
+
+services:
+
+  db:
+    image: mongo:4.1.6
+    restart: always
+    # environment:
+    #    MONGO_INITDB_ROOT_USERNAME: freaco
+    #    MONGO_INITDB_ROOT_PASSWORD: freaco
+    ports:
+      - 27017:27017
+    # volumes:
+    #   - type: bind
+    #     source : ./db_init
+    #     target : /docker-entrypoint-initdb.d
+    #   - data-volume:/var/lib/postgresql/data/pgdata
+  app:
+    image: vaibhavbansal1993/freaco
+    ports:
+      - 3002:3002
+    # volumes:
+    #   - type: bind
+    #     source : ./
+    #     target : /docker-entrypoint-initdb.d
+    depends_on:
+      - "db"
+    command: ["forever", "server/server.js"]
+
+volumes:
+    data-volume:

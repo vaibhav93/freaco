@@ -41,6 +41,7 @@ module.exports = function(app) {
                 console.log(err);
             }
             (created) ? console.log('Created vendor', createdVendor.email) : console.log('Found vendor', createdVendor.email);
+	    createBusiness(createdVendor.id,app);
         });
         sample_users.forEach(function(user) {
             userModel.findOrCreate({
@@ -49,11 +50,44 @@ module.exports = function(app) {
                 }
             }, user, function(err, createdUser, created) {
                 if (err) {
-                    console.log(err)
+                    console.log(err);
                 }
                 //console.log(createdBusiness);
                 (created) ? console.log('Created user', createdUser.fname) : console.log('Found user', createdUser.fname);
-            })
-        })
-    })
+            });
+        });
+    });
+};
+
+function createBusiness(vendorId, app){
+    var businessModel = app.models.Business;
+    var ds = app.dataSources.mongoDs;
+    var sample_businesses = [{
+        name: 'Ohri, Hyderabad',
+        qr: 'ohri_hyderabad',
+        img: 'http://app.freaco.com/admin/assets/images/ohri.jpg',
+        totalVisits: 0,
+	vendorId: vendorId
+    }, {
+        name: 'Taj, Chandigarh',
+        qr: 'taj_chandigarh',
+        img: 'http://app.freaco.com/admin/assets/images/taj.jpg',
+        totalVisits: 0,
+	vendorId: vendorId
+    }];
+
+        sample_businesses.forEach(function(business) {
+            businessModel.findOrCreate({
+                where: {
+                    name: business.name
+                }
+            }, business, function(err, createdBusiness, created) {
+                if (err) {
+                    console.log(err);
+                }
+                //console.log(createdBusiness);
+                (created) ? console.log('Created business', createdBusiness.name) : console.log('Found business', createdBusiness.name);
+            });
+        });
+
 }

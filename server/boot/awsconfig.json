@@ -1,0 +1,4 @@
+{ "accessKeyId": "abc",
+  "secretAccessKey": "def",
+  "region": "us-east-1"
+}
